@@ -45,9 +45,9 @@
             this.tabCtrl = new System.Windows.Forms.TabControl();
             this.tabEncounters = new System.Windows.Forms.TabPage();
             this.tabConnections = new System.Windows.Forms.TabPage();
+            this.tabSkills = new System.Windows.Forms.TabPage();
             this.tabTraps = new System.Windows.Forms.TabPage();
             this.tabLoot = new System.Windows.Forms.TabPage();
-            this.tabSkills = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRooms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEncounters)).BeginInit();
             this.ctxtMenu.SuspendLayout();
@@ -56,9 +56,9 @@
             this.tabCtrl.SuspendLayout();
             this.tabEncounters.SuspendLayout();
             this.tabConnections.SuspendLayout();
+            this.tabSkills.SuspendLayout();
             this.tabTraps.SuspendLayout();
             this.tabLoot.SuspendLayout();
-            this.tabSkills.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbName
@@ -101,14 +101,13 @@
             this.dgvEncounters.ColumnHeadersVisible = false;
             this.dgvEncounters.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colMonster});
-            this.dgvEncounters.ContextMenuStrip = this.ctxtMenu;
             this.dgvEncounters.Location = new System.Drawing.Point(0, 0);
             this.dgvEncounters.MultiSelect = false;
             this.dgvEncounters.Name = "dgvEncounters";
             this.dgvEncounters.RowHeadersVisible = false;
             this.dgvEncounters.Size = new System.Drawing.Size(562, 212);
             this.dgvEncounters.TabIndex = 9;
-            this.dgvEncounters.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEncounters_CellClick);
+            this.dgvEncounters.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvEncounters_MouseDown);
             // 
             // colMonster
             // 
@@ -126,7 +125,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -224,6 +223,16 @@
             this.tabConnections.Text = "Connections";
             this.tabConnections.UseVisualStyleBackColor = true;
             // 
+            // tabSkills
+            // 
+            this.tabSkills.Controls.Add(this.tbSkills);
+            this.tabSkills.Location = new System.Drawing.Point(4, 22);
+            this.tabSkills.Name = "tabSkills";
+            this.tabSkills.Size = new System.Drawing.Size(562, 212);
+            this.tabSkills.TabIndex = 4;
+            this.tabSkills.Text = "Relevant Skills";
+            this.tabSkills.UseVisualStyleBackColor = true;
+            // 
             // tabTraps
             // 
             this.tabTraps.Controls.Add(this.dgvTraps);
@@ -244,16 +253,6 @@
             this.tabLoot.Text = "Loot";
             this.tabLoot.UseVisualStyleBackColor = true;
             // 
-            // tabSkills
-            // 
-            this.tabSkills.Controls.Add(this.tbSkills);
-            this.tabSkills.Location = new System.Drawing.Point(4, 22);
-            this.tabSkills.Name = "tabSkills";
-            this.tabSkills.Size = new System.Drawing.Size(562, 212);
-            this.tabSkills.TabIndex = 4;
-            this.tabSkills.Text = "Relevant Skills";
-            this.tabSkills.UseVisualStyleBackColor = true;
-            // 
             // RoomControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,10 +270,10 @@
             this.tabCtrl.ResumeLayout(false);
             this.tabEncounters.ResumeLayout(false);
             this.tabConnections.ResumeLayout(false);
-            this.tabTraps.ResumeLayout(false);
-            this.tabLoot.ResumeLayout(false);
             this.tabSkills.ResumeLayout(false);
             this.tabSkills.PerformLayout();
+            this.tabTraps.ResumeLayout(false);
+            this.tabLoot.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

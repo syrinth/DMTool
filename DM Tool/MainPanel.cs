@@ -13,8 +13,6 @@ namespace DM_Tool
 {
     public partial class MainPanel : Form
     {
-        private string configFile = "./config.txt";
-        private string campaignHash = "##Campaign Name:";
         private enum ListDisplay { ALL, TYPES, MONSTERS, BASEITEMS, ADVSITES};
         private List<string> baseMenu = new List<string> { "Types", "Monsters", "Base Items", "Adventure Sites"};
         public string Campaign;
@@ -25,7 +23,6 @@ namespace DM_Tool
         public MainPanel()
         {
             InitializeComponent();
-            ConfigFile(); 
 
             display = ListDisplay.ALL;
             mgr.listCreatureTypes = new List<CreatureType>();
@@ -39,40 +36,11 @@ namespace DM_Tool
             mgr.SetMain(this);
             mgr.Load(Campaign);
             SetMenuToBase();
+            this.Text = mgr.Campaign;
         }
 
 
-        public void ConfigFile(){
-            if (!File.Exists(configFile))
-            {
-                File.Create(configFile);
-            }
-            else
-            {
-                string line;
-                System.IO.StreamReader file = new System.IO.StreamReader(configFile);
-                while ((line = file.ReadLine()) != null)
-                {
-                    if (line.Contains(campaignHash))
-                    {
-                        Campaign = line.Split(':')[1];
-                        this.Text = Campaign;
-                    }
-                }
-                file.Close();
-            }
-        }
-
-        public void WriteConfigFile(){
-            if (!File.Exists(configFile))
-            {
-                File.Delete(configFile);
-            }
-            System.IO.StreamWriter file = new System.IO.StreamWriter(configFile);
-            file.WriteLine(campaignHash + Campaign);
-            this.Text = Campaign;
-            file.Close();
-        }
+        
 
         private void saveCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -86,7 +54,7 @@ namespace DM_Tool
             MonsterControl mc = new MonsterControl(page);
             page.Controls.Add(mc);
             mc.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void typesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -182,9 +150,21 @@ namespace DM_Tool
             }
         }
 
-        public void AddPage(TabPage page)
+        public void AddOrSelectPage(TabPage page)
         {
-            tabOpenObjects.Controls.Add(page);
+            bool found = false;
+            foreach (TabPage p in tabOpenObjects.TabPages)
+            {
+                if (p.Text == page.Text)
+                {
+                    page = p;
+                    found = true;
+                }
+            }
+            if (!found)
+            {
+                tabOpenObjects.Controls.Add(page);
+            }
             tabOpenObjects.SelectedTab = page;
             tabOpenObjects.Focus();
         }
@@ -239,7 +219,7 @@ namespace DM_Tool
             ArtObjectControl aoc = new ArtObjectControl(page);
             page.Controls.Add(aoc);
             aoc.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void newBaseItemToolStripMenuItem_Click(object sender, EventArgs e)
@@ -249,7 +229,7 @@ namespace DM_Tool
             BaseItemControl i = new BaseItemControl(page, true);
             page.Controls.Add(i);
             i.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -269,7 +249,7 @@ namespace DM_Tool
             QualityControl i = new QualityControl(page, false);
             page.Controls.Add(i);
             i.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void baseItemsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -279,7 +259,7 @@ namespace DM_Tool
             BaseItemControl i = new BaseItemControl(page, false);
             page.Controls.Add(i);
             i.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void hardMaterialsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -289,7 +269,7 @@ namespace DM_Tool
             HardMaterialControl i = new HardMaterialControl(page, false);
             page.Controls.Add(i);
             i.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void newCampaignToolStripMenuItem_Click(object sender, EventArgs e)
@@ -304,7 +284,7 @@ namespace DM_Tool
 
             Directory.CreateDirectory("./" + Campaign);
 
-            WriteConfigFile();
+            mgr.WriteConfigFile();
         }
 
         private void battleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -314,7 +294,7 @@ namespace DM_Tool
             Combat aoc = new Combat(page, this);
             page.Controls.Add(aoc);
             aoc.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         private void newAdventureSiteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -323,7 +303,7 @@ namespace DM_Tool
             AdventureSiteControl aoc = new AdventureSiteControl(page, this);
             page.Controls.Add(aoc);
             aoc.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
 
         public bool PageOpen(string pageName)
@@ -398,7 +378,7 @@ namespace DM_Tool
             CharacterControl aoc = new CharacterControl();
             page.Controls.Add(aoc);
             aoc.Dock = DockStyle.Fill;
-            AddPage(page);
+            AddOrSelectPage(page);
         }
     }
 }

@@ -30,6 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvCombat = new System.Windows.Forms.DataGridView();
+            this.CharacterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Init = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.touchAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.flatFootAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currHp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.maxHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fort = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.reflex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.will = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Icon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ctxtCombat = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxtMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,17 +55,6 @@
             this.btnNewEffect = new System.Windows.Forms.Button();
             this.btnDeleteEffect = new System.Windows.Forms.Button();
             this.btnAddCharacters = new System.Windows.Forms.Button();
-            this.CharacterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Init = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.touchAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.flatFootAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currHp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.maxHP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fort = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reflex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.will = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Icon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCombat)).BeginInit();
             this.ctxtCombat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEffects)).BeginInit();
@@ -63,6 +63,10 @@
             // dgvCombat
             // 
             this.dgvCombat.AllowUserToAddRows = false;
+            this.dgvCombat.AllowUserToDeleteRows = false;
+            this.dgvCombat.AllowUserToOrderColumns = true;
+            this.dgvCombat.AllowUserToResizeColumns = false;
+            this.dgvCombat.AllowUserToResizeRows = false;
             this.dgvCombat.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCombat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCombat.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -87,6 +91,72 @@
             this.dgvCombat.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
             this.dgvCombat.Leave += new System.EventHandler(this.dgvCombat_Leave);
             this.dgvCombat.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvCombat_MouseDown);
+            // 
+            // CharacterName
+            // 
+            this.CharacterName.FillWeight = 30F;
+            this.CharacterName.HeaderText = "Name";
+            this.CharacterName.Name = "CharacterName";
+            // 
+            // Init
+            // 
+            this.Init.FillWeight = 10F;
+            this.Init.HeaderText = "Init";
+            this.Init.Name = "Init";
+            // 
+            // AC
+            // 
+            this.AC.FillWeight = 10F;
+            this.AC.HeaderText = "AC";
+            this.AC.Name = "AC";
+            // 
+            // touchAC
+            // 
+            this.touchAC.FillWeight = 10F;
+            this.touchAC.HeaderText = "Touch";
+            this.touchAC.Name = "touchAC";
+            // 
+            // flatFootAC
+            // 
+            this.flatFootAC.FillWeight = 10F;
+            this.flatFootAC.HeaderText = "FF";
+            this.flatFootAC.Name = "flatFootAC";
+            // 
+            // currHp
+            // 
+            this.currHp.FillWeight = 10F;
+            this.currHp.HeaderText = "HP";
+            this.currHp.Name = "currHp";
+            // 
+            // maxHP
+            // 
+            this.maxHP.FillWeight = 10F;
+            this.maxHP.HeaderText = "Max";
+            this.maxHP.Name = "maxHP";
+            // 
+            // fort
+            // 
+            this.fort.FillWeight = 10F;
+            this.fort.HeaderText = "Fort";
+            this.fort.Name = "fort";
+            // 
+            // reflex
+            // 
+            this.reflex.FillWeight = 10F;
+            this.reflex.HeaderText = "Ref";
+            this.reflex.Name = "reflex";
+            // 
+            // will
+            // 
+            this.will.FillWeight = 10F;
+            this.will.HeaderText = "Will";
+            this.will.Name = "will";
+            // 
+            // Icon
+            // 
+            this.Icon.FillWeight = 20F;
+            this.Icon.HeaderText = "Icon";
+            this.Icon.Name = "Icon";
             // 
             // ctxtCombat
             // 
@@ -214,72 +284,6 @@
             this.btnAddCharacters.Text = "Add Characters";
             this.btnAddCharacters.UseVisualStyleBackColor = true;
             this.btnAddCharacters.Click += new System.EventHandler(this.btnAddCharacters_Click);
-            // 
-            // CharacterName
-            // 
-            this.CharacterName.FillWeight = 30F;
-            this.CharacterName.HeaderText = "Name";
-            this.CharacterName.Name = "CharacterName";
-            // 
-            // Init
-            // 
-            this.Init.FillWeight = 10F;
-            this.Init.HeaderText = "Init";
-            this.Init.Name = "Init";
-            // 
-            // AC
-            // 
-            this.AC.FillWeight = 10F;
-            this.AC.HeaderText = "AC";
-            this.AC.Name = "AC";
-            // 
-            // touchAC
-            // 
-            this.touchAC.FillWeight = 10F;
-            this.touchAC.HeaderText = "Touch";
-            this.touchAC.Name = "touchAC";
-            // 
-            // flatFootAC
-            // 
-            this.flatFootAC.FillWeight = 10F;
-            this.flatFootAC.HeaderText = "FF";
-            this.flatFootAC.Name = "flatFootAC";
-            // 
-            // currHp
-            // 
-            this.currHp.FillWeight = 10F;
-            this.currHp.HeaderText = "HP";
-            this.currHp.Name = "currHp";
-            // 
-            // maxHP
-            // 
-            this.maxHP.FillWeight = 10F;
-            this.maxHP.HeaderText = "Max";
-            this.maxHP.Name = "maxHP";
-            // 
-            // fort
-            // 
-            this.fort.FillWeight = 10F;
-            this.fort.HeaderText = "Fort";
-            this.fort.Name = "fort";
-            // 
-            // reflex
-            // 
-            this.reflex.FillWeight = 10F;
-            this.reflex.HeaderText = "Ref";
-            this.reflex.Name = "reflex";
-            // 
-            // will
-            // 
-            this.will.FillWeight = 10F;
-            this.will.HeaderText = "Will";
-            this.will.Name = "will";
-            // 
-            // Icon
-            // 
-            this.Icon.FillWeight = 20F;
-            this.Icon.HeaderText = "Icon";
-            this.Icon.Name = "Icon";
             // 
             // Combat
             // 

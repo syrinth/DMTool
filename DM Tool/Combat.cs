@@ -35,21 +35,26 @@ namespace DM_Tool
             dgvCombat.Rows.Clear();
             dgvEffects.Rows.Clear();
             currentTurn = null;
+            ((DataGridViewComboBoxColumn)dgvEffects.Columns["Owner"]).Items.Clear();
         }
 
         private void dgvCombat_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+
             if (dgvCombat.Columns["Init"] != null)
             {
                 if (e.ColumnIndex == dgvCombat.Columns["Init"].Index)
                 {
                     dgvCombat.Sort(dgvCombat.Columns["Init"], ListSortDirection.Descending);
                 }
-
-                if (e.ColumnIndex == dgvCombat.Columns["CharacterName"].Index)
+                else if (e.ColumnIndex == dgvCombat.Columns["CharacterName"].Index)
                 {
                     DataGridViewRow currRow = dgvCombat.Rows[e.RowIndex];
-                    DataGridViewCell cell = dgvCombat.Rows[e.RowIndex].Cells["CharacterName"];
+                    DataGridViewCell cell = currRow.Cells["CharacterName"];
                     string name = cell.Value.ToString();
                     ((DataGridViewComboBoxColumn)dgvEffects.Columns["Owner"]).Items.Add(name);
 
@@ -66,6 +71,23 @@ namespace DM_Tool
                         currRow.Cells["will"].Value = sheet.willSave;
                         currRow.Cells["touchAC"].Value = sheet.touchAC;
                         currRow.Cells["flatFootAC"].Value = sheet.ffAC;
+                    }
+                }
+                else if (e.ColumnIndex == dgvCombat.Columns["Icon"].Index)
+                {
+                    DataGridViewComboBoxColumn column = ((DataGridViewComboBoxColumn)dgvEffects.Columns["Owner"]);
+                    for (int i = 0; i < column.Items.Count; i++)
+                    {
+                        DataGridViewRow currRow = dgvCombat.Rows[e.RowIndex];
+                        DataGridViewCell cell = currRow.Cells["CharacterName"];
+                        string name = cell.Value.ToString();
+
+                        string val = column.Items[i].ToString();
+                        if (val.Equals(name))
+                        {
+                            column.Items[i] += "-" + currRow.Cells["Icon"].Value.ToString();
+                            break;
+                        }
                     }
                 }
             }
@@ -114,7 +136,13 @@ namespace DM_Tool
                 {
                     if (r.Cells["EffectsName"].Value != null)
                     {
-                        if (r.Cells["Owner"].Value.ToString() == currentTurn.Cells["CharacterName"].Value.ToString())
+                        string matchName = currentTurn.Cells["CharacterName"].Value.ToString();
+
+                        if(currentTurn.Cells["Icon"].Value.ToString() != string.Empty){
+                            matchName += "-" + currentTurn.Cells["Icon"].Value.ToString();
+                        }
+
+                        if (r.Cells["Owner"].Value.ToString() == matchName)
                         {
                             int currDuration = Convert.ToInt32(r.Cells["Duration"].Value);
                             currDuration -= 1;
@@ -130,6 +158,7 @@ namespace DM_Tool
                     }
                 }
             }
+            this.dgvCombat.FirstDisplayedScrollingRowIndex = currentTurn.Index;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -139,6 +168,7 @@ namespace DM_Tool
                 currentTurn = dgvCombat.Rows[0];
                 currentTurn.DefaultCellStyle.BackColor = Color.Red;
                 btnNext.Text = "Next Turn";
+                this.dgvCombat.FirstDisplayedScrollingRowIndex = currentTurn.Index;
             }
             else
             {
@@ -193,6 +223,11 @@ namespace DM_Tool
         {
             if (!dgvCombat.SelectedRows[0].IsNewRow)
             {
+                if (currentTurn.Index == dgvCombat.SelectedRows[0].Index)
+                {
+                    Next();
+
+                }
                 dgvCombat.Rows.Remove(dgvCombat.SelectedRows[0]);
             }
         }
@@ -249,7 +284,7 @@ namespace DM_Tool
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
 
-                _mainPanel.AddPage(page);
+                _mainPanel.AddOrSelectPage(page);
             }
             else
             {
@@ -258,7 +293,7 @@ namespace DM_Tool
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
 
-                _mainPanel.AddPage(page);
+                _mainPanel.AddOrSelectPage(page);
             }
         }
     }

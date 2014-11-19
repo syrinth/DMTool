@@ -17,6 +17,10 @@ namespace DM_Tool
     {
         private static  PublicManager instance;
 
+        private string configFile = "./config.txt";
+        private string campaignHash = "##Campaign Name:";
+        public string Campaign;
+
         public int totalQualityRatios;
         public int totalBaseItemRatios;
         public int totalHardMaterialRatios;
@@ -40,7 +44,7 @@ namespace DM_Tool
         private static string xmlHardMaterials = "HardMaterials.xml";
         private static string xmlCharacterSheets = "Monsters.xml";
         private static string xmlQualities = "Qualitys.xml";
-        
+
         public MainPanel _main;
 
         private PublicManager()
@@ -48,6 +52,7 @@ namespace DM_Tool
             totalQualityRatios = 0;
             totalBaseItemRatios = 0;
             totalHardMaterialRatios = 0;
+            ConfigFile();
         }
 
         public static PublicManager GetInstance(){
@@ -61,6 +66,41 @@ namespace DM_Tool
         public void SetMain(MainPanel main){
             _main = main;
         }
+
+        #region Config File
+        public void ConfigFile()
+        {
+            if (!File.Exists(configFile))
+            {
+                File.Create(configFile);
+            }
+            else
+            {
+                string line;
+                System.IO.StreamReader file = new System.IO.StreamReader(configFile);
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (line.Contains(campaignHash))
+                    {
+                        Campaign = line.Split(':')[1];
+                        xmlAdventures = Campaign + "\\" + xmlAdventures;
+                    }
+                }
+                file.Close();
+            }
+        }
+
+        public void WriteConfigFile()
+        {
+            if (!File.Exists(configFile))
+            {
+                File.Delete(configFile);
+            }
+            System.IO.StreamWriter file = new System.IO.StreamWriter(configFile);
+            file.WriteLine(campaignHash + Campaign);
+            file.Close();
+        }
+        #endregion
 
         public void DisplayCreatures()
         {
@@ -100,7 +140,7 @@ namespace DM_Tool
             page.AutoScroll = true;
             page.AutoScrollMargin = new System.Drawing.Size(20, 20);
             page.AutoScrollMinSize = new System.Drawing.Size(page.Width, page.Height);
-            _main.AddPage(page);
+            _main.AddOrSelectPage(page);
         }
 
         #region Serialization

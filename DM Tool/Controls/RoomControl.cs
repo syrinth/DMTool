@@ -145,44 +145,6 @@ namespace DM_Tool.Controls
             dgvRooms.CurrentCell = dgvRooms.Rows[dgvRooms.Rows.Count - 1].Cells["colRoom"];
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void dgvEncounters_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridViewRow row = dgvEncounters.Rows[e.RowIndex];
-            DataGridViewCell cell = dgvEncounters.Rows[e.RowIndex].Cells["colMonster"];
-            if (cell.Value != null && cell.Value != string.Empty)
-            {
-                string charName = cell.Value.ToString();
-                CharacterSheet sheet = mgr.listCharacterSheets.Find(x => x.name.ToUpper().Equals(charName.ToUpper()));
-                if (sheet != null)
-                {
-                    if (_advSiteCtl.GetMainPanel().PageOpen(charName))
-                    {
-                        return;
-                    }
-
-                    TabPage page = new TabPage(charName);
-                    MonsterControl mc = new MonsterControl(page, sheet);
-                    page.Controls.Add(mc);
-                    mc.Dock = DockStyle.Fill;
-
-                    _advSiteCtl.GetMainPanel().AddPage(page);
-                }
-                else
-                {
-                    TabPage page = new TabPage(charName);
-                    MonsterControl mc = new MonsterControl(page, charName);
-                    page.Controls.Add(mc);
-                    mc.Dock = DockStyle.Fill;
-
-                    _advSiteCtl.GetMainPanel().AddPage(page);
-                }
-            }
-        }
 
         public void Save()
         {
@@ -233,6 +195,58 @@ namespace DM_Tool.Controls
                 catch { }
             }
             _room._rooms = temp.Trim('|');
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DataGridViewCell cell = dgvEncounters.SelectedRows[0].Cells["colMonster"];
+            if (cell.Value != null && cell.Value != string.Empty)
+            {
+                string charName = cell.Value.ToString();
+                CharacterSheet sheet = mgr.listCharacterSheets.Find(x => x.name.ToUpper().Equals(charName.ToUpper()));
+                if (sheet != null)
+                {
+                    if (_advSiteCtl.GetMainPanel().PageOpen(charName))
+                    {
+                        return;
+                    }
+
+                    TabPage page = new TabPage(charName);
+                    MonsterControl mc = new MonsterControl(page, sheet);
+                    page.Controls.Add(mc);
+                    mc.Dock = DockStyle.Fill;
+
+                    _advSiteCtl.GetMainPanel().AddOrSelectPage(page);
+                }
+                else
+                {
+                    TabPage page = new TabPage(charName);
+                    MonsterControl mc = new MonsterControl(page, charName);
+                    page.Controls.Add(mc);
+                    mc.Dock = DockStyle.Fill;
+
+                    _advSiteCtl.GetMainPanel().AddOrSelectPage(page);
+                }
+            }
+        }
+
+        private void dgvEncounters_MouseDown(object sender, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo Hti;
+            if (e.Button == MouseButtons.Right)
+            {
+                Hti = dgvEncounters.HitTest(e.X, e.Y);
+                if (Hti.Type == DataGridViewHitTestType.Cell)
+                {
+                    if (!((DataGridViewRow)(dgvEncounters.Rows[Hti.RowIndex])).Selected)
+                    {
+                        dgvEncounters.ClearSelection();
+                        ((DataGridViewRow)dgvEncounters.Rows[Hti.RowIndex]).Selected = true;
+                    }
+                    ctxtMenu.Show(MousePosition);
+                }
+            }
         }
     }
 }
