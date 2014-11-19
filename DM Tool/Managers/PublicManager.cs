@@ -19,7 +19,6 @@ namespace DM_Tool
 
         private string configFile = "./config.txt";
         private string campaignHash = "##Campaign Name:";
-        public string Campaign;
 
         public int totalQualityRatios;
         public int totalBaseItemRatios;
@@ -36,9 +35,10 @@ namespace DM_Tool
         public List<HardMaterial> listHardMaterials;
         public List<CharacterSheet> listCharacterSheets;
         public List<Quality> listQualities;
-        
+
+        private static string Campaign;
         private static string xmlAdventures = "AdventureSites.xml";
-        public static string xmlBaseItems = "BaseItems.xml";
+        private static string xmlBaseItems = "BaseItems.xml";
         private static string xmlCreatureSizes = "Sizes.xml";
         private static string xmlCreatureTypes = "CreatureTypes.xml";
         private static string xmlHardMaterials = "HardMaterials.xml";
@@ -67,6 +67,22 @@ namespace DM_Tool
             _main = main;
         }
 
+        #region CampaignInfo
+        public void SetCampaign(string val)
+        {
+            Campaign = val;
+        }
+
+        public string GetCampaign()
+        {
+            return Campaign;
+        }
+
+        public void LoadCampaign()
+        {
+            listAdvSites = DeserializeAdventuresFromXML();
+        }
+        #endregion
         #region Config File
         public void ConfigFile()
         {
@@ -83,7 +99,6 @@ namespace DM_Tool
                     if (line.Contains(campaignHash))
                     {
                         Campaign = line.Split(':')[1];
-                        xmlAdventures = Campaign + "\\" + xmlAdventures;
                     }
                 }
                 file.Close();
@@ -216,7 +231,7 @@ namespace DM_Tool
 
         #region Deserialization
 
-        public void Load(string Campaign)
+        public void LoadDefault()
         {
             listCreatureTypes = DeserializeCreatureTypesFromXML();
             listCharacterSheets = DeserializeMonstersFromXML();
@@ -238,7 +253,7 @@ namespace DM_Tool
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<AdventureSite>));
-                TextReader textReader = new StreamReader(xmlAdventures);
+                TextReader textReader = new StreamReader(Campaign + "\\" + xmlAdventures);
                 advs = (List<AdventureSite>)deserializer.Deserialize(textReader);
                 textReader.Close();
 

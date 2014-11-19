@@ -219,6 +219,7 @@
             this.loadCampaignToolStripMenuItem.Name = "loadCampaignToolStripMenuItem";
             this.loadCampaignToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.loadCampaignToolStripMenuItem.Text = "Load Campaign";
+            this.loadCampaignToolStripMenuItem.Click += new System.EventHandler(this.loadCampaignToolStripMenuItem_Click);
             // 
             // saveCampaignToolStripMenuItem
             // 

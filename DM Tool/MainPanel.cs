@@ -15,7 +15,6 @@ namespace DM_Tool
     {
         private enum ListDisplay { ALL, TYPES, MONSTERS, BASEITEMS, ADVSITES};
         private List<string> baseMenu = new List<string> { "Types", "Monsters", "Base Items", "Adventure Sites"};
-        public string Campaign;
 
         public PublicManager mgr = PublicManager.GetInstance();
 
@@ -34,9 +33,9 @@ namespace DM_Tool
             mgr.listCreatureSizes = new List<CreatureSize>();
             mgr.listAdvSites = new List<AdventureSite>();
             mgr.SetMain(this);
-            mgr.Load(Campaign);
+            mgr.LoadDefault();
             SetMenuToBase();
-            this.Text = mgr.Campaign;
+            this.Text = mgr.GetCampaign();
         }
 
 
@@ -279,12 +278,14 @@ namespace DM_Tool
 
             if (txtBox.DialogResult == DialogResult.OK)
             {
-                Campaign = txtBox.GetText();
+                mgr.SetCampaign(txtBox.GetText());
             }
 
-            Directory.CreateDirectory("./" + Campaign);
+            Directory.CreateDirectory("./" + mgr.GetCampaign());
 
             mgr.WriteConfigFile();
+            this.Text = mgr.GetCampaign();
+            mgr.LoadCampaign();
         }
 
         private void battleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -379,6 +380,25 @@ namespace DM_Tool
             page.Controls.Add(aoc);
             aoc.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
+        }
+
+        private void loadCampaignToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new  FolderBrowserDialog();
+            fbd.SelectedPath = Environment.CurrentDirectory;
+            DialogResult result = fbd.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string[] split = fbd.SelectedPath.Split('\\');
+                mgr.SetCampaign(split[split.Length -1]);
+            }
+
+            Directory.CreateDirectory("./" + mgr.GetCampaign());
+
+            mgr.WriteConfigFile();
+            this.Text = mgr.GetCampaign();
+            mgr.LoadCampaign();
         }
     }
 }
