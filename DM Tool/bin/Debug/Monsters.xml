@@ -1,47 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfCharacterSheet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CharacterSheet>
-    <name>Awakened Zombie Hydra (Six-Heads)</name>
-    <raceName>Hydra</raceName>
-    <classes />
-    <levels />
-    <type>Undead</type>
-    <hitDieSize>12</hitDieSize>
-    <hitDieNum>12</hitDieNum>
-    <hp>78</hp>
-    <init>1</init>
-    <initMisc>0</initMisc>
-    <speed>30</speed>
-    <baseAttackBonus>6</baseAttackBonus>
-    <fortSave>4</fortSave>
-    <refSave>5</refSave>
-    <willSave>3</willSave>
-    <skillPoints>0</skillPoints>
-    <str>17</str>
-    <dex>12</dex>
-    <con>0</con>
-    <intelligence>0</intelligence>
-    <wis>0</wis>
-    <cha>0</cha>
-    <description> </description>
-    <size>Huge</size>
-    <natAC>0</natAC>
-    <armorAC>0</armorAC>
-    <shieldAC>0</shieldAC>
-    <defAC>0</defAC>
-    <attack>6 bites +8 melee (1d10+3)</attack>
-    <fullAttack>6 bites +8 melee (1d10+3)</fullAttack>
-    <space>15</space>
-    <reach>10</reach>
-    <specialAttacks />
-    <specialQualities>Darkvision 60 ft., fast healing 16, low-light vision, scent</specialQualities>
-    <feats>Combat ReflexesB, Iron Will, Toughness, Weapon Focus (bite)</feats>
-    <maxHP>78</maxHP>
-    <totalAC>9</totalAC>
-    <touchAC>9</touchAC>
-    <ffAC>8</ffAC>
-  </CharacterSheet>
-  <CharacterSheet>
     <name>Badger</name>
     <raceName />
     <classes />
