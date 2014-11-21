@@ -142,9 +142,12 @@ namespace DM_Tool.Controls
             SetRoomInformation();
             foreach (DataGridViewRow row in dgvRooms.Rows)
             {
-                if (row.Cells["colRoom"].Value.ToString().Equals(oldName))
+                if (row.Cells["colRoom"].Value != null)
                 {
-                    row.Cells["colRoom"].Value = newName;
+                    if (row.Cells["colRoom"].Value.ToString().Equals(oldName))
+                    {
+                        row.Cells["colRoom"].Value = newName;
+                    }
                 }
             }
         }

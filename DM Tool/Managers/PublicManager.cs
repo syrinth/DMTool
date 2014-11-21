@@ -45,6 +45,8 @@ namespace DM_Tool
         private static string xmlCharacterSheets = "Monsters.xml";
         private static string xmlQualities = "Qualitys.xml";
 
+        private static XmlWriterSettings ws = new XmlWriterSettings();
+
         public MainPanel _main;
 
         private PublicManager()
@@ -53,6 +55,7 @@ namespace DM_Tool
             totalBaseItemRatios = 0;
             totalHardMaterialRatios = 0;
             ConfigFile();
+            ws.NewLineHandling = NewLineHandling.Entitize;
         }
 
         public static PublicManager GetInstance(){
@@ -174,57 +177,64 @@ namespace DM_Tool
         static public void SerializeAdventuresToXML(List<AdventureSite> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<AdventureSite>));
-            TextWriter textWriter = new StreamWriter(Campaign + "\\" + xmlAdventures);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(Campaign + "\\" + xmlAdventures, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         static public void SerializeMonstersToXML(List<CharacterSheet> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterSheet>));
-            TextWriter textWriter = new StreamWriter(xmlCharacterSheets);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(xmlCharacterSheets, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         static public void SerializeCreatureTypesToXML(List<CreatureType> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<CreatureType>));
-            TextWriter textWriter = new StreamWriter(xmlCreatureTypes);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(xmlCreatureTypes, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         static public void SerializeQualitiesToXML(List<Quality> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Quality>));
-            TextWriter textWriter = new StreamWriter(xmlQualities);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(xmlQualities, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         static public void SerializeCreatureSizesToXML(List<CreatureSize> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<CreatureSize>));
-            TextWriter textWriter = new StreamWriter(xmlCreatureSizes);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(xmlCreatureSizes, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         static public void SerializeHardMaterialsToXML(List<HardMaterial> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<HardMaterial>));
-            TextWriter textWriter = new StreamWriter(xmlHardMaterials);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(xmlHardMaterials, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         static public void SerializeBaseItemsToXML(List<BaseItem> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<BaseItem>));
-            TextWriter textWriter = new StreamWriter(xmlBaseItems);
-            serializer.Serialize(textWriter, sites);
-            textWriter.Close();
+            using (XmlWriter wr = XmlWriter.Create(xmlBaseItems, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
         }
 
         #endregion
