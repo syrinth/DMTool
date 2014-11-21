@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAdventureSite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AdventureSite>
+    <_name>The Rat's Nest</_name>
+    <_description>A dilapidated looking tavern notorious to the Slums District. It appears to be made of whatever was handy at the time, as it is a patchwork of cobbled together wood, stone and tarp.
+
+
+
+
+
+
+
+
+
+There are three front doors, a back door, and numerous windos coming form the second floor.</_description>
+    <_location>Slums District, An'Hattar</_location>
+    <_totalExp>0</_totalExp>
+    <_totalLoot>0</_totalLoot>
+    <_panda>0</_panda>
+    <_rooms>
+      <Room>
+        <_name>Hallway</_name>
+        <_description>A narrow, cramped hallway five feet wide by twenty long. At the far end are two doors, and a small stool on which a bored looking guard is reading what appears to be a comic book.
+
+
+
+Door to the basement is locked, Hardness 5, HP 10 and Break 13</_description>
+        <_encounters>Thug (2 HD)</_encounters>
+        <_loot>Longsword|Banded Mail|2d6 Gold|Silver Ring (15 gp)|Comic Book (Louis l'Arrac The Conqueror #23)</_loot>
+        <_traps />
+        <_relevantChecks>Open Lock DC 20</_relevantChecks>
+        <_rooms>Basement</_rooms>
+      </Room>
+      <Room>
+        <_name>Basement</_name>
+        <_description>The stairs come out to a large, poorly lit room. A single torch barely burns in the stairway beside you, there is a table near the center of the room at which a small, wiry-looking man is sleeping. You notice that he carries a heavy mace, faint green flames seem to twirl and hiss off of it.
+
+-To your right, there is a large, heavy stone door. Beyond the door, there is a foul stench.
+
+-A small door is in to your left at the far end of the room, past the guard. After 1d6 rounds, another wererat will emerge from the room and wake up the first with a cold beer.
+
+-Going forward, a series of tunnels appears to have been gnawed or dug out of the earth, shored up here and there as needed.
+
+-End of the tunnels to the Processing Room is another simple wooden door. Hardness 5, hp 10, break 13. Door is unlocked.
+
+The tunnels are patrolled by a thug who can be snuck past</_description>
+        <_encounters>Wererat|Thug (2 HD)|Wererat</_encounters>
+        <_loot>Longsword|+1 Heavy Mace|+1 Studded Leather|Cloak of Resistance|2d10 gold|Banded Mail|Shortsword|Studded Leather</_loot>
+        <_traps />
+        <_relevantChecks>DC -1 Move Silently check to avoid waking the guard
+Open Lock DC 20 to open the door to the sewers
+Listen DC 15 reveals something large moving not too far down the sweres.
+</_relevantChecks>
+        <_rooms>Hallway|Sewer Entrance|Processing Room</_rooms>
+      </Room>
+      <Room>
+        <_name>Sewer Entrance</_name>
+      </Room>
+      <Room>
+        <_name>Processing Room</_name>
+        <_description>A large room containing a thick, alchemical smell. Barrels and crates line the walls, at the far corner lies a table on which several powders lay, while the other wall has a large steaming vat of greenish-red water. There is a tiny man with a pointed face doing something complicated over the table. He appears to be distracted.
+
+A door immediatey to the side is partly opened.
+
+Note: Due to the smell of the processing, the Dire Rat requires a DC 20 Survival check to detect anyone.</_description>
+        <_encounters>Wererat|Dire Rat (6 HD)</_encounters>
+        <_loot>+1 Heavy Mace|Oasis Drug|+1 Studded Leather Armor|+1 Studded Leather Armor</_loot>
+        <_traps />
+        <_relevantChecks>DC 20 Search check reveals alternate route to the back alley behind the Rat's Nest</_relevantChecks>
+        <_rooms>Basement|Store Room</_rooms>
+      </Room>
+      <Room>
+        <_name>Store Room</_name>
+        <_description>A small store room about ten by fifteen feet. There are several large crates as well as a table and chair in the corner of the room with sheafs of paper.
+
+The recipe is incomplete, and it only details the procedure the rats do, although it is apparently the final step before it is sent to their dealers.</_description>
+        <_encounters />
+        <_loot>2d4 Silver|Shipping and Arrival Times|Recipe</_loot>
+        <_traps />
+        <_relevantChecks />
+        <_rooms>Processing Room</_rooms>
+      </Room>
+    </_rooms>
+  </AdventureSite>
+</ArrayOfAdventureSite>

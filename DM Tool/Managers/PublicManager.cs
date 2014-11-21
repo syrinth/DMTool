@@ -174,7 +174,7 @@ namespace DM_Tool
         static public void SerializeAdventuresToXML(List<AdventureSite> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<AdventureSite>));
-            TextWriter textWriter = new StreamWriter(xmlAdventures);
+            TextWriter textWriter = new StreamWriter(Campaign + "\\" + xmlAdventures);
             serializer.Serialize(textWriter, sites);
             textWriter.Close();
         }

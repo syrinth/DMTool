@@ -23,7 +23,7 @@
     <intelligence>0</intelligence>
     <wis>0</wis>
     <cha>0</cha>
-    <description> </description>
+    <description />
     <size>Huge</size>
     <natAC>0</natAC>
     <armorAC>0</armorAC>
@@ -204,6 +204,47 @@
     <totalAC>15</totalAC>
     <touchAC>11</touchAC>
     <ffAC>14</ffAC>
+  </CharacterSheet>
+  <CharacterSheet>
+    <name>Dire Rat (6 HD)</name>
+    <raceName />
+    <classes />
+    <levels />
+    <type>Animal</type>
+    <hitDieSize>8</hitDieSize>
+    <hitDieNum>6</hitDieNum>
+    <hp>33</hp>
+    <init>3</init>
+    <initMisc>0</initMisc>
+    <speed>30</speed>
+    <baseAttackBonus>4</baseAttackBonus>
+    <fortSave>6</fortSave>
+    <refSave>8</refSave>
+    <willSave>3</willSave>
+    <skillPoints>0</skillPoints>
+    <str>10</str>
+    <dex>17</dex>
+    <con>12</con>
+    <intelligence>1</intelligence>
+    <wis>12</wis>
+    <cha>4</cha>
+    <description> </description>
+    <size>Medium</size>
+    <natAC>1</natAC>
+    <armorAC>0</armorAC>
+    <shieldAC>0</shieldAC>
+    <defAC>0</defAC>
+    <attack>Bite +8 melee (1d4 plus disease)</attack>
+    <fullAttack>Bite +8 melee (1d4 plus disease)</fullAttack>
+    <space>5</space>
+    <reach>5</reach>
+    <specialAttacks>Disease[Filth Fever DC 11]</specialAttacks>
+    <specialQualities>Low-light vision, scent</specialQualities>
+    <feats>Alertness, Weapon Finesse</feats>
+    <maxHP>33</maxHP>
+    <totalAC>14</totalAC>
+    <touchAC>13</touchAC>
+    <ffAC>11</ffAC>
   </CharacterSheet>
   <CharacterSheet>
     <name>Gelatinous Cube</name>
@@ -491,6 +532,88 @@
     <totalAC>15</totalAC>
     <touchAC>12</touchAC>
     <ffAC>13</ffAC>
+  </CharacterSheet>
+  <CharacterSheet>
+    <name>Otyugh</name>
+    <raceName />
+    <classes />
+    <levels />
+    <type>Aberration</type>
+    <hitDieSize>8</hitDieSize>
+    <hitDieNum>6</hitDieNum>
+    <hp>36</hp>
+    <init>0</init>
+    <initMisc>0</initMisc>
+    <speed>20</speed>
+    <baseAttackBonus>4</baseAttackBonus>
+    <fortSave>3</fortSave>
+    <refSave>2</refSave>
+    <willSave>6</willSave>
+    <skillPoints>0</skillPoints>
+    <str>11</str>
+    <dex>10</dex>
+    <con>13</con>
+    <intelligence>5</intelligence>
+    <wis>12</wis>
+    <cha>6</cha>
+    <description> </description>
+    <size>Large</size>
+    <natAC>8</natAC>
+    <armorAC>0</armorAC>
+    <shieldAC>0</shieldAC>
+    <defAC>0</defAC>
+    <attack>Tentacle +4 melee (1d6)</attack>
+    <fullAttack>2 tentacles +4 melee (1d6) and bite -2 melee (1d4)</fullAttack>
+    <space>5</space>
+    <reach>5</reach>
+    <specialAttacks>Constrict 1d6, disease, improved grab</specialAttacks>
+    <specialQualities>Darkvision 60 ft., scent</specialQualities>
+    <feats>Alertness, Toughness, Weapon Focus (tentacle)</feats>
+    <maxHP>36</maxHP>
+    <totalAC>17</totalAC>
+    <touchAC>9</touchAC>
+    <ffAC>17</ffAC>
+  </CharacterSheet>
+  <CharacterSheet>
+    <name>Thug (2 HD)</name>
+    <raceName />
+    <classes>Fighter</classes>
+    <levels>2</levels>
+    <type>Humanoid</type>
+    <hitDieSize>8</hitDieSize>
+    <hitDieNum>2</hitDieNum>
+    <hp>18</hp>
+    <init>1</init>
+    <initMisc>0</initMisc>
+    <speed>20</speed>
+    <baseAttackBonus>1</baseAttackBonus>
+    <fortSave>2</fortSave>
+    <refSave>4</refSave>
+    <willSave>0</willSave>
+    <skillPoints>0</skillPoints>
+    <str>14</str>
+    <dex>12</dex>
+    <con>14</con>
+    <intelligence>10</intelligence>
+    <wis>10</wis>
+    <cha>10</cha>
+    <description />
+    <size>Medium</size>
+    <natAC>6</natAC>
+    <armorAC>0</armorAC>
+    <shieldAC>0</shieldAC>
+    <defAC>1</defAC>
+    <attack>+4 Longsword (1d8 +4)</attack>
+    <fullAttack>+4 Longsword (1d8 +4)</fullAttack>
+    <space>5</space>
+    <reach>5</reach>
+    <specialAttacks>-</specialAttacks>
+    <specialQualities>-</specialQualities>
+    <feats>Toughness, Weapon Focus(Longsword), Dodge</feats>
+    <maxHP>18</maxHP>
+    <totalAC>18</totalAC>
+    <touchAC>12</touchAC>
+    <ffAC>17</ffAC>
   </CharacterSheet>
   <CharacterSheet>
     <name>Vargouille</name>

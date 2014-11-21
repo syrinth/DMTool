@@ -31,6 +31,8 @@ namespace DM_Tool.Controls
             this._parent = parent;
             this._advSiteCtl = adventureSiteControl;
             this._advSite = adventureSiteControl.GetAdventureSite();
+            this.tbDescription.Text = room._description;
+            this.tbSkills.Text = room._relevantChecks;
 
             _parent.Text = room._name;
             tbName.Text = _room._name;
@@ -131,6 +133,18 @@ namespace DM_Tool.Controls
                     RoomControl room = new RoomControl(page, advRoom, _advSiteCtl);
                     page.Controls.Add(room);
                     _advSiteCtl.AddPage(page);
+                }
+            }
+        }
+
+        public void SetRoomInformation(string oldName, string newName)
+        {
+            SetRoomInformation();
+            foreach (DataGridViewRow row in dgvRooms.Rows)
+            {
+                if (row.Cells["colRoom"].Value.ToString().Equals(oldName))
+                {
+                    row.Cells["colRoom"].Value = newName;
                 }
             }
         }

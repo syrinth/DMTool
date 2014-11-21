@@ -71,7 +71,7 @@ namespace DM_Tool.Controls
                         r.Cells["colRoom"].Value = newName;
                         foreach (RoomControl rc in _roomCtls)
                         {
-                            rc.SetRoomInformation();
+                            rc.SetRoomInformation(oldName, newName);
                         }
                         return;
                     }
@@ -145,13 +145,7 @@ namespace DM_Tool.Controls
                 if (!_adventureSite.ContainsRoom(name))
                 {
                     Room newRoom = new Room(name);
-                    //TabPage tabPage = new TabPage(name);
-                    //RoomControl roomCtl = new RoomControl(tabPage, newRoom, this);
 
-
-                    //tabPage.Controls.Add(roomCtl);
-                    //this.tabAdventureSite.Controls.Add(tabPage);
-                    //this.tabAdventureSite.SelectedTab = tabPage;
                     this._adventureSite.AddRoom(newRoom);
                     foreach (RoomControl rc in _roomCtls)
                     {
