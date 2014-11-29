@@ -6,6 +6,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DM_Tool.Controls;
+using DM_Tool.Classes;
 
 namespace DM_Tool
 {
@@ -58,9 +60,9 @@ namespace DM_Tool
                     string name = cell.Value.ToString();
                     ((DataGridViewComboBoxColumn)dgvEffects.Columns["Owner"]).Items.Add(name);
 
-                    //Search MonstersList
-                    List<CharacterSheet> monstersList = mgr.listCharacterSheets;
-                    CharacterSheet sheet = mgr.listCharacterSheets.Find(x => x.name.ToUpper().Equals(name.ToUpper()));
+                    //Search listCharacters
+                    //List<Character> charactersList = mgr.listCharacters;
+                    CharacterSheet sheet = mgr.listCharacters.Find(x => x.GetName().ToUpper().Equals(name.ToUpper())).GetCharacterSheet();
                     if (sheet != null)
                     {
                         currRow.Cells["AC"].Value = sheet.totalAC;
@@ -80,13 +82,16 @@ namespace DM_Tool
                     {
                         DataGridViewRow currRow = dgvCombat.Rows[e.RowIndex];
                         DataGridViewCell cell = currRow.Cells["CharacterName"];
-                        string name = cell.Value.ToString();
-
-                        string val = column.Items[i].ToString();
-                        if (val.Equals(name))
+                        if (cell.Value != null && cell.Value.ToString() != string.Empty)
                         {
-                            column.Items[i] += "-" + currRow.Cells["Icon"].Value.ToString();
-                            break;
+                            string name = cell.Value.ToString();
+
+                            string val = column.Items[i].ToString();
+                            if (val.Equals(name))
+                            {
+                                column.Items[i] += "-" + currRow.Cells["Icon"].Value.ToString();
+                                break;
+                            }
                         }
                     }
                 }
@@ -269,9 +274,9 @@ namespace DM_Tool
             }
 
             string charName = cell.Value.ToString();
-            CharacterSheet sheet = mgr.listCharacterSheets.Find(x => x.name.ToUpper().Equals(charName.ToUpper()));
+            Character character = mgr.listCharacters.Find(x => x.GetName().ToUpper().Equals(charName.ToUpper()));
 
-            if (sheet != null)
+            if (character != null)
             {
 
                 if (_mainPanel.PageOpen(charName))
@@ -280,7 +285,7 @@ namespace DM_Tool
                 }
 
                 TabPage page = new TabPage(charName);
-                MonsterControl mc = new MonsterControl(page, sheet);
+                CharacterControl mc = new CharacterControl(page, character);
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
 
@@ -289,7 +294,7 @@ namespace DM_Tool
             else
             {
                 TabPage page = new TabPage(charName);
-                MonsterControl mc = new MonsterControl(page, charName);
+                CharacterControl mc = new CharacterControl(page, charName);
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
 

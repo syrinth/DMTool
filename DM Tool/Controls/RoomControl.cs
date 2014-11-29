@@ -221,8 +221,8 @@ namespace DM_Tool.Controls
             if (cell.Value != null && cell.Value != string.Empty)
             {
                 string charName = cell.Value.ToString();
-                CharacterSheet sheet = mgr.listCharacterSheets.Find(x => x.name.ToUpper().Equals(charName.ToUpper()));
-                if (sheet != null)
+                Character character = mgr.listCharacters.Find(x => x.GetName().ToUpper().Equals(charName.ToUpper()));
+                if (character != null)
                 {
                     if (_advSiteCtl.GetMainPanel().PageOpen(charName))
                     {
@@ -230,7 +230,7 @@ namespace DM_Tool.Controls
                     }
 
                     TabPage page = new TabPage(charName);
-                    MonsterControl mc = new MonsterControl(page, sheet);
+                    CharacterControl mc = new CharacterControl(page, character);
                     page.Controls.Add(mc);
                     mc.Dock = DockStyle.Fill;
 
@@ -239,7 +239,7 @@ namespace DM_Tool.Controls
                 else
                 {
                     TabPage page = new TabPage(charName);
-                    MonsterControl mc = new MonsterControl(page, charName);
+                    CharacterControl mc = new CharacterControl(page, charName);
                     page.Controls.Add(mc);
                     mc.Dock = DockStyle.Fill;
 

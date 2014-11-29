@@ -11,49 +11,50 @@ namespace DM_Tool
         public CharacterSheet(){
         }
 
-        public CharacterSheet(string name, string raceName, string classes, string levels, string type, string size, string hdNum, string hdSize, string hp, string init, string initMisc, string speed, string bab, string fort, string reflex, string will, string str, string dex, string con, string intelligence, string wis, string cha, string natAC, string armorAC, string shieldAC, string defAC, string attack, string fullAttack, string space, string reach, string specialAttacks, string specialQualities, string feats, string maxHP, string totalAC, string touchAC, string ffAC)
+        public CharacterSheet(string[] vals)//string name, string raceName, string classes, string levels, string type, string size, string hdNum, string hdSize, string hp, string init, string initMisc, string speed, string bab, string fort, string reflex, string will, string str, string dex, string con, string intelligence, string wis, string cha, string natAC, string armorAC, string shieldAC, string defAC, string attack, string fullAttack, string space, string reach, string specialAttacks, string specialQualities, string feats, string maxHP, string totalAC, string touchAC, string ffAC)
         {
-            this._name = name;
-            this._raceName = raceName;
-            
-            this._type = type;
-            this._size = size;
-            this._classes = classes;
-            this._levels = levels;
-            this._hitDieSize = Convert.ToInt32(hdSize);
-            this._hitDieNum = Convert.ToInt32(hdNum);
-            this._hp = Convert.ToInt32(hp);
-            this._init = Convert.ToInt32(init);
-            this._initMisc = Convert.ToInt32(initMisc);
-            this._speed = speed;
-            this._baseAttackBonus = Convert.ToInt32(bab);
-            this._fortSave = Convert.ToInt32(fort);
-            this._refSave = Convert.ToInt32(reflex);
-            this._willSave = Convert.ToInt32(will);
+            int count = 0;
+            this._name = vals[count++];
+            this._raceName = vals[count++];
 
-            this._str = Convert.ToInt32(str);
-            this._dex = Convert.ToInt32(dex);
-            this._con = Convert.ToInt32(con);
-            this._int = Convert.ToInt32(intelligence);
-            this._wis = Convert.ToInt32(wis);
-            this._cha = Convert.ToInt32(cha);
-            this._natAC = Convert.ToInt32(natAC);
-            this._armorAC = Convert.ToInt32(armorAC);
-            this._shieldAC = Convert.ToInt32(shieldAC);
-            this._defAC = Convert.ToInt32(defAC);
-            this._attack = attack;
-            this._fullAttack = fullAttack;
-            this._space = Convert.ToInt32(space);
-            this._reach = Convert.ToInt32(reach);
-            this._specialAttacks = specialAttacks;
-            this._specialQualities = specialQualities;
-            this._feats = feats;
+            this._type = vals[count++];
+            this._size = vals[count++];
+            this._classes = vals[count++];
+            this._levels = vals[count++];
+            this._hitDieSize = Convert.ToInt32(vals[count++]);
+            this._hitDieNum = Convert.ToInt32(vals[count++]);
+            this._hp = Convert.ToInt32(vals[count++]);
+            this._init = Convert.ToInt32(vals[count++]);
+            this._initMisc = Convert.ToInt32(vals[count++]);
+            this._speed = vals[count++];
+            this._baseAttackBonus = Convert.ToInt32(vals[count++]);
+            this._fortSave = Convert.ToInt32(vals[count++]);
+            this._refSave = Convert.ToInt32(vals[count++]);
+            this._willSave = Convert.ToInt32(vals[count++]);
 
-            this._maxHP = Convert.ToInt32(maxHP);
-            this._totalAC = Convert.ToInt32(totalAC);
+            this._str = Convert.ToInt32(vals[count++]);
+            this._dex = Convert.ToInt32(vals[count++]);
+            this._con = Convert.ToInt32(vals[count++]);
+            this._int = Convert.ToInt32(vals[count++]);
+            this._wis = Convert.ToInt32(vals[count++]);
+            this._cha = Convert.ToInt32(vals[count++]);
+            this._natAC = Convert.ToInt32(vals[count++]);
+            this._armorAC = Convert.ToInt32(vals[count++]);
+            this._shieldAC = Convert.ToInt32(vals[count++]);
+            this._defAC = Convert.ToInt32(vals[count++]);
+            this._attack = vals[count++];
+            this._fullAttack = vals[count++];
+            this._space = Convert.ToInt32(vals[count++]);
+            this._reach = Convert.ToInt32(vals[count++]);
+            this._specialAttacks = vals[count++];
+            this._specialQualities = vals[count++];
+            this._feats = vals[count++];
 
-            this._touchAC = Convert.ToInt32(touchAC);
-            this._ffAC = Convert.ToInt32(ffAC);
+            this._maxHP = Convert.ToInt32(vals[count++]);
+            this._totalAC = Convert.ToInt32(vals[count++]);
+
+            this._touchAC = Convert.ToInt32(vals[count++]);
+            this._ffAC = Convert.ToInt32(vals[count++]);
         }
 
         private string _name;

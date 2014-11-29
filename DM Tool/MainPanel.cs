@@ -13,7 +13,7 @@ namespace DM_Tool
 {
     public partial class MainPanel : Form
     {
-        private enum ListDisplay { ALL, TYPES, MONSTERS, BASEITEMS, ADVSITES};
+        private enum ListDisplay { ALL, TYPES, CHARACTERS, BASEITEMS, ADVSITES};
         private List<string> baseMenu = new List<string> { "Types", "Monsters", "Base Items", "Adventure Sites"};
 
         public PublicManager mgr = PublicManager.GetInstance();
@@ -25,7 +25,7 @@ namespace DM_Tool
 
             display = ListDisplay.ALL;
             mgr.listCreatureTypes = new List<CreatureType>();
-            mgr.listCharacterSheets = new List<CharacterSheet>();
+            mgr.listCharacters = new List<Character>();
             mgr.listBaseItems = new List<BaseItem>();
             mgr.listQualities = new List<Quality>();
             mgr.listHardMaterials = new List<HardMaterial>();
@@ -46,11 +46,11 @@ namespace DM_Tool
             mgr.Save();
         }
 
-        private void createAMonsterToolStripMenuItem_Click(object sender, EventArgs e)
+        private void createACharacterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string newMonster = "New Monster";
-            TabPage page = new TabPage(newMonster);
-            MonsterControl mc = new MonsterControl(page);
+            string newCharacter = "New Character";
+            TabPage page = new TabPage(newCharacter);
+            CharacterControl mc = new CharacterControl(page);
             page.Controls.Add(mc);
             mc.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
@@ -88,7 +88,7 @@ namespace DM_Tool
                 }
                 if (name == "Monsters")
                 {
-                    DisplayCreatures();
+                    DisplayCharacters();
                 }
                 if (name == "Base Items")
                 {
@@ -111,7 +111,7 @@ namespace DM_Tool
                 }
                 mgr.NewTab("Type", name);
             }
-            else if (display == ListDisplay.MONSTERS)
+            else if (display == ListDisplay.CHARACTERS)
             {
                 foreach (TabPage page in tabOpenObjects.TabPages)
                 {
@@ -121,7 +121,7 @@ namespace DM_Tool
                         return;
                     }
                 }
-                mgr.NewTab("Monster", name);
+                mgr.NewTab("Character", name);
             }
             else if (display == ListDisplay.BASEITEMS)
             {
@@ -178,14 +178,14 @@ namespace DM_Tool
             }
         }
 
-        public void DisplayCreatures()
+        public void DisplayCharacters()
         {
             dgView.Rows.Clear();
-            display = ListDisplay.MONSTERS;
+            display = ListDisplay.CHARACTERS;
             dgView.Rows.Add("--Main Manu");
-            foreach (CharacterSheet m in mgr.listCharacterSheets)
+            foreach (Character c in mgr.listCharacters)
             {
-                dgView.Rows.Add(m.name);
+                dgView.Rows.Add(c.GetName());
             }
         }
 

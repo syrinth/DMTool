@@ -1,5 +1,5 @@
 ﻿namespace DM_Tool
-{
+{/*
     partial class MonsterControl
     {
         /// <summary>
@@ -789,5 +789,5 @@
         private System.Windows.Forms.TextBox tbRaceName;
         private System.Windows.Forms.TextBox tbClasses;
         private System.Windows.Forms.TextBox tbLevels;
-    }
+    }*/
 }

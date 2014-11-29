@@ -111,9 +111,7 @@
       <DependentUpon>frmNewCreatureType.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\CharacterSheet.cs" />
-    <Compile Include="Controls\CharacterSheetControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="Controls\CharacterSheetControl.cs" />
     <Compile Include="Controls\CharacterSheetControl.Designer.cs">
       <DependentUpon>CharacterSheetControl.cs</DependentUpon>
     </Compile>

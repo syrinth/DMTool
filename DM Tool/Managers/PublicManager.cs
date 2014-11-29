@@ -33,7 +33,7 @@ namespace DM_Tool
         public List<CreatureSize> listCreatureSizes;
         public List<CreatureType> listCreatureTypes;
         public List<HardMaterial> listHardMaterials;
-        public List<CharacterSheet> listCharacterSheets;
+        public List<Character> listCharacters;
         public List<Quality> listQualities;
 
         private static string Campaign;
@@ -42,7 +42,7 @@ namespace DM_Tool
         private static string xmlCreatureSizes = "Sizes.xml";
         private static string xmlCreatureTypes = "CreatureTypes.xml";
         private static string xmlHardMaterials = "HardMaterials.xml";
-        private static string xmlCharacterSheets = "Monsters.xml";
+        private static string xmlCharacters = "Characters.xml";
         private static string xmlQualities = "Qualitys.xml";
 
         private static XmlWriterSettings ws = new XmlWriterSettings();
@@ -120,9 +120,9 @@ namespace DM_Tool
         }
         #endregion
 
-        public void DisplayCreatures()
+        public void DisplayCharacters()
         {
-            _main.DisplayCreatures();
+            _main.DisplayCharacters();
         }
 
         public void DisplayAdvSites()
@@ -140,8 +140,8 @@ namespace DM_Tool
                     page.Controls.Add(tc);
                     tc.Dock = DockStyle.Fill;
                     break;
-                case "Monster":
-                    MonsterControl m = new MonsterControl(page, listCharacterSheets.Find(x => x.name.Equals(name)));
+                case "Character":
+                    CharacterControl m = new CharacterControl(page, listCharacters.Find(x => x.GetName().Equals(name)));
                     page.Controls.Add(m);
                     m.Dock = DockStyle.Fill;
                     break;
@@ -165,7 +165,7 @@ namespace DM_Tool
 
         public void Save()
         {
-            SerializeMonstersToXML(listCharacterSheets);
+            SerializeCharactersToXML(listCharacters);
             SerializeAdventuresToXML(listAdvSites);
             SerializeCreatureSizesToXML(listCreatureSizes);
             SerializeCreatureTypesToXML(listCreatureTypes);
@@ -183,12 +183,12 @@ namespace DM_Tool
             }
         }
 
-        static public void SerializeMonstersToXML(List<CharacterSheet> sites)
+        static public void SerializeCharactersToXML(List<Character> characters)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterSheet>));
-            using (XmlWriter wr = XmlWriter.Create(xmlCharacterSheets, ws))
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
+            using (XmlWriter wr = XmlWriter.Create(xmlCharacters, ws))
             {
-                serializer.Serialize(wr, sites);
+                serializer.Serialize(wr, characters);
             }
         }
 
@@ -244,7 +244,7 @@ namespace DM_Tool
         public void LoadDefault()
         {
             listCreatureTypes = DeserializeCreatureTypesFromXML();
-            listCharacterSheets = DeserializeMonstersFromXML();
+            listCharacters = DeserializeCharactersFromXML();
             listQualities = DeserializeQualitiesFromXML();
             listAdvSites = DeserializeAdventuresFromXML();
             listHardMaterials = DeserializeHardMaterialsFromXML();
@@ -275,21 +275,21 @@ namespace DM_Tool
             return advs;
         }
 
-        static public List<CharacterSheet> DeserializeMonstersFromXML()
+        static public List<Character> DeserializeCharactersFromXML()
         {
-            List<CharacterSheet> monsters = new List<CharacterSheet>();
+            List<Character> characters = new List<Character>();
             try
             {
-                XmlSerializer deserializer = new XmlSerializer(typeof(List<CharacterSheet>));
-                TextReader textReader = new StreamReader(xmlCharacterSheets);
-                monsters = (List<CharacterSheet>)deserializer.Deserialize(textReader);
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<Character>));
+                TextReader textReader = new StreamReader(xmlCharacters);
+                characters = (List<Character>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
             catch
             {
             }
 
-            return monsters;
+            return characters;
         }
 
         static public List<CreatureType> DeserializeCreatureTypesFromXML()

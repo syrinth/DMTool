@@ -33,8 +33,8 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.HardMaterialControl
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.QualityControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.MainPanel.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.frmNewCreatureType.resources
-E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.MonsterControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Properties.Resources.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.TypeControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.TextInputDialog.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csproj.GenerateResource.Cache
+E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.CharacterSheetControl.resources

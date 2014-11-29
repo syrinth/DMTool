@@ -249,7 +249,7 @@
             this.createAMonsterToolStripMenuItem.Name = "createAMonsterToolStripMenuItem";
             this.createAMonsterToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.createAMonsterToolStripMenuItem.Text = "Create a Monster";
-            this.createAMonsterToolStripMenuItem.Click += new System.EventHandler(this.createAMonsterToolStripMenuItem_Click);
+            this.createAMonsterToolStripMenuItem.Click += new System.EventHandler(this.createACharacterToolStripMenuItem_Click);
             // 
             // typesToolStripMenuItem
             // 

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using DM_Tool.Classes;
 
 namespace DM_Tool
-{
+{/*
     public partial class MonsterControl : UserControl
     {
         public PublicManager mgr = PublicManager.GetInstance();
@@ -351,20 +351,20 @@ namespace DM_Tool
             if (tbName.Text != string.Empty)
             {
                 _parentPage.Text = tbName.Text;
-                CharacterSheet tc = mgr.listCharacterSheets.Find(x => x.name.Equals(tbName.Text));
+                Character tc = mgr.listCharacters.Find(x => x.GetName.Equals(tbName.Text));
                 if (tc != null)
                 {
-                    mgr.listCharacterSheets.Remove(tc);
+                    mgr.listCharacters.Remove(tc);
                 }
-                mgr.listCharacterSheets.Add(new CharacterSheet(tbName.Text, tbRaceName.Text, tbClasses.Text, tbLevels.Text, cbType.SelectedItem.ToString(), cbSize.SelectedItem.ToString(), tbHDNum.Text,
+                mgr.listCharacters.Add(new CharacterSheet(tbName.Text, tbRaceName.Text, tbClasses.Text, tbLevels.Text, cbType.SelectedItem.ToString(), cbSize.SelectedItem.ToString(), tbHDNum.Text,
                                             tbHDSize.Text, tbHP.Text, tbInit.Text, tbInitMisc.Text, tbSpeed.Text,
                                             tbBAB.Text, tbFort.Text, tbRef.Text, tbWill.Text,
                                             tbStr.Text, tbDex.Text, tbCon.Text, tbInt.Text,
                                             tbWis.Text, tbCha.Text, tbNatAC.Text, tbArmorAC.Text,
                                             tbShieldAC.Text, tbDefAC.Text, tbAttack.Text, tbFullAttack.Text, tbSpace.Text,
                                             tbReach.Text, tbSpecialAttacks.Text, tbSpecialQualities.Text, tbFeats.Text, tbHP.Text, tbTotalAC.Text, tbTouchAC.Text, tbFFAC.Text));
-                mgr.listCharacterSheets.Sort((a, b) => a.name.CompareTo(b.name));
-                PublicManager.SerializeMonstersToXML(mgr.listCharacterSheets);
+                mgr.listCharacters.Sort((a, b) => a.name.CompareTo(b.name));
+                PublicManager.SerializeCharactersToXML(mgr.listCharacters);
                 mgr.DisplayCreatures();
             }
             else
@@ -378,8 +378,8 @@ namespace DM_Tool
             DialogResult res = MessageBox.Show(null, "Really delete object?", "Delete Object?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
-                CharacterSheet m = mgr.listCharacterSheets.Find(x => x.name.Equals(tbName.Text));
-                mgr.listCharacterSheets.Remove(m);
+                CharacterSheet m = mgr.listCharacters.Find(x => x.name.Equals(tbName.Text));
+                mgr.listCharacters.Remove(m);
                 mgr.DisplayCreatures();
                 _parentPage.Dispose();
             }
@@ -435,7 +435,7 @@ namespace DM_Tool
 
         private void tbRaceName_Leave(object sender, EventArgs e)
         {
-            CharacterSheet m = mgr.listCharacterSheets.Find(x => x.name.Equals(tbRaceName.Text));
+            CharacterSheet m = mgr.listCharacters.Find(x => x.name.Equals(tbRaceName.Text));
 
             if (m != null)
             {
@@ -475,5 +475,5 @@ namespace DM_Tool
                 this.tbHP.Text = m.hp.ToString();
             }
         }
-    }
+    }*/
 }
