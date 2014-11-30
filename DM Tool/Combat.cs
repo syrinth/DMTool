@@ -62,9 +62,10 @@ namespace DM_Tool
 
                     //Search listCharacters
                     //List<Character> charactersList = mgr.listCharacters;
-                    CharacterSheet sheet = mgr.listCharacters.Find(x => x.GetName().ToUpper().Equals(name.ToUpper())).GetCharacterSheet();
-                    if (sheet != null)
+                    Character character = mgr.listCombinedCharacters.Find(x => x.GetName().ToUpper().Equals(name.ToUpper()));
+                    if (character != null)
                     {
+                        CharacterSheet sheet = character.GetCharacterSheet();
                         currRow.Cells["AC"].Value = sheet.totalAC;
                         currRow.Cells["currHP"].Value = sheet.maxHP;
                         currRow.Cells["maxHP"].Value = sheet.maxHP;

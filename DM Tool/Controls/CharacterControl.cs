@@ -18,11 +18,15 @@ namespace DM_Tool.Controls
         private CreatureType tc;
         private CreatureSize size;
         private Character _character;
+        private List<KeyValuePair<string, int>> classLevels = new List<KeyValuePair<string, int>>();
+        private int RacialHD = 0;
+        private bool Loaded = false;
 
         public CharacterControl()
         {
             InitializeComponent();
-            Init(); 
+            Init();
+            Loaded = true;
         }
 
         public CharacterControl(TabPage parentPage, Character c)
@@ -35,15 +39,15 @@ namespace DM_Tool.Controls
             _character = c;
             CharacterSheet cSheet = c.GetCharacterSheet();
 
+            this.chkCampaign.Checked = c._campaignSpecific;
             this.tbName.Text = cSheet.name;
             this.tbRaceName.Text = cSheet.raceName;
             this.tbClasses.Text = cSheet.classes;
             this.tbLevels.Text = cSheet.levels;
-            this.cbType.SelectedItem = cSheet.type;
+            this.cbType.SelectedItem = cSheet.creatureType;
             this.cbSize.SelectedItem = cSheet.size;
 
-            this.tbHDSize.Text = cSheet.hitDieSize.ToString();
-            this.tbHDNum.Text = cSheet.hitDieNum.ToString();
+            this.tbRacialHD.Text = cSheet.hitDieNum.ToString();
             this.tbInit.Text = cSheet.init.ToString();
             this.tbInitMisc.Text = cSheet.initMisc.ToString();
             this.tbSpeed.Text = cSheet.speed;
@@ -67,13 +71,18 @@ namespace DM_Tool.Controls
             this.tbFullAttack.Text = cSheet.fullAttack;
             this.tbSpace.Text = cSheet.space.ToString();
             this.tbReach.Text = cSheet.reach.ToString();
-            this.tbSpecialAttacks.Text = cSheet.specialAttacks;
-            this.tbSpecialQualities.Text = cSheet.specialQualities;
-            this.tbFeats.Text = cSheet.feats;
+
+            FillSpecialsColumn(cSheet.feats, "colFeats");
+            FillSpecialsColumn(cSheet.specialAttacks, "colSpecialAttacks");
+            FillSpecialsColumn(cSheet.specialQualities, "colSpecialQualities");
 
             //Goes last to overwrite any issues
-            this.tbHP.Text =cSheet.hp.ToString();
+            this.tbHP.Text = cSheet.hp.ToString();
             AssignCharacterSkills();
+            tc = mgr.listCreatureTypes.Find(x => x.name.Equals(cbType.SelectedText));
+            GetClassLevels();
+            Loaded = true;
+            UpdateSheet();
         }
 
         public CharacterControl(TabPage parentPage)
@@ -82,6 +91,7 @@ namespace DM_Tool.Controls
             Init();
 
             _parentPage = parentPage;
+            Loaded = true;
         }
 
         public CharacterControl(TabPage parentPage, string name)
@@ -93,7 +103,7 @@ namespace DM_Tool.Controls
 
             tbName.Text = name;
             btnSave.Text = "Save";
-
+            Loaded = true;
         }
 
         public void Init()
@@ -156,9 +166,6 @@ namespace DM_Tool.Controls
 
         private void cbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tc = mgr.listCreatureTypes.Find(x => x.name.Equals(cbType.SelectedItem.ToString()));
-            tbHDSize.Text = tc.hitDieSize.ToString();
-
             UpdateSheet();
         }
 
@@ -183,15 +190,23 @@ namespace DM_Tool.Controls
 
         public void UpdateSheet()
         {
-            int result;
-            if (tbHDNum.Text != string.Empty)
+            if (Loaded)
             {
-                if (Convert.ToInt32(tbHDNum.Text) > 0 && !int.TryParse(tbHDNum.Text, out result))
+                try
                 {
-                    MessageBox.Show("Must be int!");
+                    tc = mgr.listCreatureTypes.Find(x => x.name.Equals(cbType.SelectedItem));
                 }
-                else
+                catch { }
+                GetClassLevels();
+                try
                 {
+                    RacialHD = Convert.ToInt32(tbRacialHD.Text);
+                }
+                catch { }
+
+                if (classLevels.Count > 0 || RacialHD > 0)
+                {
+
                     tbInit.Text = (Convert.ToInt32(tbInitDex.Text) + Convert.ToInt32(tbInitMisc.Text)).ToString();
                     //Calculate the BAB and Grapple
                     CalculateBABGrapple();
@@ -210,14 +225,52 @@ namespace DM_Tool.Controls
 
         public void CalculateBaseHP()
         {
-            int HDNum = Convert.ToInt32(tbHDNum.Text);
-            double HDSize = Convert.ToDouble(tbHDSize.Text);
-            double avgHpPerDie = (HDSize+1)/2;
-            double averageHP = HDNum * avgHpPerDie;
-            int hp = Convert.ToInt32(averageHP);
+            int HDNum = 0;
+            tbHD.Text = "";
+            int hp = 0;
+            if (RacialHD > 0)
+            {
+                int racialHDNum = Convert.ToInt32(tbRacialHD.Text);
+                HDNum = racialHDNum;
+                double HDSize = Convert.ToDouble(tc.hitDieSize);
+                double avgHpPerDie = (HDSize + 1) / 2;
+                double averageHP = racialHDNum * avgHpPerDie;
+
+                tbHD.Text = racialHDNum.ToString() + "d" + tc.hitDieSize.ToString();
+                hp = Convert.ToInt32(averageHP);
+
+                if (classLevels.Count > 0)
+                {
+                    tbHD.Text += " + ";
+                }
+            }
+
+            foreach(KeyValuePair<string, int> kvp in classLevels){
+                int classHDNum = kvp.Value;
+                HDNum += classHDNum;
+
+                CharacterClass c = mgr.listCharacterClasses.Find(x => x.name.Equals(kvp.Key));
+                if (c != null)
+                {
+                    double classHDSize = Convert.ToDouble(c.hitDieSize);
+                    double avgHpPerClassDie = (classHDSize + 1) / 2;
+                    double averageClassHP = classHDNum * avgHpPerClassDie;
+                    hp += Convert.ToInt32(averageClassHP);
+                    tbHD.Text += classHDNum.ToString() + "d" + classHDSize.ToString() + " + ";
+                }
+            }
+
+            string val = tbHD.Text;
+            int last = val.LastIndexOf(" + ");
+            if (last > 0)
+            {
+                tbHD.Text = val.Remove(last);
+            }
+
             if (tc.name != "Undead")
             {
                 hp += (GetModifier(tbCon.Text) * HDNum);
+                tbHD.Text += " + " + (GetModifier(tbCon.Text) * HDNum);
             }
 
             tbHP.Text = hp.ToString();
@@ -226,18 +279,43 @@ namespace DM_Tool.Controls
         public void CalculateBABGrapple()
         {
             int bab = 0;
-            if ((PublicManager.BABType)tc.baseAttackBonus == PublicManager.BABType.POOR)
+            if (RacialHD > 0)
             {
-                bab = (Convert.ToInt32(tbHDNum.Text) / 2);
+                if ((PublicManager.BABType)tc.baseAttackBonus == PublicManager.BABType.POOR)
+                {
+                    bab = (Convert.ToInt32(tbRacialHD.Text) / 2);
+                }
+                else if ((PublicManager.BABType)tc.baseAttackBonus == PublicManager.BABType.AVERAGE)
+                {
+                    bab = (Int32)(Convert.ToInt32(tbRacialHD.Text) * .75);
+                }
+                else if ((PublicManager.BABType)tc.baseAttackBonus == PublicManager.BABType.GOOD)
+                {
+                    bab = Convert.ToInt32(tbRacialHD.Text);
+                }
             }
-            else if ((PublicManager.BABType)tc.baseAttackBonus == PublicManager.BABType.AVERAGE)
+
+            foreach (KeyValuePair<string, int> kvp in classLevels)
             {
-                bab = (Int32)(Convert.ToInt32(tbHDNum.Text) * .75);
+                int classHDNum = kvp.Value;
+                CharacterClass c = mgr.listCharacterClasses.Find(x => x.name.Equals(kvp.Key));
+                if (c != null)
+                {
+                    if ((PublicManager.BABType)c.baseAttackBonus == PublicManager.BABType.POOR)
+                    {
+                        bab += (Convert.ToInt32(classHDNum) / 2);
+                    }
+                    else if ((PublicManager.BABType)c.baseAttackBonus == PublicManager.BABType.AVERAGE)
+                    {
+                        bab += (Int32)(Convert.ToInt32(classHDNum) * .75);
+                    }
+                    else if ((PublicManager.BABType)c.baseAttackBonus == PublicManager.BABType.GOOD)
+                    {
+                        bab += Convert.ToInt32(classHDNum);
+                    }
+                }
             }
-            else if ((PublicManager.BABType)tc.baseAttackBonus == PublicManager.BABType.GOOD)
-            {
-                bab = Convert.ToInt32(tbHDNum.Text);
-            }
+
             tbBAB.Text = bab.ToString();
 
             tbGrapple.Text = (Convert.ToInt32(tbBAB.Text) + size.GetSpecialModifier() + GetModifier(tbStr.Text)).ToString();
@@ -322,15 +400,36 @@ namespace DM_Tool.Controls
 
         public void CalculateFortSave()
         {
-            int fort = 0; 
-            if ((PublicManager.SaveType)tc.fortSave == PublicManager.SaveType.POOR)
+            int fort = 0;
+            if (RacialHD > 0)
             {
-                fort = Convert.ToInt32(tbHDNum.Text) / 3;
+                if ((PublicManager.SaveType)tc.fortSave == PublicManager.SaveType.POOR)
+                {
+                    fort = Convert.ToInt32(tbRacialHD.Text) / 3;
+                }
+                else if ((PublicManager.SaveType)tc.fortSave == PublicManager.SaveType.GOOD)
+                {
+                    fort = (Convert.ToInt32(tbRacialHD.Text) / 2) + 2;
+                }
             }
-            else if ((PublicManager.SaveType)tc.fortSave == PublicManager.SaveType.GOOD)
+
+            foreach (KeyValuePair<string, int> kvp in classLevels)
             {
-                fort = (Convert.ToInt32(tbHDNum.Text) / 2) + 2;
+                int classHDNum = kvp.Value;
+                CharacterClass c = mgr.listCharacterClasses.Find(x => x.name.Equals(kvp.Key));
+                if (c != null)
+                {
+                    if ((PublicManager.SaveType)c.fortSave == PublicManager.SaveType.POOR)
+                    {
+                        fort += Convert.ToInt32(classHDNum) / 3;
+                    }
+                    else if ((PublicManager.SaveType)c.fortSave == PublicManager.SaveType.GOOD)
+                    {
+                        fort += (Convert.ToInt32(classHDNum) / 2) + 2;
+                    }
+                }
             }
+
             if (tc.name != "Undead")
             {
                 fort += GetModifier(tbCon.Text);
@@ -341,14 +440,35 @@ namespace DM_Tool.Controls
         public void CalculateRefSave()
         {
             int reflex = 0;
-            if ((PublicManager.SaveType)tc.refSave == PublicManager.SaveType.POOR)
+            if (RacialHD > 0)
             {
-                reflex = Convert.ToInt32(tbHDNum.Text) / 3;
+                if ((PublicManager.SaveType)tc.refSave == PublicManager.SaveType.POOR)
+                {
+                    reflex = Convert.ToInt32(tbRacialHD.Text) / 3;
+                }
+                else if ((PublicManager.SaveType)tc.refSave == PublicManager.SaveType.GOOD)
+                {
+                    reflex = (Convert.ToInt32(tbRacialHD.Text) / 2) + 2;
+                }
             }
-            else if ((PublicManager.SaveType)tc.refSave == PublicManager.SaveType.GOOD)
+
+            foreach (KeyValuePair<string, int> kvp in classLevels)
             {
-                reflex = (Convert.ToInt32(tbHDNum.Text) / 2) + 2;
+                int classHDNum = kvp.Value;
+                CharacterClass c = mgr.listCharacterClasses.Find(x => x.name.Equals(kvp.Key));
+                if (c != null)
+                {
+                    if ((PublicManager.SaveType)c.refSave == PublicManager.SaveType.POOR)
+                    {
+                        reflex += Convert.ToInt32(classHDNum) / 3;
+                    }
+                    else if ((PublicManager.SaveType)c.refSave == PublicManager.SaveType.GOOD)
+                    {
+                        reflex += (Convert.ToInt32(classHDNum) / 2) + 2;
+                    }
+                }
             }
+
             reflex += GetModifier(tbDex.Text);
             tbRef.Text = reflex.ToString();
         }
@@ -356,14 +476,35 @@ namespace DM_Tool.Controls
         public void CalculateWillSave()
         {
             int will = 0;
-            if ((PublicManager.SaveType)tc.willSave == PublicManager.SaveType.POOR)
+            if (RacialHD > 0)
             {
-                will = Convert.ToInt32(tbHDNum.Text) / 3;
+                if ((PublicManager.SaveType)tc.willSave == PublicManager.SaveType.POOR)
+                {
+                    will = Convert.ToInt32(tbRacialHD.Text) / 3;
+                }
+                else if ((PublicManager.SaveType)tc.willSave == PublicManager.SaveType.GOOD)
+                {
+                    will = (Convert.ToInt32(tbRacialHD.Text) / 2) + 2;
+                }
             }
-            else if ((PublicManager.SaveType)tc.willSave == PublicManager.SaveType.GOOD)
+
+            foreach (KeyValuePair<string, int> kvp in classLevels)
             {
-                will = (Convert.ToInt32(tbHDNum.Text) / 2) + 2;
+                int classHDNum = kvp.Value;
+                CharacterClass c = mgr.listCharacterClasses.Find(x => x.name.Equals(kvp.Key));
+                if (c != null)
+                {
+                    if ((PublicManager.SaveType)c.willSave == PublicManager.SaveType.POOR)
+                    {
+                        will += Convert.ToInt32(classHDNum) / 3;
+                    }
+                    else if ((PublicManager.SaveType)c.willSave == PublicManager.SaveType.GOOD)
+                    {
+                        will += (Convert.ToInt32(classHDNum) / 2) + 2;
+                    }
+                }
             }
+
             will += GetModifier(tbWis.Text);
             tbWill.Text = will.ToString();
         }
@@ -398,22 +539,29 @@ namespace DM_Tool.Controls
                 {
                     try
                     {
-                        Character character = mgr.listCharacters.Find(x => x.GetName().Equals(tbName.Text));
+                        Character character = GetRightCharacterList().Find(x => x.GetName().Equals(tbName.Text));
                         if (tc != null)
                         {
-                            mgr.listCharacters.Remove(character);
+                            GetRightCharacterList().Remove(character);
                         }
                     }
                     catch { }
                 }
 
-                mgr.listCharacters.Add(new Character(CharacterSheetToString(), GetSkillsList()));
+                GetRightCharacterList().Add(new Character(CharacterSheetToString(), chkCampaign.Checked, GetSkillsList()));
                 try
                 {
-                    mgr.listCharacters.Sort((a, b) => a.GetName().CompareTo(b.GetName()));
+                    GetRightCharacterList().Sort((a, b) => a.GetName().CompareTo(b.GetName()));
                 }
                 catch { }
-                PublicManager.SerializeCharactersToXML(mgr.listCharacters);
+                if (chkCampaign.Checked)
+                {
+                    PublicManager.SerializeCampaignCharactersToXML(mgr.listCampaignCharacters);
+                }
+                else
+                {
+                    PublicManager.SerializeCharactersToXML(mgr.listCharacters);
+                }
                 mgr.DisplayCharacters();
             }
             else
@@ -427,8 +575,9 @@ namespace DM_Tool.Controls
             DialogResult res = MessageBox.Show(null, "Really delete object?", "Delete Object?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
-                Character character = mgr.listCharacters.Find(x => x.GetName().Equals(tbName.Text));
-                mgr.listCharacters.Remove(character);
+                Character character = GetRightCharacterList().Find(x => x.GetName().Equals(tbName.Text));
+                GetRightCharacterList().Remove(character);
+                mgr.listCombinedCharacters.Remove(character);
                 mgr.DisplayCharacters();
                 _parentPage.Dispose();
             }
@@ -489,11 +638,10 @@ namespace DM_Tool.Controls
             if (character != null)
             {
                 CharacterSheet cSheet = character.GetCharacterSheet();
-                this.cbType.SelectedItem = cSheet.type;
+                this.cbType.SelectedItem = cSheet.creatureType;
                 this.cbSize.SelectedItem = cSheet.size;
 
-                this.tbHDSize.Text = cSheet.hitDieSize.ToString();
-                this.tbHDNum.Text = cSheet.hitDieNum.ToString();
+                this.tbRacialHD.Text = cSheet.hitDieNum.ToString();
                 this.tbInit.Text = cSheet.init.ToString();
                 this.tbInitMisc.Text = cSheet.initMisc.ToString();
                 this.tbSpeed.Text = cSheet.speed;
@@ -517,9 +665,10 @@ namespace DM_Tool.Controls
                 this.tbFullAttack.Text = cSheet.fullAttack;
                 this.tbSpace.Text = cSheet.space.ToString();
                 this.tbReach.Text = cSheet.reach.ToString();
-                this.tbSpecialAttacks.Text = cSheet.specialAttacks;
-                this.tbSpecialQualities.Text = cSheet.specialQualities;
-                this.tbFeats.Text = cSheet.feats;
+
+                FillSpecialsColumn(cSheet.feats, "colFeats");
+                FillSpecialsColumn(cSheet.specialAttacks, "colSpecialAttacks");
+                FillSpecialsColumn(cSheet.specialQualities, "colSpecialQualities");
 
                 //Goes last to overwrite any issues
                 this.tbHP.Text = cSheet.hp.ToString();
@@ -528,13 +677,14 @@ namespace DM_Tool.Controls
 
         private string[] CharacterSheetToString()
         {
-            return new string[]{tbName.Text, tbRaceName.Text, tbClasses.Text, tbLevels.Text, cbType.SelectedItem.ToString(), cbSize.SelectedItem.ToString(), tbHDNum.Text,
-                                            tbHDSize.Text, tbHP.Text, tbInit.Text, tbInitMisc.Text, tbSpeed.Text,
+            return new string[]{tbName.Text, tbRaceName.Text, tbClasses.Text, tbLevels.Text, cbType.SelectedItem.ToString(), cbSize.SelectedItem.ToString(), tbRacialHD.Text,
+                                            tbHP.Text, tbInit.Text, tbInitMisc.Text, tbSpeed.Text,
                                             tbBAB.Text, tbFort.Text, tbRef.Text, tbWill.Text,
                                             tbStr.Text, tbDex.Text, tbCon.Text, tbInt.Text,
                                             tbWis.Text, tbCha.Text, tbNatAC.Text, tbArmorAC.Text,
                                             tbShieldAC.Text, tbDefAC.Text, tbAttack.Text, tbFullAttack.Text, tbSpace.Text,
-                                            tbReach.Text, tbSpecialAttacks.Text, tbSpecialQualities.Text, tbFeats.Text, tbHP.Text, tbTotalAC.Text, tbTouchAC.Text, tbFFAC.Text};
+                                            tbReach.Text, GetSpecialsColumn("colSpecialAttacks"), GetSpecialsColumn("colSpecialQualities"), GetSpecialsColumn("colFeats"),
+                                            tbHP.Text, tbTotalAC.Text, tbTouchAC.Text, tbFFAC.Text};
                 
         }
 
@@ -619,6 +769,113 @@ namespace DM_Tool.Controls
         private void tbInt_TextChanged(object sender, EventArgs e)
         {
             UpdateSheet();
+        }
+
+        private void tbFeats_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FillSpecialsColumn(string values, string colName)
+        {
+            string[] split = values.Split(',');
+            for (int i = 0; i < split.Length; i++)
+            {
+                if (dgvSpecials.Rows[i].IsNewRow)
+                {
+                    dgvSpecials.Rows.Add();
+                }
+                dgvSpecials.Rows[i].Cells[colName].Value = split[i].Trim();
+            }
+        }
+
+        private string GetSpecialsColumn(string colName)
+        {
+            string rv = string.Empty;
+
+            foreach (DataGridViewRow r in dgvSpecials.Rows)
+            {
+                rv += r.Cells[colName].Value + ", ";
+            }
+
+            return rv.Trim(); ;
+        }
+
+        private List<Character> GetRightCharacterList()
+        {
+            if (chkCampaign.Checked)
+            {
+                return mgr.listCampaignCharacters;
+            }
+            else
+            {
+                return mgr.listCharacters;
+            }
+        }
+
+        private void tbClasses_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctxtClasses.Items.Clear();
+                string[] split = tbClasses.Text.Split('/');
+                foreach (string s in split)
+                {
+                    if (!s.Equals(string.Empty))
+                    {
+                        ctxtClasses.Items.Add("Open " + s.Trim());
+                    }
+                }
+                ctxtClasses.Show();
+            }
+        }
+
+        private void ctxtClasses_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            string name = e.ClickedItem.Text;
+            name = name.Replace("Open ", "");
+            mgr.NewTab("Character Class", name);
+        }
+
+        private void tbClassesLevels_Leave(object sender, EventArgs e)
+        {
+            GetClassLevels();
+            UpdateSheet();
+        }
+
+        private void GetClassLevels(){
+            classLevels.Clear();
+            List<string> classes = new List<string>();
+            string[] classesSplit = tbClasses.Text.Split('/');
+            foreach (string s in classesSplit)
+            {
+                if (!s.Equals(string.Empty))
+                {
+                    classes.Add(s.Trim());
+                }
+            }
+
+            List<string> levels = new List<string>();
+            string[] levelsSplit = tbLevels.Text.Split('/');
+            foreach (string s in levelsSplit)
+            {
+                if (!s.Equals(string.Empty))
+                {
+                    levels.Add(s.Trim());
+                }
+            }
+
+            for( int i=0; i < classes.Count; i++)
+            {
+                if (levels.Count > i)
+                {
+                    try
+                    {
+                        classLevels.Add(new KeyValuePair<string, int>(classes[i], Convert.ToInt32(levels[i])));
+                    }
+                    catch { }
+                }
+            }
         }
     }
 }

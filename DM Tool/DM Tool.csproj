@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\AdventureSite.cs" />
     <Compile Include="Classes\Character.cs" />
+    <Compile Include="Classes\CharacterClass.cs" />
     <Compile Include="Classes\CreatureSize.cs" />
     <Compile Include="Classes\PlotPoint.cs" />
     <Compile Include="Classes\Room.cs" />
@@ -68,6 +69,12 @@
     </Compile>
     <Compile Include="Classes\CreatureType.cs" />
     <Compile Include="Classes\DatabaseClass.cs" />
+    <Compile Include="Controls\CharacterClassControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CharacterClassControl.Designer.cs">
+      <DependentUpon>CharacterClassControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CharacterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ArtObjectControl.resx">
       <DependentUpon>ArtObjectControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CharacterClassControl.resx">
+      <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CharacterControl.resx">
       <DependentUpon>CharacterControl.cs</DependentUpon>

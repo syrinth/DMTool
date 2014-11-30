@@ -17,11 +17,10 @@ namespace DM_Tool
             this._name = vals[count++];
             this._raceName = vals[count++];
 
-            this._type = vals[count++];
-            this._size = vals[count++];
             this._classes = vals[count++];
             this._levels = vals[count++];
-            this._hitDieSize = Convert.ToInt32(vals[count++]);
+            this._type = vals[count++];
+            this._size = vals[count++];
             this._hitDieNum = Convert.ToInt32(vals[count++]);
             this._hp = Convert.ToInt32(vals[count++]);
             this._init = Convert.ToInt32(vals[count++]);
@@ -125,7 +124,7 @@ namespace DM_Tool
         }
 
         private string _type;
-        public string type
+        public string creatureType
         {
             get
             {
@@ -139,13 +138,6 @@ namespace DM_Tool
                 }
             }
             set { _type = value; }
-        }
-
-        private int _hitDieSize;
-        public int hitDieSize
-        {
-            get { return _hitDieSize; }
-            set { _hitDieSize = value; }
         }
 
         private int _hitDieNum;

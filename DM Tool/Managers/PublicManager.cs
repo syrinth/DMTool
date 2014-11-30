@@ -33,7 +33,10 @@ namespace DM_Tool
         public List<CreatureSize> listCreatureSizes;
         public List<CreatureType> listCreatureTypes;
         public List<HardMaterial> listHardMaterials;
+        public List<Character> listCombinedCharacters;
         public List<Character> listCharacters;
+        public List<Character> listCampaignCharacters;
+        public List<CharacterClass> listCharacterClasses;
         public List<Quality> listQualities;
 
         private static string Campaign;
@@ -43,6 +46,7 @@ namespace DM_Tool
         private static string xmlCreatureTypes = "CreatureTypes.xml";
         private static string xmlHardMaterials = "HardMaterials.xml";
         private static string xmlCharacters = "Characters.xml";
+        private static string xmlCharacterClasses = "CharacterClasses.xml";
         private static string xmlQualities = "Qualitys.xml";
 
         private static XmlWriterSettings ws = new XmlWriterSettings();
@@ -141,9 +145,22 @@ namespace DM_Tool
                     tc.Dock = DockStyle.Fill;
                     break;
                 case "Character":
-                    CharacterControl m = new CharacterControl(page, listCharacters.Find(x => x.GetName().Equals(name)));
+                    CharacterControl m = new CharacterControl(page, listCombinedCharacters.Find(x => x.GetName().Equals(name)));
                     page.Controls.Add(m);
                     m.Dock = DockStyle.Fill;
+                    break;
+                case "Character Class":
+                    CharacterClass cc = listCharacterClasses.Find(x => x.name.Equals(name));
+                    CharacterClassControl charClass;
+                    if (cc == null)
+                    {
+                        charClass = new CharacterClassControl(page, name);
+                    }
+                    else{
+                        charClass = new CharacterClassControl(page, cc);
+                    }
+                    page.Controls.Add(charClass);
+                    charClass.Dock = DockStyle.Fill;
                     break;
                 case "AdventureSite":
                     AdventureSiteControl adv = new AdventureSiteControl(page, listAdvSites.Find(x => x.GetName().Equals(name)), _main);
@@ -166,12 +183,14 @@ namespace DM_Tool
         public void Save()
         {
             SerializeCharactersToXML(listCharacters);
+            SerializeCampaignCharactersToXML(listCampaignCharacters);
             SerializeAdventuresToXML(listAdvSites);
             SerializeCreatureSizesToXML(listCreatureSizes);
             SerializeCreatureTypesToXML(listCreatureTypes);
             SerializeQualitiesToXML(listQualities);
             SerializeBaseItemsToXML(listBaseItems);
             SerializeHardMaterialsToXML(listHardMaterials);
+            SerializeCharacterClassesToXML(listCharacterClasses);
         }
 
         static public void SerializeAdventuresToXML(List<AdventureSite> sites)
@@ -187,6 +206,15 @@ namespace DM_Tool
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
             using (XmlWriter wr = XmlWriter.Create(xmlCharacters, ws))
+            {
+                serializer.Serialize(wr, characters);
+            }
+        }
+
+        static public void SerializeCampaignCharactersToXML(List<Character> characters)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
+            using (XmlWriter wr = XmlWriter.Create(Campaign + "\\" + xmlCharacters, ws))
             {
                 serializer.Serialize(wr, characters);
             }
@@ -237,6 +265,15 @@ namespace DM_Tool
             }
         }
 
+        static public void SerializeCharacterClassesToXML(List<CharacterClass> sites)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<CharacterClass>));
+            using (XmlWriter wr = XmlWriter.Create(xmlCharacterClasses, ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
+        }
+
         #endregion
 
         #region Deserialization
@@ -245,16 +282,22 @@ namespace DM_Tool
         {
             listCreatureTypes = DeserializeCreatureTypesFromXML();
             listCharacters = DeserializeCharactersFromXML();
+            listCampaignCharacters = DeserializeCampaignCharactersFromXML();
             listQualities = DeserializeQualitiesFromXML();
             listAdvSites = DeserializeAdventuresFromXML();
             listHardMaterials = DeserializeHardMaterialsFromXML();
             listBaseItems = DeserializeBaseItemsFromXML();
             listCreatureSizes = DeserializeCreatureSizesFromXML();
+            listCharacterClasses = DeserializeCharacterClassesFromXML();
 
             foreach (BaseItem i in listBaseItems)
             {
                 listBaseItemNames.Add(i.name);
             }
+
+            listCombinedCharacters.Clear();
+            listCombinedCharacters.AddRange(listCharacters);
+            listCombinedCharacters.AddRange(listCampaignCharacters);
         }
 
         static public List<AdventureSite> DeserializeAdventuresFromXML()
@@ -282,6 +325,23 @@ namespace DM_Tool
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<Character>));
                 TextReader textReader = new StreamReader(xmlCharacters);
+                characters = (List<Character>)deserializer.Deserialize(textReader);
+                textReader.Close();
+            }
+            catch
+            {
+            }
+
+            return characters;
+        }
+
+        static public List<Character> DeserializeCampaignCharactersFromXML()
+        {
+            List<Character> characters = new List<Character>();
+            try
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<Character>));
+                TextReader textReader = new StreamReader(Campaign + "\\" + xmlCharacters);
                 characters = (List<Character>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
@@ -369,6 +429,23 @@ namespace DM_Tool
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<BaseItem>));
                 TextReader textReader = new StreamReader(xmlBaseItems);
                 advs = (List<BaseItem>)deserializer.Deserialize(textReader);
+                textReader.Close();
+            }
+            catch
+            {
+            }
+
+            return advs;
+        }
+
+        static public List<CharacterClass> DeserializeCharacterClassesFromXML()
+        {
+            List<CharacterClass> advs = new List<CharacterClass>();
+            try
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<CharacterClass>));
+                TextReader textReader = new StreamReader(xmlCharacterClasses);
+                advs = (List<CharacterClass>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
             catch

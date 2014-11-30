@@ -38,3 +38,4 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.TypeControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.TextInputDialog.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csproj.GenerateResource.Cache
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.CharacterSheetControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.CharacterClassControl.resources

@@ -16,3 +16,23 @@ E:\Programming\DM Tool\DM Tool\DM Tool\obj\x86\Release\DM_Tool.Controls.Adventur
 E:\Programming\DM Tool\DM Tool\DM Tool\obj\x86\Release\DM_Tool.Controls.RoomControl.resources
 E:\Programming\DM Tool\DM Tool\DM Tool\obj\x86\Release\DM_Tool.MainPanel.resources
 E:\Programming\DM Tool\DM Tool\DM Tool\obj\x86\Release\DM_Tool.TextInputDialog.resources
+E:\Programming\DMTool\DM Tool\bin\Release\DM Tool.exe
+E:\Programming\DMTool\DM Tool\bin\Release\DM Tool.pdb
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Combat.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.AdventureSiteControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.ArtObjectControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CharacterControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.RoomControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.BaseItemControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.HardMaterialControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.QualityControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.MainPanel.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.frmNewCreatureType.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CharacterSheetControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Properties.Resources.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.TypeControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.TextInputDialog.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.csproj.GenerateResource.Cache
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.exe
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.pdb
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CharacterClassControl.resources

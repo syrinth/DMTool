@@ -14,7 +14,7 @@ namespace DM_Tool
     public partial class MainPanel : Form
     {
         private enum ListDisplay { ALL, TYPES, CHARACTERS, BASEITEMS, ADVSITES};
-        private List<string> baseMenu = new List<string> { "Types", "Monsters", "Base Items", "Adventure Sites"};
+        private List<string> baseMenu = new List<string> { "Types", "Characters", "Base Items", "Adventure Sites"};
 
         public PublicManager mgr = PublicManager.GetInstance();
 
@@ -25,21 +25,21 @@ namespace DM_Tool
 
             display = ListDisplay.ALL;
             mgr.listCreatureTypes = new List<CreatureType>();
+            mgr.listCombinedCharacters = new List<Character>();
             mgr.listCharacters = new List<Character>();
+            mgr.listCampaignCharacters = new List<Character>();
             mgr.listBaseItems = new List<BaseItem>();
             mgr.listQualities = new List<Quality>();
             mgr.listHardMaterials = new List<HardMaterial>();
             mgr.listBaseItemNames = new List<string>();
             mgr.listCreatureSizes = new List<CreatureSize>();
             mgr.listAdvSites = new List<AdventureSite>();
+            mgr.listCharacterClasses = new List<CharacterClass>();
             mgr.SetMain(this);
             mgr.LoadDefault();
             SetMenuToBase();
             this.Text = mgr.GetCampaign();
         }
-
-
-        
 
         private void saveCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -86,7 +86,7 @@ namespace DM_Tool
                         dgView.Rows.Add(type.name);
                     }
                 }
-                if (name == "Monsters")
+                if (name == "Characters")
                 {
                     DisplayCharacters();
                 }
@@ -181,9 +181,13 @@ namespace DM_Tool
         public void DisplayCharacters()
         {
             dgView.Rows.Clear();
+            mgr.listCombinedCharacters.Clear();
+            mgr.listCombinedCharacters.AddRange(mgr.listCharacters);
+            mgr.listCombinedCharacters.AddRange(mgr.listCampaignCharacters);
+            mgr.listCombinedCharacters.Sort((p1, p2) => string.Compare(p1.GetName(), p2.GetName(), true));
             display = ListDisplay.CHARACTERS;
             dgView.Rows.Add("--Main Manu");
-            foreach (Character c in mgr.listCharacters)
+            foreach (Character c in mgr.listCombinedCharacters)
             {
                 dgView.Rows.Add(c.GetName());
             }

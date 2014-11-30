@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -35,8 +36,18 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabCharacterSheet = new System.Windows.Forms.TabControl();
             this.tabPageCharacterSheet = new System.Windows.Forms.TabPage();
+            this.tbHD = new System.Windows.Forms.TextBox();
+            this.tbRacialHD = new System.Windows.Forms.TextBox();
+            this.chkCampaign = new System.Windows.Forms.CheckBox();
+            this.dgvSpecials = new System.Windows.Forms.DataGridView();
+            this.colFeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialAttacks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialQualities = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFlaws = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTrais = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbLevels = new System.Windows.Forms.TextBox();
             this.tbClasses = new System.Windows.Forms.TextBox();
+            this.ctxtClasses = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tbRaceName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblFFAC = new System.Windows.Forms.Label();
@@ -59,9 +70,6 @@
             this.tbSpeed = new System.Windows.Forms.TextBox();
             this.cbSize = new System.Windows.Forms.ComboBox();
             this.lblInit = new System.Windows.Forms.Label();
-            this.tbFeats = new System.Windows.Forms.TextBox();
-            this.tbSpecialQualities = new System.Windows.Forms.TextBox();
-            this.tbSpecialAttacks = new System.Windows.Forms.TextBox();
             this.tbSpace = new System.Windows.Forms.TextBox();
             this.tbFullAttack = new System.Windows.Forms.TextBox();
             this.tbAttack = new System.Windows.Forms.TextBox();
@@ -86,19 +94,12 @@
             this.lblStr = new System.Windows.Forms.Label();
             this.tbFort = new System.Windows.Forms.TextBox();
             this.lblFort = new System.Windows.Forms.Label();
-            this.tbHDSize = new System.Windows.Forms.TextBox();
             this.tbBAB = new System.Windows.Forms.TextBox();
             this.tbHP = new System.Windows.Forms.TextBox();
-            this.tbHDNum = new System.Windows.Forms.TextBox();
             this.lblBABGrapple = new System.Windows.Forms.Label();
-            this.lblHP = new System.Windows.Forms.Label();
-            this.lblHDSize = new System.Windows.Forms.Label();
-            this.lblHDNum = new System.Windows.Forms.Label();
             this.cbType = new System.Windows.Forms.ComboBox();
             this.tabSkills = new System.Windows.Forms.TabPage();
             this.dgvSkills = new System.Windows.Forms.DataGridView();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.colClassSkill = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colAbility = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSkillName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,8 +107,11 @@
             this.colMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRanks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMisc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).BeginInit();
             this.tabSkills.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).BeginInit();
             this.SuspendLayout();
@@ -125,6 +129,10 @@
             // tabPageCharacterSheet
             // 
             this.tabPageCharacterSheet.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageCharacterSheet.Controls.Add(this.tbHD);
+            this.tabPageCharacterSheet.Controls.Add(this.tbRacialHD);
+            this.tabPageCharacterSheet.Controls.Add(this.chkCampaign);
+            this.tabPageCharacterSheet.Controls.Add(this.dgvSpecials);
             this.tabPageCharacterSheet.Controls.Add(this.tbLevels);
             this.tabPageCharacterSheet.Controls.Add(this.tbClasses);
             this.tabPageCharacterSheet.Controls.Add(this.tbRaceName);
@@ -149,9 +157,6 @@
             this.tabPageCharacterSheet.Controls.Add(this.tbSpeed);
             this.tabPageCharacterSheet.Controls.Add(this.cbSize);
             this.tabPageCharacterSheet.Controls.Add(this.lblInit);
-            this.tabPageCharacterSheet.Controls.Add(this.tbFeats);
-            this.tabPageCharacterSheet.Controls.Add(this.tbSpecialQualities);
-            this.tabPageCharacterSheet.Controls.Add(this.tbSpecialAttacks);
             this.tabPageCharacterSheet.Controls.Add(this.tbSpace);
             this.tabPageCharacterSheet.Controls.Add(this.tbFullAttack);
             this.tabPageCharacterSheet.Controls.Add(this.tbAttack);
@@ -176,14 +181,9 @@
             this.tabPageCharacterSheet.Controls.Add(this.lblStr);
             this.tabPageCharacterSheet.Controls.Add(this.tbFort);
             this.tabPageCharacterSheet.Controls.Add(this.lblFort);
-            this.tabPageCharacterSheet.Controls.Add(this.tbHDSize);
             this.tabPageCharacterSheet.Controls.Add(this.tbBAB);
             this.tabPageCharacterSheet.Controls.Add(this.tbHP);
-            this.tabPageCharacterSheet.Controls.Add(this.tbHDNum);
             this.tabPageCharacterSheet.Controls.Add(this.lblBABGrapple);
-            this.tabPageCharacterSheet.Controls.Add(this.lblHP);
-            this.tabPageCharacterSheet.Controls.Add(this.lblHDSize);
-            this.tabPageCharacterSheet.Controls.Add(this.lblHDNum);
             this.tabPageCharacterSheet.Controls.Add(this.cbType);
             this.tabPageCharacterSheet.Location = new System.Drawing.Point(4, 22);
             this.tabPageCharacterSheet.Name = "tabPageCharacterSheet";
@@ -192,19 +192,96 @@
             this.tabPageCharacterSheet.TabIndex = 0;
             this.tabPageCharacterSheet.Text = "Character Sheet";
             // 
+            // tbHD
+            // 
+            this.tbHD.Location = new System.Drawing.Point(8, 59);
+            this.tbHD.Name = "tbHD";
+            this.tbHD.Size = new System.Drawing.Size(205, 20);
+            this.tbHD.TabIndex = 146;
+            // 
+            // tbRacialHD
+            // 
+            this.tbRacialHD.Location = new System.Drawing.Point(219, 33);
+            this.tbRacialHD.Name = "tbRacialHD";
+            this.tbRacialHD.Size = new System.Drawing.Size(29, 20);
+            this.tbRacialHD.TabIndex = 145;
+            this.tbRacialHD.Text = "0";
+            // 
+            // chkCampaign
+            // 
+            this.chkCampaign.AutoSize = true;
+            this.chkCampaign.Location = new System.Drawing.Point(505, 8);
+            this.chkCampaign.Name = "chkCampaign";
+            this.chkCampaign.Size = new System.Drawing.Size(73, 17);
+            this.chkCampaign.TabIndex = 144;
+            this.chkCampaign.Text = "Campaign";
+            this.chkCampaign.UseVisualStyleBackColor = true;
+            // 
+            // dgvSpecials
+            // 
+            this.dgvSpecials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSpecials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSpecials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colFeats,
+            this.colSpecialAttacks,
+            this.colSpecialQualities,
+            this.colFlaws,
+            this.colTrais});
+            this.dgvSpecials.Location = new System.Drawing.Point(8, 338);
+            this.dgvSpecials.MultiSelect = false;
+            this.dgvSpecials.Name = "dgvSpecials";
+            this.dgvSpecials.RowHeadersVisible = false;
+            this.dgvSpecials.Size = new System.Drawing.Size(572, 95);
+            this.dgvSpecials.TabIndex = 143;
+            // 
+            // colFeats
+            // 
+            this.colFeats.HeaderText = "Feats";
+            this.colFeats.Name = "colFeats";
+            // 
+            // colSpecialAttacks
+            // 
+            this.colSpecialAttacks.HeaderText = "Spec. Attacks";
+            this.colSpecialAttacks.Name = "colSpecialAttacks";
+            // 
+            // colSpecialQualities
+            // 
+            this.colSpecialQualities.HeaderText = "Spec. Qualities";
+            this.colSpecialQualities.Name = "colSpecialQualities";
+            // 
+            // colFlaws
+            // 
+            this.colFlaws.HeaderText = "Flaws";
+            this.colFlaws.Name = "colFlaws";
+            // 
+            // colTrais
+            // 
+            this.colTrais.HeaderText = "Traits";
+            this.colTrais.Name = "colTrais";
+            // 
             // tbLevels
             // 
             this.tbLevels.Location = new System.Drawing.Point(358, 6);
             this.tbLevels.Name = "tbLevels";
             this.tbLevels.Size = new System.Drawing.Size(100, 20);
             this.tbLevels.TabIndex = 142;
+            this.tbLevels.Leave += new System.EventHandler(this.tbClassesLevels_Leave);
             // 
             // tbClasses
             // 
+            this.tbClasses.ContextMenuStrip = this.ctxtClasses;
             this.tbClasses.Location = new System.Drawing.Point(252, 6);
             this.tbClasses.Name = "tbClasses";
             this.tbClasses.Size = new System.Drawing.Size(100, 20);
             this.tbClasses.TabIndex = 141;
+            this.tbClasses.Leave += new System.EventHandler(this.tbClassesLevels_Leave);
+            this.tbClasses.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbClasses_MouseDown);
+            // 
+            // ctxtClasses
+            // 
+            this.ctxtClasses.Name = "ctxtClasses";
+            this.ctxtClasses.Size = new System.Drawing.Size(61, 4);
+            this.ctxtClasses.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ctxtClasses_ItemClicked);
             // 
             // tbRaceName
             // 
@@ -296,7 +373,7 @@
             // 
             // tbReach
             // 
-            this.tbReach.Location = new System.Drawing.Point(120, 236);
+            this.tbReach.Location = new System.Drawing.Point(88, 236);
             this.tbReach.Name = "tbReach";
             this.tbReach.Size = new System.Drawing.Size(20, 20);
             this.tbReach.TabIndex = 130;
@@ -389,7 +466,7 @@
             this.cbSize.FormattingEnabled = true;
             this.cbSize.Location = new System.Drawing.Point(8, 32);
             this.cbSize.Name = "cbSize";
-            this.cbSize.Size = new System.Drawing.Size(100, 21);
+            this.cbSize.Size = new System.Drawing.Size(78, 21);
             this.cbSize.TabIndex = 120;
             this.cbSize.SelectedIndexChanged += new System.EventHandler(this.cbSize_SelectedIndexChanged);
             // 
@@ -402,33 +479,9 @@
             this.lblInit.TabIndex = 119;
             this.lblInit.Text = "Init:";
             // 
-            // tbFeats
-            // 
-            this.tbFeats.Location = new System.Drawing.Point(92, 370);
-            this.tbFeats.Name = "tbFeats";
-            this.tbFeats.Size = new System.Drawing.Size(449, 20);
-            this.tbFeats.TabIndex = 118;
-            this.tbFeats.Text = "Feats";
-            // 
-            // tbSpecialQualities
-            // 
-            this.tbSpecialQualities.Location = new System.Drawing.Point(92, 288);
-            this.tbSpecialQualities.Name = "tbSpecialQualities";
-            this.tbSpecialQualities.Size = new System.Drawing.Size(449, 20);
-            this.tbSpecialQualities.TabIndex = 117;
-            this.tbSpecialQualities.Text = "Special Qualities";
-            // 
-            // tbSpecialAttacks
-            // 
-            this.tbSpecialAttacks.Location = new System.Drawing.Point(92, 262);
-            this.tbSpecialAttacks.Name = "tbSpecialAttacks";
-            this.tbSpecialAttacks.Size = new System.Drawing.Size(449, 20);
-            this.tbSpecialAttacks.TabIndex = 116;
-            this.tbSpecialAttacks.Text = "Special Attacks";
-            // 
             // tbSpace
             // 
-            this.tbSpace.Location = new System.Drawing.Point(92, 236);
+            this.tbSpace.Location = new System.Drawing.Point(60, 236);
             this.tbSpace.Name = "tbSpace";
             this.tbSpace.Size = new System.Drawing.Size(20, 20);
             this.tbSpace.TabIndex = 115;
@@ -436,7 +489,7 @@
             // 
             // tbFullAttack
             // 
-            this.tbFullAttack.Location = new System.Drawing.Point(92, 210);
+            this.tbFullAttack.Location = new System.Drawing.Point(59, 210);
             this.tbFullAttack.Name = "tbFullAttack";
             this.tbFullAttack.Size = new System.Drawing.Size(449, 20);
             this.tbFullAttack.TabIndex = 114;
@@ -444,7 +497,7 @@
             // 
             // tbAttack
             // 
-            this.tbAttack.Location = new System.Drawing.Point(92, 184);
+            this.tbAttack.Location = new System.Drawing.Point(59, 184);
             this.tbAttack.Name = "tbAttack";
             this.tbAttack.Size = new System.Drawing.Size(449, 20);
             this.tbAttack.TabIndex = 113;
@@ -476,7 +529,7 @@
             // 
             // tbWill
             // 
-            this.tbWill.Location = new System.Drawing.Point(255, 314);
+            this.tbWill.Location = new System.Drawing.Point(223, 262);
             this.tbWill.Name = "tbWill";
             this.tbWill.Size = new System.Drawing.Size(33, 20);
             this.tbWill.TabIndex = 109;
@@ -484,7 +537,7 @@
             // lblWill
             // 
             this.lblWill.AutoSize = true;
-            this.lblWill.Location = new System.Drawing.Point(225, 317);
+            this.lblWill.Location = new System.Drawing.Point(193, 265);
             this.lblWill.Name = "lblWill";
             this.lblWill.Size = new System.Drawing.Size(24, 13);
             this.lblWill.TabIndex = 108;
@@ -492,7 +545,7 @@
             // 
             // tbRef
             // 
-            this.tbRef.Location = new System.Drawing.Point(186, 314);
+            this.tbRef.Location = new System.Drawing.Point(154, 262);
             this.tbRef.Name = "tbRef";
             this.tbRef.Size = new System.Drawing.Size(33, 20);
             this.tbRef.TabIndex = 107;
@@ -500,7 +553,7 @@
             // lblRef
             // 
             this.lblRef.AutoSize = true;
-            this.lblRef.Location = new System.Drawing.Point(156, 317);
+            this.lblRef.Location = new System.Drawing.Point(124, 265);
             this.lblRef.Name = "lblRef";
             this.lblRef.Size = new System.Drawing.Size(24, 13);
             this.lblRef.TabIndex = 106;
@@ -508,7 +561,7 @@
             // 
             // tbCha
             // 
-            this.tbCha.Location = new System.Drawing.Point(460, 341);
+            this.tbCha.Location = new System.Drawing.Point(428, 289);
             this.tbCha.Name = "tbCha";
             this.tbCha.Size = new System.Drawing.Size(33, 20);
             this.tbCha.TabIndex = 105;
@@ -518,7 +571,7 @@
             // lblCha
             // 
             this.lblCha.AutoSize = true;
-            this.lblCha.Location = new System.Drawing.Point(428, 344);
+            this.lblCha.Location = new System.Drawing.Point(396, 292);
             this.lblCha.Name = "lblCha";
             this.lblCha.Size = new System.Drawing.Size(26, 13);
             this.lblCha.TabIndex = 104;
@@ -526,7 +579,7 @@
             // 
             // tbWis
             // 
-            this.tbWis.Location = new System.Drawing.Point(389, 341);
+            this.tbWis.Location = new System.Drawing.Point(357, 289);
             this.tbWis.Name = "tbWis";
             this.tbWis.Size = new System.Drawing.Size(33, 20);
             this.tbWis.TabIndex = 103;
@@ -536,7 +589,7 @@
             // lblWis
             // 
             this.lblWis.AutoSize = true;
-            this.lblWis.Location = new System.Drawing.Point(358, 344);
+            this.lblWis.Location = new System.Drawing.Point(326, 292);
             this.lblWis.Name = "lblWis";
             this.lblWis.Size = new System.Drawing.Size(25, 13);
             this.lblWis.TabIndex = 102;
@@ -545,7 +598,7 @@
             // lblInt
             // 
             this.lblInt.AutoSize = true;
-            this.lblInt.Location = new System.Drawing.Point(294, 344);
+            this.lblInt.Location = new System.Drawing.Point(262, 292);
             this.lblInt.Name = "lblInt";
             this.lblInt.Size = new System.Drawing.Size(19, 13);
             this.lblInt.TabIndex = 101;
@@ -554,7 +607,7 @@
             // lblCon
             // 
             this.lblCon.AutoSize = true;
-            this.lblCon.Location = new System.Drawing.Point(225, 344);
+            this.lblCon.Location = new System.Drawing.Point(193, 292);
             this.lblCon.Name = "lblCon";
             this.lblCon.Size = new System.Drawing.Size(26, 13);
             this.lblCon.TabIndex = 100;
@@ -563,7 +616,7 @@
             // lblDex
             // 
             this.lblDex.AutoSize = true;
-            this.lblDex.Location = new System.Drawing.Point(156, 344);
+            this.lblDex.Location = new System.Drawing.Point(124, 292);
             this.lblDex.Name = "lblDex";
             this.lblDex.Size = new System.Drawing.Size(26, 13);
             this.lblDex.TabIndex = 99;
@@ -571,7 +624,7 @@
             // 
             // tbInt
             // 
-            this.tbInt.Location = new System.Drawing.Point(319, 341);
+            this.tbInt.Location = new System.Drawing.Point(287, 289);
             this.tbInt.Name = "tbInt";
             this.tbInt.Size = new System.Drawing.Size(33, 20);
             this.tbInt.TabIndex = 98;
@@ -580,7 +633,7 @@
             // 
             // tbCon
             // 
-            this.tbCon.Location = new System.Drawing.Point(255, 341);
+            this.tbCon.Location = new System.Drawing.Point(223, 289);
             this.tbCon.Name = "tbCon";
             this.tbCon.Size = new System.Drawing.Size(33, 20);
             this.tbCon.TabIndex = 97;
@@ -589,7 +642,7 @@
             // 
             // tbDex
             // 
-            this.tbDex.Location = new System.Drawing.Point(186, 341);
+            this.tbDex.Location = new System.Drawing.Point(154, 289);
             this.tbDex.Name = "tbDex";
             this.tbDex.Size = new System.Drawing.Size(33, 20);
             this.tbDex.TabIndex = 96;
@@ -598,7 +651,7 @@
             // 
             // tbStr
             // 
-            this.tbStr.Location = new System.Drawing.Point(117, 341);
+            this.tbStr.Location = new System.Drawing.Point(85, 289);
             this.tbStr.Name = "tbStr";
             this.tbStr.Size = new System.Drawing.Size(33, 20);
             this.tbStr.TabIndex = 95;
@@ -608,7 +661,7 @@
             // lblStr
             // 
             this.lblStr.AutoSize = true;
-            this.lblStr.Location = new System.Drawing.Point(93, 344);
+            this.lblStr.Location = new System.Drawing.Point(61, 292);
             this.lblStr.Name = "lblStr";
             this.lblStr.Size = new System.Drawing.Size(20, 13);
             this.lblStr.TabIndex = 94;
@@ -616,7 +669,7 @@
             // 
             // tbFort
             // 
-            this.tbFort.Location = new System.Drawing.Point(117, 314);
+            this.tbFort.Location = new System.Drawing.Point(85, 262);
             this.tbFort.Name = "tbFort";
             this.tbFort.Size = new System.Drawing.Size(33, 20);
             this.tbFort.TabIndex = 93;
@@ -624,19 +677,11 @@
             // lblFort
             // 
             this.lblFort.AutoSize = true;
-            this.lblFort.Location = new System.Drawing.Point(93, 317);
+            this.lblFort.Location = new System.Drawing.Point(61, 265);
             this.lblFort.Name = "lblFort";
             this.lblFort.Size = new System.Drawing.Size(25, 13);
             this.lblFort.TabIndex = 92;
             this.lblFort.Text = "Fort";
-            // 
-            // tbHDSize
-            // 
-            this.tbHDSize.Location = new System.Drawing.Point(71, 59);
-            this.tbHDSize.Name = "tbHDSize";
-            this.tbHDSize.ReadOnly = true;
-            this.tbHDSize.Size = new System.Drawing.Size(20, 20);
-            this.tbHDSize.TabIndex = 91;
             // 
             // tbBAB
             // 
@@ -648,18 +693,10 @@
             // 
             // tbHP
             // 
-            this.tbHP.Location = new System.Drawing.Point(120, 59);
+            this.tbHP.Location = new System.Drawing.Point(219, 59);
             this.tbHP.Name = "tbHP";
-            this.tbHP.Size = new System.Drawing.Size(50, 20);
+            this.tbHP.Size = new System.Drawing.Size(29, 20);
             this.tbHP.TabIndex = 89;
-            // 
-            // tbHDNum
-            // 
-            this.tbHDNum.Location = new System.Drawing.Point(36, 59);
-            this.tbHDNum.Name = "tbHDNum";
-            this.tbHDNum.Size = new System.Drawing.Size(20, 20);
-            this.tbHDNum.TabIndex = 88;
-            this.tbHDNum.TextChanged += new System.EventHandler(this.tbHDNum_TextChanged);
             // 
             // lblBABGrapple
             // 
@@ -670,38 +707,11 @@
             this.lblBABGrapple.TabIndex = 87;
             this.lblBABGrapple.Text = "BAB/Grapple";
             // 
-            // lblHP
-            // 
-            this.lblHP.AutoSize = true;
-            this.lblHP.Location = new System.Drawing.Point(93, 62);
-            this.lblHP.Name = "lblHP";
-            this.lblHP.Size = new System.Drawing.Size(25, 13);
-            this.lblHP.TabIndex = 86;
-            this.lblHP.Text = "HP:";
-            // 
-            // lblHDSize
-            // 
-            this.lblHDSize.AutoSize = true;
-            this.lblHDSize.Location = new System.Drawing.Point(57, 62);
-            this.lblHDSize.Name = "lblHDSize";
-            this.lblHDSize.Size = new System.Drawing.Size(13, 13);
-            this.lblHDSize.TabIndex = 85;
-            this.lblHDSize.Text = "d";
-            // 
-            // lblHDNum
-            // 
-            this.lblHDNum.AutoSize = true;
-            this.lblHDNum.Location = new System.Drawing.Point(8, 62);
-            this.lblHDNum.Name = "lblHDNum";
-            this.lblHDNum.Size = new System.Drawing.Size(26, 13);
-            this.lblHDNum.TabIndex = 84;
-            this.lblHDNum.Text = "HD:";
-            // 
             // cbType
             // 
             this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbType.FormattingEnabled = true;
-            this.cbType.Location = new System.Drawing.Point(114, 32);
+            this.cbType.Location = new System.Drawing.Point(92, 32);
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(121, 21);
             this.cbType.TabIndex = 83;
@@ -737,26 +747,6 @@
             this.dgvSkills.Size = new System.Drawing.Size(580, 433);
             this.dgvSkills.TabIndex = 0;
             this.dgvSkills.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSkills_CellValueChanged);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(15, 474);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 76;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(518, 474);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 77;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // colClassSkill
             // 
@@ -813,6 +803,26 @@
             this.colMisc.HeaderText = "Misc";
             this.colMisc.Name = "colMisc";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(15, 474);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 76;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(512, 474);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 77;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // CharacterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -825,6 +835,7 @@
             this.tabCharacterSheet.ResumeLayout(false);
             this.tabPageCharacterSheet.ResumeLayout(false);
             this.tabPageCharacterSheet.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).EndInit();
             this.tabSkills.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).EndInit();
             this.ResumeLayout(false);
@@ -863,9 +874,6 @@
         private System.Windows.Forms.TextBox tbSpeed;
         private System.Windows.Forms.ComboBox cbSize;
         private System.Windows.Forms.Label lblInit;
-        private System.Windows.Forms.TextBox tbFeats;
-        private System.Windows.Forms.TextBox tbSpecialQualities;
-        private System.Windows.Forms.TextBox tbSpecialAttacks;
         private System.Windows.Forms.TextBox tbSpace;
         private System.Windows.Forms.TextBox tbFullAttack;
         private System.Windows.Forms.TextBox tbAttack;
@@ -890,14 +898,9 @@
         private System.Windows.Forms.Label lblStr;
         private System.Windows.Forms.TextBox tbFort;
         private System.Windows.Forms.Label lblFort;
-        private System.Windows.Forms.TextBox tbHDSize;
         private System.Windows.Forms.TextBox tbBAB;
         private System.Windows.Forms.TextBox tbHP;
-        private System.Windows.Forms.TextBox tbHDNum;
         private System.Windows.Forms.Label lblBABGrapple;
-        private System.Windows.Forms.Label lblHP;
-        private System.Windows.Forms.Label lblHDSize;
-        private System.Windows.Forms.Label lblHDNum;
         private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.DataGridViewCheckBoxColumn colClassSkill;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAbility;
@@ -906,5 +909,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colMod;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRanks;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMisc;
+        private System.Windows.Forms.DataGridView dgvSpecials;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFeats;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialAttacks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialQualities;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFlaws;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTrais;
+        private System.Windows.Forms.CheckBox chkCampaign;
+        private System.Windows.Forms.ContextMenuStrip ctxtClasses;
+        private System.Windows.Forms.TextBox tbRacialHD;
+        private System.Windows.Forms.TextBox tbHD;
     }
 }
