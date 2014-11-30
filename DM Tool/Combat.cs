@@ -72,8 +72,7 @@ namespace DM_Tool
                         currRow.Cells["fort"].Value = sheet.fortSave;
                         currRow.Cells["reflex"].Value = sheet.refSave;
                         currRow.Cells["will"].Value = sheet.willSave;
-                        currRow.Cells["touchAC"].Value = sheet.touchAC;
-                        currRow.Cells["flatFootAC"].Value = sheet.ffAC;
+                        currRow.Cells["AC"].ToolTipText = "Flat-Footed: " + sheet.ffAC + ", Touch: " + sheet.touchAC;
                     }
                 }
                 else if (e.ColumnIndex == dgvCombat.Columns["Icon"].Index)
@@ -144,7 +143,7 @@ namespace DM_Tool
                     {
                         string matchName = currentTurn.Cells["CharacterName"].Value.ToString();
 
-                        if(currentTurn.Cells["Icon"].Value.ToString() != string.Empty){
+                        if(currentTurn.Cells["Icon"].Value != null){
                             matchName += "-" + currentTurn.Cells["Icon"].Value.ToString();
                         }
 
@@ -169,6 +168,7 @@ namespace DM_Tool
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            dgvCombat.ClearSelection();
             if (currentTurn == null && dgvCombat.Rows.Count > 0)
             {
                 currentTurn = dgvCombat.Rows[0];

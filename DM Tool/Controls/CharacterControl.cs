@@ -76,13 +76,14 @@ namespace DM_Tool.Controls
             FillSpecialsColumn(cSheet.specialAttacks, "colSpecialAttacks");
             FillSpecialsColumn(cSheet.specialQualities, "colSpecialQualities");
 
-            //Goes last to overwrite any issues
-            this.tbHP.Text = cSheet.hp.ToString();
             AssignCharacterSkills();
             tc = mgr.listCreatureTypes.Find(x => x.name.Equals(cbType.SelectedText));
             GetClassLevels();
             Loaded = true;
             UpdateSheet();
+
+            //Goes last to overwrite any issues
+            this.tbHP.Text = cSheet.hp.ToString();
         }
 
         public CharacterControl(TabPage parentPage)
