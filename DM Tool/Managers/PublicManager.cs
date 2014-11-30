@@ -74,6 +74,16 @@ namespace DM_Tool
             _main = main;
         }
 
+        public string[] GetCharacterNames()
+        {
+            List<string> names = new List<string>();
+            foreach (Character c in listCombinedCharacters)
+            {
+                names.Add(c.GetName());
+            }
+            return names.ToArray();
+        }
+
         #region CampaignInfo
         public void SetCampaign(string val)
         {

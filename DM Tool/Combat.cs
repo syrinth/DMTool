@@ -30,6 +30,9 @@ namespace DM_Tool
             _mainPanel = mainPanel;
             _parentPage = parentPage;
             this.Init.ValueType = typeof(int);
+
+            var source = new AutoCompleteStringCollection();
+            source.AddRange(mgr.GetCharacterNames());
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -73,6 +76,7 @@ namespace DM_Tool
                         currRow.Cells["reflex"].Value = sheet.refSave;
                         currRow.Cells["will"].Value = sheet.willSave;
                         currRow.Cells["AC"].ToolTipText = "Flat-Footed: " + sheet.ffAC + ", Touch: " + sheet.touchAC;
+                        currRow.Cells["Init"].ToolTipText = "Init Mod: " + sheet.init;
                     }
                 }
                 else if (e.ColumnIndex == dgvCombat.Columns["Icon"].Index)
@@ -300,6 +304,24 @@ namespace DM_Tool
                 mc.Dock = DockStyle.Fill;
 
                 _mainPanel.AddOrSelectPage(page);
+            }
+        }
+
+        private void dgvCombat_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (dgvCombat.CurrentCell.ColumnIndex == 0)
+            {
+                var source = new AutoCompleteStringCollection();
+                source.AddRange(mgr.GetCharacterNames());
+
+                TextBox prodCode = e.Control as TextBox;
+                if (prodCode != null)
+                {
+                    prodCode.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    prodCode.AutoCompleteCustomSource = source;
+                    prodCode.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+                }
             }
         }
     }
