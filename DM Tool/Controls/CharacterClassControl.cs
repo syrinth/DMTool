@@ -13,6 +13,7 @@ namespace DM_Tool.Controls
     public partial class CharacterClassControl : UserControl
     {
         public PublicManager mgr = PublicManager.GetInstance();
+        TabPage _parentPage;
 
         public CharacterClassControl()
         {
@@ -24,12 +25,14 @@ namespace DM_Tool.Controls
 
             InitializeComponent();
             Init();
-             this.tbName.Text = name;
+            this.tbName.Text = name;
+            _parentPage = page;
         }
 
         public CharacterClassControl(TabPage page, CharacterClass c){
 
             InitializeComponent();
+            _parentPage = page;
             Init();
             if (c != null)
             {
@@ -76,6 +79,18 @@ namespace DM_Tool.Controls
             else
             {
                 MessageBox.Show("Name cannot be empty!", "Error");
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show(null, "Really delete Character Class?", "Delete Class?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                CharacterClass character = mgr.listCharacterClasses.Find(x => x.name.Equals(tbName.Text));
+                mgr.listCharacterClasses.Remove(character);
+                mgr.DisplayCharacterClasses();
+                _parentPage.Dispose();
             }
         }
     }

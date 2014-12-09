@@ -81,6 +81,12 @@
     <Compile Include="Controls\CharacterControl.Designer.cs">
       <DependentUpon>CharacterControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CurrentInfoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CurrentInfoControl.Designer.cs">
+      <DependentUpon>CurrentInfoControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RoomControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -105,6 +111,12 @@
     <Compile Include="Controls\Tables\QualityControl.Designer.cs">
       <DependentUpon>QualityControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\XPLedgerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\XPLedgerControl.Designer.cs">
+      <DependentUpon>XPLedgerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,10 +130,6 @@
       <DependentUpon>frmNewCreatureType.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\CharacterSheet.cs" />
-    <Compile Include="Controls\CharacterSheetControl.cs" />
-    <Compile Include="Controls\CharacterSheetControl.Designer.cs">
-      <DependentUpon>CharacterSheetControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\PublicManager.cs" />
@@ -158,6 +166,9 @@
     <EmbeddedResource Include="Controls\CharacterControl.resx">
       <DependentUpon>CharacterControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CurrentInfoControl.resx">
+      <DependentUpon>CurrentInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\RoomControl.resx">
       <DependentUpon>RoomControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,14 +181,14 @@
     <EmbeddedResource Include="Controls\Tables\QualityControl.resx">
       <DependentUpon>QualityControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\XPLedgerControl.resx">
+      <DependentUpon>XPLedgerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainPanel.resx">
       <DependentUpon>MainPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewCreatureType.resx">
       <DependentUpon>frmNewCreatureType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CharacterSheetControl.resx">
-      <DependentUpon>CharacterSheetControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -27,6 +27,7 @@ namespace DM_Tool
         public enum BABType { [XmlEnum(Name = "POOR")]POOR, [XmlEnum(Name = "AVERAGE")] AVERAGE, [XmlEnum(Name = "GOOD")] GOOD };
         public enum SaveType { [XmlEnum(Name = "POOR")]POOR, [XmlEnum(Name = "GOOD")]GOOD };
 
+        public List<List<string>> listXP;
         public List<AdventureSite> listAdvSites;
         public List<BaseItem> listBaseItems;
         public List<string> listBaseItemNames;
@@ -40,6 +41,7 @@ namespace DM_Tool
         public List<Quality> listQualities;
 
         private static string Campaign;
+        private static string xmlXPLedger = "XPLedger.xml";
         private static string xmlAdventures = "AdventureSites.xml";
         private static string xmlBaseItems = "BaseItems.xml";
         private static string xmlCreatureSizes = "Sizes.xml";
@@ -137,6 +139,11 @@ namespace DM_Tool
         public void DisplayCharacters()
         {
             _main.DisplayCharacters();
+        }
+
+        public void DisplayCharacterClasses()
+        {
+            _main.DisplayCharacterClasses();
         }
 
         public void DisplayAdvSites()
@@ -281,6 +288,15 @@ namespace DM_Tool
             using (XmlWriter wr = XmlWriter.Create(xmlCharacterClasses, ws))
             {
                 serializer.Serialize(wr, sites);
+            }
+        }
+
+        static public void SerializeXPLedgerToXML(List<List<string>> xpList)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<List<string>>));
+            using (XmlWriter wr = XmlWriter.Create(Campaign + "\\" + xmlXPLedger, ws))
+            {
+                serializer.Serialize(wr, xpList);
             }
         }
 
@@ -463,6 +479,23 @@ namespace DM_Tool
             }
 
             return advs;
+        }
+
+        static public List<List<string>> DeserializeXPLedgerFromXML()
+        {
+            List<List<string>> xpLedger = new List<List<string>>();
+            try
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<List<string>>));
+                TextReader textReader = new StreamReader(Campaign + "\\" + xmlXPLedger);
+                xpLedger = (List<List<string>>)deserializer.Deserialize(textReader);
+                textReader.Close();
+            }
+            catch
+            {
+            }
+
+            return xpLedger;
         }
         #endregion
     }

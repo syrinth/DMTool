@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DM_Tool.Classes;
+using System.Windows.Forms;
 
 namespace DM_Tool
 {
@@ -21,39 +22,39 @@ namespace DM_Tool
             this._levels = vals[count++];
             this._type = vals[count++];
             this._size = vals[count++];
-            this._hitDieNum = Convert.ToInt32(vals[count++]);
-            this._hp = Convert.ToInt32(vals[count++]);
-            this._init = Convert.ToInt32(vals[count++]);
-            this._initMisc = Convert.ToInt32(vals[count++]);
+            this._hitDieNum =  ConvertToIntSafely(vals[count++]);
+            this._hp =  ConvertToIntSafely(vals[count++]);
+            this._init =  ConvertToIntSafely(vals[count++]);
+            this._initMisc =  ConvertToIntSafely(vals[count++]);
             this._speed = vals[count++];
-            this._baseAttackBonus = Convert.ToInt32(vals[count++]);
-            this._fortSave = Convert.ToInt32(vals[count++]);
-            this._refSave = Convert.ToInt32(vals[count++]);
-            this._willSave = Convert.ToInt32(vals[count++]);
+            this._baseAttackBonus =  ConvertToIntSafely(vals[count++]);
+            this._fortSave =  ConvertToIntSafely(vals[count++]);
+            this._refSave =  ConvertToIntSafely(vals[count++]);
+            this._willSave =  ConvertToIntSafely(vals[count++]);
 
-            this._str = Convert.ToInt32(vals[count++]);
-            this._dex = Convert.ToInt32(vals[count++]);
-            this._con = Convert.ToInt32(vals[count++]);
-            this._int = Convert.ToInt32(vals[count++]);
-            this._wis = Convert.ToInt32(vals[count++]);
-            this._cha = Convert.ToInt32(vals[count++]);
-            this._natAC = Convert.ToInt32(vals[count++]);
-            this._armorAC = Convert.ToInt32(vals[count++]);
-            this._shieldAC = Convert.ToInt32(vals[count++]);
-            this._defAC = Convert.ToInt32(vals[count++]);
+            this._str =  ConvertToIntSafely(vals[count++]);
+            this._dex =  ConvertToIntSafely(vals[count++]);
+            this._con =  ConvertToIntSafely(vals[count++]);
+            this._int =  ConvertToIntSafely(vals[count++]);
+            this._wis =  ConvertToIntSafely(vals[count++]);
+            this._cha =  ConvertToIntSafely(vals[count++]);
+            this._natAC =  ConvertToIntSafely(vals[count++]);
+            this._armorAC =  ConvertToIntSafely(vals[count++]);
+            this._shieldAC =  ConvertToIntSafely(vals[count++]);
+            this._defAC =  ConvertToIntSafely(vals[count++]);
             this._attack = vals[count++];
             this._fullAttack = vals[count++];
-            this._space = Convert.ToInt32(vals[count++]);
-            this._reach = Convert.ToInt32(vals[count++]);
+            this._space =  ConvertToIntSafely(vals[count++]);
+            this._reach =  ConvertToIntSafely(vals[count++]);
             this._specialAttacks = vals[count++];
             this._specialQualities = vals[count++];
             this._feats = vals[count++];
 
-            this._maxHP = Convert.ToInt32(vals[count++]);
-            this._totalAC = Convert.ToInt32(vals[count++]);
+            this._maxHP =  ConvertToIntSafely(vals[count++]);
+            this._totalAC =  ConvertToIntSafely(vals[count++]);
 
-            this._touchAC = Convert.ToInt32(vals[count++]);
-            this._ffAC = Convert.ToInt32(vals[count++]);
+            this._touchAC =  ConvertToIntSafely(vals[count++]);
+            this._ffAC =  ConvertToIntSafely(vals[count++]);
         }
 
         private string _name;
@@ -439,6 +440,21 @@ namespace DM_Tool
         {
             get { return _ffAC; }
             set { _ffAC = value; }
+        }
+
+        public int ConvertToIntSafely(string val)
+        {
+            int rv = 0;
+            try
+            {
+                rv = Convert.ToInt32(val);
+            }
+            catch
+            {
+                MessageBox.Show("Must be an integer!");
+            }
+
+            return rv;
         }
     }
 }

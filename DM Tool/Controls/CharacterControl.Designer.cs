@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabCharacterSheet = new System.Windows.Forms.TabControl();
             this.tabPageCharacterSheet = new System.Windows.Forms.TabPage();
             this.tbHD = new System.Windows.Forms.TextBox();
             this.tbRacialHD = new System.Windows.Forms.TextBox();
-            this.chkCampaign = new System.Windows.Forms.CheckBox();
             this.dgvSpecials = new System.Windows.Forms.DataGridView();
             this.colFeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecialAttacks = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,8 +106,11 @@
             this.colMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRanks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMisc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkCampaign = new System.Windows.Forms.CheckBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblHP = new System.Windows.Forms.Label();
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).BeginInit();
@@ -129,9 +131,9 @@
             // tabPageCharacterSheet
             // 
             this.tabPageCharacterSheet.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageCharacterSheet.Controls.Add(this.lblHP);
             this.tabPageCharacterSheet.Controls.Add(this.tbHD);
             this.tabPageCharacterSheet.Controls.Add(this.tbRacialHD);
-            this.tabPageCharacterSheet.Controls.Add(this.chkCampaign);
             this.tabPageCharacterSheet.Controls.Add(this.dgvSpecials);
             this.tabPageCharacterSheet.Controls.Add(this.tbLevels);
             this.tabPageCharacterSheet.Controls.Add(this.tbClasses);
@@ -198,6 +200,7 @@
             this.tbHD.Name = "tbHD";
             this.tbHD.Size = new System.Drawing.Size(205, 20);
             this.tbHD.TabIndex = 146;
+            this.toolTip1.SetToolTip(this.tbHD, "Hit Dice HP calculations");
             // 
             // tbRacialHD
             // 
@@ -206,16 +209,7 @@
             this.tbRacialHD.Size = new System.Drawing.Size(29, 20);
             this.tbRacialHD.TabIndex = 145;
             this.tbRacialHD.Text = "0";
-            // 
-            // chkCampaign
-            // 
-            this.chkCampaign.AutoSize = true;
-            this.chkCampaign.Location = new System.Drawing.Point(505, 8);
-            this.chkCampaign.Name = "chkCampaign";
-            this.chkCampaign.Size = new System.Drawing.Size(73, 17);
-            this.chkCampaign.TabIndex = 144;
-            this.chkCampaign.Text = "Campaign";
-            this.chkCampaign.UseVisualStyleBackColor = true;
+            this.toolTip1.SetToolTip(this.tbRacialHD, "Racial HD");
             // 
             // dgvSpecials
             // 
@@ -265,6 +259,7 @@
             this.tbLevels.Name = "tbLevels";
             this.tbLevels.Size = new System.Drawing.Size(100, 20);
             this.tbLevels.TabIndex = 142;
+            this.toolTip1.SetToolTip(this.tbLevels, "Levels [1/2/3/4]");
             this.tbLevels.Leave += new System.EventHandler(this.tbClassesLevels_Leave);
             // 
             // tbClasses
@@ -274,6 +269,7 @@
             this.tbClasses.Name = "tbClasses";
             this.tbClasses.Size = new System.Drawing.Size(100, 20);
             this.tbClasses.TabIndex = 141;
+            this.toolTip1.SetToolTip(this.tbClasses, "Classes [1/2/3/4] Right-click to open classes");
             this.tbClasses.Leave += new System.EventHandler(this.tbClassesLevels_Leave);
             this.tbClasses.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tbClasses_MouseDown);
             // 
@@ -697,6 +693,8 @@
             this.tbHP.Name = "tbHP";
             this.tbHP.Size = new System.Drawing.Size(29, 20);
             this.tbHP.TabIndex = 89;
+            this.tbHP.Text = "0";
+            this.toolTip1.SetToolTip(this.tbHP, "Total HP");
             // 
             // lblBABGrapple
             // 
@@ -729,8 +727,8 @@
             // 
             // dgvSkills
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
-            this.dgvSkills.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Info;
+            this.dgvSkills.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvSkills.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSkills.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSkills.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -771,37 +769,47 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle7;
             this.colTotal.FillWeight = 10F;
             this.colTotal.HeaderText = "Total";
             this.colTotal.Name = "colTotal";
             // 
             // colMod
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colMod.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colMod.DefaultCellStyle = dataGridViewCellStyle8;
             this.colMod.FillWeight = 10F;
             this.colMod.HeaderText = "Ability Mod";
             this.colMod.Name = "colMod";
             // 
             // colRanks
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.colRanks.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.colRanks.DefaultCellStyle = dataGridViewCellStyle9;
             this.colRanks.FillWeight = 10F;
             this.colRanks.HeaderText = "Ranks";
             this.colRanks.Name = "colRanks";
             // 
             // colMisc
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colMisc.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colMisc.DefaultCellStyle = dataGridViewCellStyle10;
             this.colMisc.FillWeight = 10F;
             this.colMisc.HeaderText = "Misc";
             this.colMisc.Name = "colMisc";
+            // 
+            // chkCampaign
+            // 
+            this.chkCampaign.AutoSize = true;
+            this.chkCampaign.Location = new System.Drawing.Point(95, 478);
+            this.chkCampaign.Name = "chkCampaign";
+            this.chkCampaign.Size = new System.Drawing.Size(73, 17);
+            this.chkCampaign.TabIndex = 144;
+            this.chkCampaign.Text = "Campaign";
+            this.chkCampaign.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
@@ -823,11 +831,26 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.AutomaticDelay = 100;
+            this.toolTip1.IsBalloon = true;
+            // 
+            // lblHP
+            // 
+            this.lblHP.AutoSize = true;
+            this.lblHP.Location = new System.Drawing.Point(249, 62);
+            this.lblHP.Name = "lblHP";
+            this.lblHP.Size = new System.Drawing.Size(22, 13);
+            this.lblHP.TabIndex = 147;
+            this.lblHP.Text = "HP";
+            // 
             // CharacterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.chkCampaign);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.tabCharacterSheet);
             this.Name = "CharacterControl";
@@ -839,6 +862,7 @@
             this.tabSkills.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -919,5 +943,7 @@
         private System.Windows.Forms.ContextMenuStrip ctxtClasses;
         private System.Windows.Forms.TextBox tbRacialHD;
         private System.Windows.Forms.TextBox tbHD;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lblHP;
     }
 }

@@ -41,6 +41,9 @@
             this.closeAllToTheRightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.campaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.currentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xPLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.newCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +59,6 @@
             this.hardMaterialsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adventureSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newAdventureSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.derpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.spltMain)).BeginInit();
             this.spltMain.Panel1.SuspendLayout();
             this.spltMain.Panel2.SuspendLayout();
@@ -200,12 +202,34 @@
             // campaignToolStripMenuItem
             // 
             this.campaignToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.currentToolStripMenuItem,
+            this.xPLedgerToolStripMenuItem,
+            this.toolStripSeparator1,
             this.newCampaignToolStripMenuItem,
             this.loadCampaignToolStripMenuItem,
             this.saveCampaignToolStripMenuItem});
             this.campaignToolStripMenuItem.Name = "campaignToolStripMenuItem";
             this.campaignToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.campaignToolStripMenuItem.Text = "Campaign";
+            // 
+            // currentToolStripMenuItem
+            // 
+            this.currentToolStripMenuItem.Name = "currentToolStripMenuItem";
+            this.currentToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.currentToolStripMenuItem.Text = "Current";
+            this.currentToolStripMenuItem.Click += new System.EventHandler(this.currentToolStripMenuItem_Click);
+            // 
+            // xPLedgerToolStripMenuItem
+            // 
+            this.xPLedgerToolStripMenuItem.Name = "xPLedgerToolStripMenuItem";
+            this.xPLedgerToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.xPLedgerToolStripMenuItem.Text = "XP Ledger";
+            this.xPLedgerToolStripMenuItem.Click += new System.EventHandler(this.xPLedgerToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
             // 
             // newCampaignToolStripMenuItem
             // 
@@ -265,6 +289,7 @@
             this.createNewTypeToolStripMenuItem.Name = "createNewTypeToolStripMenuItem";
             this.createNewTypeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.createNewTypeToolStripMenuItem.Text = "Create New Type";
+            this.createNewTypeToolStripMenuItem.Click += new System.EventHandler(this.createNewTypeToolStripMenuItem_Click);
             // 
             // newItemToolStripMenuItem
             // 
@@ -307,8 +332,7 @@
             // adventureSiteToolStripMenuItem
             // 
             this.adventureSiteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newAdventureSiteToolStripMenuItem,
-            this.derpToolStripMenuItem});
+            this.newAdventureSiteToolStripMenuItem});
             this.adventureSiteToolStripMenuItem.Name = "adventureSiteToolStripMenuItem";
             this.adventureSiteToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.adventureSiteToolStripMenuItem.Text = "Adventure Sites";
@@ -319,13 +343,6 @@
             this.newAdventureSiteToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.newAdventureSiteToolStripMenuItem.Text = "New Adventure Site";
             this.newAdventureSiteToolStripMenuItem.Click += new System.EventHandler(this.newAdventureSiteToolStripMenuItem_Click);
-            // 
-            // derpToolStripMenuItem
-            // 
-            this.derpToolStripMenuItem.Name = "derpToolStripMenuItem";
-            this.derpToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.derpToolStripMenuItem.Text = "derp";
-            this.derpToolStripMenuItem.Click += new System.EventHandler(this.derpToolStripMenuItem_Click);
             // 
             // MainPanel
             // 
@@ -380,7 +397,9 @@
         private System.Windows.Forms.ToolStripMenuItem closeThisToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeAllOpenTabsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeAllToTheRightToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem derpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem currentToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xPLedgerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

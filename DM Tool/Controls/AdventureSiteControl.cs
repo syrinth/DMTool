@@ -195,5 +195,10 @@ namespace DM_Tool.Controls
                 rc.Save();
             }
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

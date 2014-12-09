@@ -13,8 +13,8 @@ namespace DM_Tool
 {
     public partial class MainPanel : Form
     {
-        private enum ListDisplay { ALL, TYPES, CHARACTERS, BASEITEMS, ADVSITES};
-        private List<string> baseMenu = new List<string> { "Types", "Characters", "Base Items", "Adventure Sites"};
+        private enum ListDisplay { ALL, TYPES, CHARACTERS, CHARCLASSES, BASEITEMS, ADVSITES};
+        private List<string> baseMenu = new List<string> { "Types", "Characters", "Character Classes", "Base Items", "Adventure Sites"};
 
         public PublicManager mgr = PublicManager.GetInstance();
 
@@ -24,6 +24,7 @@ namespace DM_Tool
             InitializeComponent();
 
             display = ListDisplay.ALL;
+            mgr.listXP = new List<List<string>>();
             mgr.listCreatureTypes = new List<CreatureType>();
             mgr.listCombinedCharacters = new List<Character>();
             mgr.listCharacters = new List<Character>();
@@ -90,6 +91,10 @@ namespace DM_Tool
                 {
                     DisplayCharacters();
                 }
+                if (name == "Character Classes")
+                {
+                    DisplayCharacterClasses();
+                }
                 if (name == "Base Items")
                 {
                     DisplayBaseItems();
@@ -122,6 +127,18 @@ namespace DM_Tool
                     }
                 }
                 mgr.NewTab("Character", name);
+            }
+            else if (display == ListDisplay.CHARCLASSES)
+            {
+                foreach (TabPage page in tabOpenObjects.TabPages)
+                {
+                    if (page.Text == name)
+                    {
+                        tabOpenObjects.SelectedTab = page;
+                        return;
+                    }
+                }
+                mgr.NewTab("Character Class", name);
             }
             else if (display == ListDisplay.BASEITEMS)
             {
@@ -190,6 +207,18 @@ namespace DM_Tool
             foreach (Character c in mgr.listCombinedCharacters)
             {
                 dgView.Rows.Add(c.GetName());
+            }
+        }
+
+        public void DisplayCharacterClasses()
+        {
+            dgView.Rows.Clear();
+
+            display = ListDisplay.CHARCLASSES;
+            dgView.Rows.Add("--Main Manu");
+            foreach (CharacterClass cc in mgr.listCharacterClasses)
+            {
+                dgView.Rows.Add(cc.name);
             }
         }
 
@@ -403,6 +432,31 @@ namespace DM_Tool
             mgr.WriteConfigFile();
             this.Text = mgr.GetCampaign();
             mgr.LoadCampaign();
+        }
+
+        private void currentToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string currentInfo = "Current Info";
+            TabPage page = new TabPage(currentInfo);
+            CurrentInfoControl mc = new CurrentInfoControl(page);
+            page.Controls.Add(mc);
+            mc.Dock = DockStyle.Fill;
+            AddOrSelectPage(page);
+        }
+
+        private void createNewTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void xPLedgerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string currentInfo = "XP Ledger";
+            TabPage page = new TabPage(currentInfo);
+            XPLedgerControl xp = new XPLedgerControl(page, PublicManager.DeserializeXPLedgerFromXML());
+            page.Controls.Add(xp);
+            xp.Dock = DockStyle.Fill;
+            AddOrSelectPage(page);
         }
     }
 }
