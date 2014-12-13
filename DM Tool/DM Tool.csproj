@@ -87,6 +87,7 @@
     <Compile Include="Controls\CurrentInfoControl.Designer.cs">
       <DependentUpon>CurrentInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Managers\PublicCode.cs" />
     <Compile Include="Controls\RoomControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

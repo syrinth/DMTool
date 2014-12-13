@@ -383,7 +383,7 @@ namespace DM_Tool.Controls
         {
             if (number != string.Empty)
             {
-                int num = Convert.ToInt32(number);
+                int num = PublicCode.ConvertToIntSafely(number);
                 double mod = 0;
                 if (num >= 10)
                 {

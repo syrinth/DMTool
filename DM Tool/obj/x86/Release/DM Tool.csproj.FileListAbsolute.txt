@@ -36,3 +36,5 @@ E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.csproj.GenerateResource.Ca
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.exe
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.pdb
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CharacterClassControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CurrentInfoControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.XPLedgerControl.resources

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DM_Tool.Classes;
 using System.Windows.Forms;
+using DM_Tool.Controls;
 
 namespace DM_Tool
 {
@@ -22,39 +23,39 @@ namespace DM_Tool
             this._levels = vals[count++];
             this._type = vals[count++];
             this._size = vals[count++];
-            this._hitDieNum =  ConvertToIntSafely(vals[count++]);
-            this._hp =  ConvertToIntSafely(vals[count++]);
-            this._init =  ConvertToIntSafely(vals[count++]);
-            this._initMisc =  ConvertToIntSafely(vals[count++]);
+            this._hitDieNum = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._hp = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._init = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._initMisc = PublicCode.ConvertToIntSafely(vals[count++]);
             this._speed = vals[count++];
-            this._baseAttackBonus =  ConvertToIntSafely(vals[count++]);
-            this._fortSave =  ConvertToIntSafely(vals[count++]);
-            this._refSave =  ConvertToIntSafely(vals[count++]);
-            this._willSave =  ConvertToIntSafely(vals[count++]);
+            this._baseAttackBonus = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._fortSave = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._refSave = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._willSave = PublicCode.ConvertToIntSafely(vals[count++]);
 
-            this._str =  ConvertToIntSafely(vals[count++]);
-            this._dex =  ConvertToIntSafely(vals[count++]);
-            this._con =  ConvertToIntSafely(vals[count++]);
-            this._int =  ConvertToIntSafely(vals[count++]);
-            this._wis =  ConvertToIntSafely(vals[count++]);
-            this._cha =  ConvertToIntSafely(vals[count++]);
-            this._natAC =  ConvertToIntSafely(vals[count++]);
-            this._armorAC =  ConvertToIntSafely(vals[count++]);
-            this._shieldAC =  ConvertToIntSafely(vals[count++]);
-            this._defAC =  ConvertToIntSafely(vals[count++]);
+            this._str = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._dex = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._con = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._int = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._wis = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._cha = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._natAC = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._armorAC = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._shieldAC = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._defAC = PublicCode.ConvertToIntSafely(vals[count++]);
             this._attack = vals[count++];
             this._fullAttack = vals[count++];
-            this._space =  ConvertToIntSafely(vals[count++]);
-            this._reach =  ConvertToIntSafely(vals[count++]);
+            this._space = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._reach = PublicCode.ConvertToIntSafely(vals[count++]);
             this._specialAttacks = vals[count++];
             this._specialQualities = vals[count++];
             this._feats = vals[count++];
 
-            this._maxHP =  ConvertToIntSafely(vals[count++]);
-            this._totalAC =  ConvertToIntSafely(vals[count++]);
+            this._maxHP = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._totalAC = PublicCode.ConvertToIntSafely(vals[count++]);
 
-            this._touchAC =  ConvertToIntSafely(vals[count++]);
-            this._ffAC =  ConvertToIntSafely(vals[count++]);
+            this._touchAC = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._ffAC = PublicCode.ConvertToIntSafely(vals[count++]);
         }
 
         private string _name;
@@ -440,21 +441,6 @@ namespace DM_Tool
         {
             get { return _ffAC; }
             set { _ffAC = value; }
-        }
-
-        public int ConvertToIntSafely(string val)
-        {
-            int rv = 0;
-            try
-            {
-                rv = Convert.ToInt32(val);
-            }
-            catch
-            {
-                MessageBox.Show("Must be an integer!");
-            }
-
-            return rv;
         }
     }
 }
