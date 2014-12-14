@@ -16,6 +16,7 @@ namespace DM_Tool
         public PublicManager mgr = PublicManager.GetInstance();
         private TabPage _parentPage;
         private DataGridViewRow currentTurn;
+        private Color color;
 
         private MainPanel _mainPanel;
 
@@ -135,10 +136,11 @@ namespace DM_Tool
                         currRow = 0;
                     }
 
-                    currentTurn.DefaultCellStyle.BackColor = Color.White;
+                    currentTurn.DefaultCellStyle.BackColor = color;
                     currentTurn = dgvCombat.Rows[currRow];
                 }
 
+                color = currentTurn.DefaultCellStyle.BackColor;
                 currentTurn.DefaultCellStyle.BackColor = Color.Red;
 
                 foreach (DataGridViewRow r in dgvEffects.Rows)
