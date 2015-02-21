@@ -87,6 +87,13 @@
     <Compile Include="Controls\CurrentInfoControl.Designer.cs">
       <DependentUpon>CurrentInfoControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Spell Controls\SpellPage.cs" />
+    <Compile Include="Controls\Spell Controls\TextInformationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\Spell Controls\TextInformationControl.Designer.cs">
+      <DependentUpon>TextInformationControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Managers\PublicCode.cs" />
     <Compile Include="Controls\RoomControl.cs">
       <SubType>UserControl</SubType>
@@ -172,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RoomControl.resx">
       <DependentUpon>RoomControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\Spell Controls\TextInformationControl.resx">
+      <DependentUpon>TextInformationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\Tables\BaseItemControl.resx">
       <DependentUpon>BaseItemControl.cs</DependentUpon>

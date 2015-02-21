@@ -11,17 +11,21 @@ namespace DM_Tool.Classes
         public bool _campaignSpecific = false;
         public CharacterSheet _characterSheet;
         public List<string> _skills;
+        public List<List<string>> _spells;
+        public List<string> _equipment;
 
         public Character()
         {
         }
 
-        public Character(string[] charSheetVals, bool campaignSpecific, List<string> skills)
+        public Character(string[] charSheetVals, bool campaignSpecific, List<string> skills, List<List<string>> spells, List<string> equipment)
         {
             _characterSheet = new CharacterSheet(charSheetVals);
             _skills = skills;
             _name = _characterSheet.name;
             _campaignSpecific = campaignSpecific;
+            _spells = spells;
+            _equipment = equipment;
         }
 
         public CharacterSheet GetCharacterSheet()

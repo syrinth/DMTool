@@ -40,6 +40,7 @@
             this.lblHP = new System.Windows.Forms.Label();
             this.tbHD = new System.Windows.Forms.TextBox();
             this.tbRacialHD = new System.Windows.Forms.TextBox();
+            this.chkCampaign = new System.Windows.Forms.CheckBox();
             this.dgvSpecials = new System.Windows.Forms.DataGridView();
             this.colFeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecialAttacks = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -108,20 +109,33 @@
             this.colMod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colRanks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMisc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkCampaign = new System.Windows.Forms.CheckBox();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.tabInventory = new System.Windows.Forms.TabPage();
+            this.tabInventoryContainers = new System.Windows.Forms.TabControl();
+            this.ctxtInventory = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addNewContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabEquipment = new System.Windows.Forms.TabPage();
+            this.dgvEquipment = new System.Windows.Forms.DataGridView();
+            this.tabSpells = new System.Windows.Forms.TabPage();
+            this.tabSpellPages = new System.Windows.Forms.TabControl();
+            this.ctxtNewSpellPage = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addNewSpontaneousPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabInventory = new System.Windows.Forms.TabPage();
-            this.tabSpells = new System.Windows.Forms.TabPage();
-            this.dgvInventory = new System.Windows.Forms.DataGridView();
+            this.colSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).BeginInit();
             this.tabSkills.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).BeginInit();
             this.tabInventory.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).BeginInit();
+            this.tabInventoryContainers.SuspendLayout();
+            this.ctxtInventory.SuspendLayout();
+            this.tabEquipment.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEquipment)).BeginInit();
+            this.tabSpells.SuspendLayout();
+            this.ctxtNewSpellPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabCharacterSheet
@@ -142,6 +156,7 @@
             this.tabPageCharacterSheet.Controls.Add(this.lblHP);
             this.tabPageCharacterSheet.Controls.Add(this.tbHD);
             this.tabPageCharacterSheet.Controls.Add(this.tbRacialHD);
+            this.tabPageCharacterSheet.Controls.Add(this.chkCampaign);
             this.tabPageCharacterSheet.Controls.Add(this.dgvSpecials);
             this.tabPageCharacterSheet.Controls.Add(this.tbLevels);
             this.tabPageCharacterSheet.Controls.Add(this.tbClasses);
@@ -227,6 +242,16 @@
             this.tbRacialHD.TabIndex = 145;
             this.tbRacialHD.Text = "0";
             this.toolTip1.SetToolTip(this.tbRacialHD, "Racial HD");
+            // 
+            // chkCampaign
+            // 
+            this.chkCampaign.AutoSize = true;
+            this.chkCampaign.Location = new System.Drawing.Point(505, 6);
+            this.chkCampaign.Name = "chkCampaign";
+            this.chkCampaign.Size = new System.Drawing.Size(73, 17);
+            this.chkCampaign.TabIndex = 144;
+            this.chkCampaign.Text = "Campaign";
+            this.chkCampaign.UseVisualStyleBackColor = true;
             // 
             // dgvSpecials
             // 
@@ -744,6 +769,8 @@
             // 
             // dgvSkills
             // 
+            this.dgvSkills.AllowUserToResizeColumns = false;
+            this.dgvSkills.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
             this.dgvSkills.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSkills.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -757,8 +784,10 @@
             this.colRanks,
             this.colMisc});
             this.dgvSkills.Location = new System.Drawing.Point(3, 3);
+            this.dgvSkills.MultiSelect = false;
             this.dgvSkills.Name = "dgvSkills";
             this.dgvSkills.RowHeadersVisible = false;
+            this.dgvSkills.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSkills.Size = new System.Drawing.Size(580, 433);
             this.dgvSkills.TabIndex = 0;
             this.dgvSkills.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSkills_CellValueChanged);
@@ -782,13 +811,13 @@
             this.colSkillName.FillWeight = 50F;
             this.colSkillName.HeaderText = "Skill";
             this.colSkillName.Name = "colSkillName";
-            this.colSkillName.ReadOnly = true;
             // 
             // colTotal
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.NullValue = "0";
             this.colTotal.DefaultCellStyle = dataGridViewCellStyle2;
             this.colTotal.FillWeight = 10F;
             this.colTotal.HeaderText = "Total";
@@ -797,6 +826,7 @@
             // colMod
             // 
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.NullValue = "0";
             this.colMod.DefaultCellStyle = dataGridViewCellStyle3;
             this.colMod.FillWeight = 10F;
             this.colMod.HeaderText = "Ability Mod";
@@ -805,6 +835,7 @@
             // colRanks
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.NullValue = "0";
             this.colRanks.DefaultCellStyle = dataGridViewCellStyle4;
             this.colRanks.FillWeight = 10F;
             this.colRanks.HeaderText = "Ranks";
@@ -813,30 +844,103 @@
             // colMisc
             // 
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.NullValue = "0";
             this.colMisc.DefaultCellStyle = dataGridViewCellStyle5;
             this.colMisc.FillWeight = 10F;
             this.colMisc.HeaderText = "Misc";
             this.colMisc.Name = "colMisc";
             // 
-            // chkCampaign
+            // tabInventory
             // 
-            this.chkCampaign.AutoSize = true;
-            this.chkCampaign.Location = new System.Drawing.Point(95, 478);
-            this.chkCampaign.Name = "chkCampaign";
-            this.chkCampaign.Size = new System.Drawing.Size(73, 17);
-            this.chkCampaign.TabIndex = 144;
-            this.chkCampaign.Text = "Campaign";
-            this.chkCampaign.UseVisualStyleBackColor = true;
+            this.tabInventory.Controls.Add(this.tabInventoryContainers);
+            this.tabInventory.Location = new System.Drawing.Point(4, 22);
+            this.tabInventory.Name = "tabInventory";
+            this.tabInventory.Size = new System.Drawing.Size(586, 439);
+            this.tabInventory.TabIndex = 2;
+            this.tabInventory.Text = "Inventory";
+            this.tabInventory.UseVisualStyleBackColor = true;
             // 
-            // btnDelete
+            // tabInventoryContainers
             // 
-            this.btnDelete.Location = new System.Drawing.Point(15, 474);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 76;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.tabInventoryContainers.ContextMenuStrip = this.ctxtInventory;
+            this.tabInventoryContainers.Controls.Add(this.tabEquipment);
+            this.tabInventoryContainers.Location = new System.Drawing.Point(0, 3);
+            this.tabInventoryContainers.Name = "tabInventoryContainers";
+            this.tabInventoryContainers.SelectedIndex = 0;
+            this.tabInventoryContainers.Size = new System.Drawing.Size(586, 433);
+            this.tabInventoryContainers.TabIndex = 1;
+            this.tabInventoryContainers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabInventoryContainers_MouseClick);
+            // 
+            // ctxtInventory
+            // 
+            this.ctxtInventory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewContainerToolStripMenuItem});
+            this.ctxtInventory.Name = "ctxtInventory";
+            this.ctxtInventory.Size = new System.Drawing.Size(179, 26);
+            // 
+            // addNewContainerToolStripMenuItem
+            // 
+            this.addNewContainerToolStripMenuItem.Name = "addNewContainerToolStripMenuItem";
+            this.addNewContainerToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.addNewContainerToolStripMenuItem.Text = "Add New Container";
+            // 
+            // tabEquipment
+            // 
+            this.tabEquipment.Controls.Add(this.dgvEquipment);
+            this.tabEquipment.Location = new System.Drawing.Point(4, 22);
+            this.tabEquipment.Name = "tabEquipment";
+            this.tabEquipment.Size = new System.Drawing.Size(578, 407);
+            this.tabEquipment.TabIndex = 0;
+            this.tabEquipment.Text = "Equipment";
+            this.tabEquipment.UseVisualStyleBackColor = true;
+            // 
+            // dgvEquipment
+            // 
+            this.dgvEquipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEquipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEquipment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSlot,
+            this.colItemName,
+            this.colWeight});
+            this.dgvEquipment.Location = new System.Drawing.Point(3, 3);
+            this.dgvEquipment.Name = "dgvEquipment";
+            this.dgvEquipment.RowHeadersVisible = false;
+            this.dgvEquipment.Size = new System.Drawing.Size(572, 401);
+            this.dgvEquipment.TabIndex = 0;
+            // 
+            // tabSpells
+            // 
+            this.tabSpells.Controls.Add(this.tabSpellPages);
+            this.tabSpells.Location = new System.Drawing.Point(4, 22);
+            this.tabSpells.Name = "tabSpells";
+            this.tabSpells.Size = new System.Drawing.Size(586, 439);
+            this.tabSpells.TabIndex = 3;
+            this.tabSpells.Text = "Spells";
+            this.tabSpells.UseVisualStyleBackColor = true;
+            this.tabSpells.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabSpells_MouseClick);
+            // 
+            // tabSpellPages
+            // 
+            this.tabSpellPages.ContextMenuStrip = this.ctxtNewSpellPage;
+            this.tabSpellPages.Location = new System.Drawing.Point(0, 6);
+            this.tabSpellPages.Name = "tabSpellPages";
+            this.tabSpellPages.SelectedIndex = 0;
+            this.tabSpellPages.Size = new System.Drawing.Size(586, 433);
+            this.tabSpellPages.TabIndex = 0;
+            // 
+            // ctxtNewSpellPage
+            // 
+            this.ctxtNewSpellPage.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewSpontaneousPageToolStripMenuItem});
+            this.ctxtNewSpellPage.Name = "ctxtNewSpellPage";
+            this.ctxtNewSpellPage.Size = new System.Drawing.Size(181, 26);
+            // 
+            // addNewSpontaneousPageToolStripMenuItem
+            // 
+            this.addNewSpontaneousPageToolStripMenuItem.Name = "addNewSpontaneousPageToolStripMenuItem";
+            this.addNewSpontaneousPageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNewSpontaneousPageToolStripMenuItem.Text = "Add New Spell Page";
+            this.addNewSpontaneousPageToolStripMenuItem.Click += new System.EventHandler(this.addNewSpellPageToolStripMenuItem_Click);
             // 
             // btnSave
             // 
@@ -853,44 +957,32 @@
             this.toolTip1.AutomaticDelay = 100;
             this.toolTip1.IsBalloon = true;
             // 
-            // tabInventory
+            // colSlot
             // 
-            this.tabInventory.Controls.Add(this.dgvInventory);
-            this.tabInventory.Location = new System.Drawing.Point(4, 22);
-            this.tabInventory.Name = "tabInventory";
-            this.tabInventory.Size = new System.Drawing.Size(586, 439);
-            this.tabInventory.TabIndex = 2;
-            this.tabInventory.Text = "Inventory";
-            this.tabInventory.UseVisualStyleBackColor = true;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colSlot.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colSlot.FillWeight = 20F;
+            this.colSlot.HeaderText = "Slot";
+            this.colSlot.Name = "colSlot";
             // 
-            // tabSpells
+            // colItemName
             // 
-            this.tabSpells.Location = new System.Drawing.Point(4, 22);
-            this.tabSpells.Name = "tabSpells";
-            this.tabSpells.Size = new System.Drawing.Size(586, 439);
-            this.tabSpells.TabIndex = 3;
-            this.tabSpells.Text = "Spells";
-            this.tabSpells.UseVisualStyleBackColor = true;
+            this.colItemName.FillWeight = 90F;
+            this.colItemName.HeaderText = "Item";
+            this.colItemName.Name = "colItemName";
             // 
-            // dgvInventory
+            // colWeight
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Info;
-            this.dgvInventory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvInventory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvInventory.Location = new System.Drawing.Point(3, 3);
-            this.dgvInventory.Name = "dgvInventory";
-            this.dgvInventory.RowHeadersVisible = false;
-            this.dgvInventory.Size = new System.Drawing.Size(580, 433);
-            this.dgvInventory.TabIndex = 1;
+            this.colWeight.FillWeight = 15F;
+            this.colWeight.HeaderText = "Weight";
+            this.colWeight.Name = "colWeight";
             // 
             // CharacterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.chkCampaign);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.tabCharacterSheet);
             this.Name = "CharacterControl";
             this.Size = new System.Drawing.Size(600, 500);
@@ -901,16 +993,19 @@
             this.tabSkills.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).EndInit();
             this.tabInventory.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvInventory)).EndInit();
+            this.tabInventoryContainers.ResumeLayout(false);
+            this.ctxtInventory.ResumeLayout(false);
+            this.tabEquipment.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEquipment)).EndInit();
+            this.tabSpells.ResumeLayout(false);
+            this.ctxtNewSpellPage.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.TabControl tabCharacterSheet;
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.TabPage tabPageCharacterSheet;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TabPage tabSkills;
@@ -967,13 +1062,6 @@
         private System.Windows.Forms.TextBox tbHP;
         private System.Windows.Forms.Label lblBABGrapple;
         private System.Windows.Forms.ComboBox cbType;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn colClassSkill;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colAbility;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSkillName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colRanks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMisc;
         private System.Windows.Forms.DataGridView dgvSpecials;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFeats;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialAttacks;
@@ -987,7 +1075,24 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lblHP;
         private System.Windows.Forms.TabPage tabInventory;
-        private System.Windows.Forms.DataGridView dgvInventory;
         private System.Windows.Forms.TabPage tabSpells;
+        private System.Windows.Forms.TabControl tabSpellPages;
+        private System.Windows.Forms.ContextMenuStrip ctxtNewSpellPage;
+        private System.Windows.Forms.ToolStripMenuItem addNewSpontaneousPageToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabInventoryContainers;
+        private System.Windows.Forms.ContextMenuStrip ctxtInventory;
+        private System.Windows.Forms.TabPage tabEquipment;
+        private System.Windows.Forms.ToolStripMenuItem addNewContainerToolStripMenuItem;
+        private System.Windows.Forms.DataGridView dgvEquipment;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colClassSkill;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAbility;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSkillName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRanks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMisc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSlot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colItemName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
     }
 }

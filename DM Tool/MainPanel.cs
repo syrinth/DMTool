@@ -244,16 +244,6 @@ namespace DM_Tool
             }
         }
 
-        private void newItemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string newArtObject = "New Art Object";
-            TabPage page = new TabPage(newArtObject);
-            ArtObjectControl aoc = new ArtObjectControl(page);
-            page.Controls.Add(aoc);
-            aoc.Dock = DockStyle.Fill;
-            AddOrSelectPage(page);
-        }
-
         private void newBaseItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string newArtObject = "New Base Item";
@@ -262,16 +252,6 @@ namespace DM_Tool
             page.Controls.Add(i);
             i.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSaveAndEdit_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void qualityToolStripMenuItem_Click(object sender, EventArgs e)
@@ -417,9 +397,12 @@ namespace DM_Tool
 
         private void loadCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new  FolderBrowserDialog();
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.Reset();
+            fbd.RootFolder = Environment.SpecialFolder.MyComputer;
             fbd.SelectedPath = Environment.CurrentDirectory;
-            DialogResult result = fbd.ShowDialog();
+
+            DialogResult result = fbd.ShowDialog();        
 
             if (result == DialogResult.OK)
             {
@@ -427,10 +410,13 @@ namespace DM_Tool
                 mgr.SetCampaign(split[split.Length -1]);
             }
 
-            Directory.CreateDirectory("./" + mgr.GetCampaign());
+            Directory.CreateDirectory("./Files/" + mgr.GetCampaign());
 
             mgr.WriteConfigFile();
             this.Text = mgr.GetCampaign();
+            SetMenuToBase();
+            tabOpenObjects.TabPages.Clear();
+
             mgr.LoadCampaign();
         }
 
@@ -444,11 +430,6 @@ namespace DM_Tool
             AddOrSelectPage(page);
         }
 
-        private void createNewTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void xPLedgerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string currentInfo = "XP Ledger";
@@ -457,6 +438,126 @@ namespace DM_Tool
             page.Controls.Add(xp);
             xp.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
+        }
+
+        private void dgView_MouseClick(object sender, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo Hti;
+            if (e.Button == MouseButtons.Right)
+            {
+                Hti = dgView .HitTest(e.X, e.Y);
+                if (Hti.Type == DataGridViewHitTestType.Cell)
+                {
+                    if (!((DataGridViewRow)(dgView.Rows[Hti.RowIndex])).Selected)
+                    {
+                        dgView.ClearSelection();
+                        ((DataGridViewRow)dgView.Rows[Hti.RowIndex]).Selected = true;
+                    }
+                    ctxtMenuItem.Show(MousePosition);
+                }
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string name = dgView.SelectedRows[0].Cells[0].Value.ToString();
+
+            if (display == ListDisplay.TYPES)
+            {
+                DialogResult res = MessageBox.Show(null, "Really delete " + name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    mgr.listCreatureTypes.Remove(mgr.listCreatureTypes.Find(x => x.name.Equals(name)));
+                }
+            }
+            else if (display == ListDisplay.CHARACTERS)
+            {
+                DialogResult res = MessageBox.Show(null, "Really delete " + name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    Character c = mgr.listCombinedCharacters.Find(x => x.GetName().Equals(name));
+                    mgr.listCombinedCharacters.Remove(c);
+                    if (c._campaignSpecific)
+                    {
+                        mgr.listCampaignCharacters.Remove(c);
+                    }
+                    else
+                    {
+                        mgr.listCharacters.Remove(c);
+                    }
+                    mgr.DisplayCharacters();
+                }
+            }
+            else if (display == ListDisplay.CHARCLASSES)
+            {
+                DialogResult res = MessageBox.Show(null, "Really delete " + name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    mgr.listCharacterClasses.Remove(mgr.listCharacterClasses.Find(x => x.name.Equals(name)));
+                    mgr.DisplayCharacterClasses();
+                }
+            }
+            else if (display == ListDisplay.BASEITEMS)
+            {
+                DialogResult res = MessageBox.Show(null, "Really delete " + name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    mgr.listBaseItems.Remove(mgr.listBaseItems.Find(x => x.name.Equals(name)));
+                }
+            }
+            else if (display == ListDisplay.ADVSITES)
+            {
+                DialogResult res = MessageBox.Show(null, "Really delete " + name + "?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                {
+                    mgr.listAdvSites.Remove(mgr.listAdvSites.Find(x => x.GetName().Equals(name)));
+                    mgr.DisplayAdvSites();
+                }
+            }
+            mgr.Save();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (display == ListDisplay.TYPES)
+            {
+                TabPage page = new TabPage("New Creature Type");
+                TypeControl aoc = new TypeControl(page);
+                page.Controls.Add(aoc);
+                aoc.Dock = DockStyle.Fill;
+                AddOrSelectPage(page);
+            }
+            else if (display == ListDisplay.CHARACTERS)
+            {
+                string newCharacter = "New Character";
+                TabPage page = new TabPage(newCharacter);
+                CharacterControl mc = new CharacterControl(page);
+                page.Controls.Add(mc);
+                mc.Dock = DockStyle.Fill;
+                AddOrSelectPage(page);
+            }
+            else if (display == ListDisplay.CHARCLASSES)
+            {
+                string name = "New Class";
+                mgr.NewTab("Character Class", name);
+            }
+            else if (display == ListDisplay.BASEITEMS)
+            {
+                string newArtObject = "New Art Object";
+                TabPage page = new TabPage(newArtObject);
+                ArtObjectControl aoc = new ArtObjectControl(page);
+                page.Controls.Add(aoc);
+                aoc.Dock = DockStyle.Fill;
+                AddOrSelectPage(page);
+            }
+            else if (display == ListDisplay.ADVSITES)
+            {
+                TabPage page = new TabPage("New Adventure Site");
+                AdventureSiteControl aoc = new AdventureSiteControl(page, this);
+                page.Controls.Add(aoc);
+                aoc.Dock = DockStyle.Fill;
+                AddOrSelectPage(page);
+            }
         }
     }
 }

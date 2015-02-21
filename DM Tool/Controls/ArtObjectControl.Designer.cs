@@ -38,8 +38,6 @@
             this.tbMaterial = new System.Windows.Forms.TextBox();
             this.lblDecoration = new System.Windows.Forms.Label();
             this.tbDecoration = new System.Windows.Forms.TextBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnSaveAndEdit = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -135,28 +133,9 @@
             this.tbDecoration.Size = new System.Drawing.Size(139, 20);
             this.tbDecoration.TabIndex = 84;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(15, 474);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 87;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(508, 474);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 86;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // btnSaveAndEdit
             // 
-            this.btnSaveAndEdit.Location = new System.Drawing.Point(427, 474);
+            this.btnSaveAndEdit.Location = new System.Drawing.Point(522, 474);
             this.btnSaveAndEdit.Name = "btnSaveAndEdit";
             this.btnSaveAndEdit.Size = new System.Drawing.Size(75, 23);
             this.btnSaveAndEdit.TabIndex = 85;
@@ -240,8 +219,6 @@
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSaveAndEdit);
             this.Controls.Add(this.tbDecoration);
             this.Controls.Add(this.lblDecoration);
@@ -272,8 +249,6 @@
         private System.Windows.Forms.TextBox tbMaterial;
         private System.Windows.Forms.Label lblDecoration;
         private System.Windows.Forms.TextBox tbDecoration;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnSaveAndEdit;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;

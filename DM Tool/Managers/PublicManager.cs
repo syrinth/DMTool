@@ -17,7 +17,7 @@ namespace DM_Tool
     {
         private static  PublicManager instance;
 
-        private string configFile = "./config.txt";
+        private string configFile = "./Files/config.txt";
         private string campaignHash = "##Campaign Name:";
 
         public int totalQualityRatios;
@@ -41,15 +41,15 @@ namespace DM_Tool
         public List<Quality> listQualities;
 
         private static string Campaign;
-        private static string xmlXPLedger = "XPLedger.xml";
-        private static string xmlAdventures = "AdventureSites.xml";
-        private static string xmlBaseItems = "BaseItems.xml";
-        private static string xmlCreatureSizes = "Sizes.xml";
-        private static string xmlCreatureTypes = "CreatureTypes.xml";
-        private static string xmlHardMaterials = "HardMaterials.xml";
-        private static string xmlCharacters = "Characters.xml";
-        private static string xmlCharacterClasses = "CharacterClasses.xml";
-        private static string xmlQualities = "Qualitys.xml";
+        private static string xmlXPLedger = "./Files/*/XPLedger.xml";
+        private static string xmlAdventures = "./Files/*/AdventureSites.xml";
+        private static string xmlBaseItems = "./Files/BaseItems.xml";
+        private static string xmlCreatureSizes = "./Files/Sizes.xml";
+        private static string xmlCreatureTypes = "./Files/CreatureTypes.xml";
+        private static string xmlHardMaterials = "./Files/HardMaterials.xml";
+        private static string xmlCharacters = "./Files/*/Characters.xml";
+        private static string xmlCharacterClasses = "./Files/CharacterClasses.xml";
+        private static string xmlQualities = "./Files/Qualitys.xml";
 
         private static XmlWriterSettings ws = new XmlWriterSettings();
 
@@ -100,6 +100,12 @@ namespace DM_Tool
         public void LoadCampaign()
         {
             listAdvSites = DeserializeAdventuresFromXML();
+            listCampaignCharacters = DeserializeCampaignCharactersFromXML();
+
+            listCombinedCharacters.Clear();
+            listCombinedCharacters.AddRange(listCharacters);
+            listCombinedCharacters.AddRange(listCampaignCharacters);
+            listCombinedCharacters.Sort((p1, p2) => string.Compare(p1.GetName(), p2.GetName(), true));
         }
         #endregion
         #region Config File
@@ -213,7 +219,7 @@ namespace DM_Tool
         static public void SerializeAdventuresToXML(List<AdventureSite> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<AdventureSite>));
-            using (XmlWriter wr = XmlWriter.Create(Campaign + "\\" + xmlAdventures, ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlAdventures.Replace("*", Campaign), ws))
             {
                 serializer.Serialize(wr, sites);
             }
@@ -222,7 +228,7 @@ namespace DM_Tool
         static public void SerializeCharactersToXML(List<Character> characters)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
-            using (XmlWriter wr = XmlWriter.Create(xmlCharacters, ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlCharacters.Replace("*", ""), ws))
             {
                 serializer.Serialize(wr, characters);
             }
@@ -231,7 +237,7 @@ namespace DM_Tool
         static public void SerializeCampaignCharactersToXML(List<Character> characters)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
-            using (XmlWriter wr = XmlWriter.Create(Campaign + "\\" + xmlCharacters, ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlCharacters.Replace("*", Campaign), ws))
             {
                 serializer.Serialize(wr, characters);
             }
@@ -294,7 +300,7 @@ namespace DM_Tool
         static public void SerializeXPLedgerToXML(List<List<string>> xpList)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<List<string>>));
-            using (XmlWriter wr = XmlWriter.Create(Campaign + "\\" + xmlXPLedger, ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlXPLedger.Replace("*", Campaign), ws))
             {
                 serializer.Serialize(wr, xpList);
             }
@@ -332,7 +338,7 @@ namespace DM_Tool
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<AdventureSite>));
-                TextReader textReader = new StreamReader(Campaign + "\\" + xmlAdventures);
+                TextReader textReader = new StreamReader(xmlAdventures.Replace("*", Campaign));
                 advs = (List<AdventureSite>)deserializer.Deserialize(textReader);
                 textReader.Close();
 
@@ -350,7 +356,7 @@ namespace DM_Tool
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<Character>));
-                TextReader textReader = new StreamReader(xmlCharacters);
+                TextReader textReader = new StreamReader(xmlCharacters.Replace("*/", ""));
                 characters = (List<Character>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
@@ -366,8 +372,9 @@ namespace DM_Tool
             List<Character> characters = new List<Character>();
             try
             {
+                string name = xmlCharacters.Replace("*", Campaign);
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<Character>));
-                TextReader textReader = new StreamReader(Campaign + "\\" + xmlCharacters);
+                TextReader textReader = new StreamReader(name);
                 characters = (List<Character>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
@@ -487,7 +494,7 @@ namespace DM_Tool
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<List<string>>));
-                TextReader textReader = new StreamReader(Campaign + "\\" + xmlXPLedger);
+                TextReader textReader = new StreamReader(xmlXPLedger.Replace("*", Campaign));
                 xpLedger = (List<List<string>>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
@@ -498,5 +505,17 @@ namespace DM_Tool
             return xpLedger;
         }
         #endregion
+
+        public List<Character> GetRightCharacterList(Character c)
+        {
+            if (c._campaignSpecific)
+            {
+                return listCampaignCharacters;
+            }
+            else
+            {
+                return listCharacters;
+            }
+        }
     }
 }

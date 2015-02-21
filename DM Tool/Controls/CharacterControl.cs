@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DM_Tool.Classes;
+using DM_Tool.Controls.Spell_Controls;
 
 namespace DM_Tool.Controls
 {
@@ -82,6 +83,19 @@ namespace DM_Tool.Controls
             Loaded = true;
             UpdateSheet();
 
+            foreach (List<string> s in c._spells)
+            {
+                string className = s[0];
+
+                TabPage page = new TabPage(className);
+                TextInformationControl ctl = new TextInformationControl(s[1]);
+                page.Controls.Add(ctl);
+                this.tabSpellPages.Controls.Add(page);
+                this.tabSpellPages.SelectedTab = page;
+            }
+
+            AssignEquipment(c._equipment);
+
             //Goes last to overwrite any issues
             this.tbHP.Text = cSheet.hp.ToString();
         }
@@ -90,6 +104,7 @@ namespace DM_Tool.Controls
         {
             InitializeComponent();
             Init();
+            InitEmptyDGV();
 
             _parentPage = parentPage;
             Loaded = true;
@@ -99,6 +114,7 @@ namespace DM_Tool.Controls
         {
             InitializeComponent();
             Init();
+            InitEmptyDGV();
 
             _parentPage = parentPage;
 
@@ -113,7 +129,10 @@ namespace DM_Tool.Controls
             LoadTypes();
             LoadSizes();
             cbType.SelectedIndex = 0;
+        }
 
+        public void InitEmptyDGV()
+        {
             List<string> skills = new List<string>(){"(Int)|Appraise", "(Dex)|Balance", "(Cha)|Bluff", "(Str)|Climb", "(Con)|Concentration", "(Int)|Craft",
                                    "(Int)|Decipher Script", "(Cha)|Diplomacy", "(Dex)|Disable Device", "(Cha)|Disguise", "(Dex)|Escape Artist",
                                    "(Dex)|Forgery", "(Cha)|Gather Information", "(Cha)|Handle Animal", "(Wis)|Heal", "(Dex)|Hide", "(Cha)|Intimidate",
@@ -127,6 +146,12 @@ namespace DM_Tool.Controls
                 string[] split = s.Split('|');
                 dgvSkills.Rows.Add(false, split[0], split[1], "0", "0", "0", "0");
             }
+
+            List<string> equipment = new List<string>() { "Head", "Face", "Neck", "Body", "Armor", "Back", "Belt", "Bracers", "Gloves", "Ring R.", "Ring L.", "Feet" };
+            foreach (string s in equipment)
+            {
+                dgvEquipment.Rows.Add(s, "", "");
+            }
         }
 
         public void AssignCharacterSkills()
@@ -137,12 +162,29 @@ namespace DM_Tool.Controls
                 if (_character.GetSkills().Count > 0)
                 {
                     string[] split = _character.GetSkills()[i].Split('|');
-
-                    r.Cells["colTotal"].Value = split[0];
-                    r.Cells["colMod"].Value = split[1];
-                    r.Cells["colRanks"].Value = split[2];
-                    r.Cells["colMisc"].Value = split[3];
+                    int count = 0;
+                    if (split.Length == 5)
+                    {
+                        r.Cells["colSkillName"].Value = split[count++];
+                    }
+                    r.Cells["colTotal"].Value = split[count++];
+                    r.Cells["colMod"].Value = split[count++];
+                    r.Cells["colRanks"].Value = split[count++];
+                    r.Cells["colMisc"].Value = split[count++];
                 }
+            }
+        }
+
+        public void AssignEquipment(List<string> equip)
+        {
+            for(int i=0; i < equip.Count; i++)
+            {
+                try
+                {
+                    string[] split = equip[i].Split('|');
+
+                    dgvEquipment.Rows.Add(split[0], split[1]);
+                }catch{}
             }
         }
 
@@ -549,7 +591,7 @@ namespace DM_Tool.Controls
                     catch { }
                 }
 
-                GetRightCharacterList().Add(new Character(CharacterSheetToString(), chkCampaign.Checked, GetSkillsList()));
+                GetRightCharacterList().Add(new Character(CharacterSheetToString(), chkCampaign.Checked, GetSkillsList(), GetSpellsList(), GetEquipmentList()));
                 try
                 {
                     GetRightCharacterList().Sort((a, b) => a.GetName().CompareTo(b.GetName()));
@@ -568,19 +610,6 @@ namespace DM_Tool.Controls
             else
             {
                 MessageBox.Show("Name cannot be empty!", "Error");
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            DialogResult res = MessageBox.Show(null, "Really delete object?", "Delete Object?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (res == DialogResult.Yes)
-            {
-                Character character = GetRightCharacterList().Find(x => x.GetName().Equals(tbName.Text));
-                GetRightCharacterList().Remove(character);
-                mgr.listCombinedCharacters.Remove(character);
-                mgr.DisplayCharacters();
-                _parentPage.Dispose();
             }
         }
 
@@ -705,7 +734,7 @@ namespace DM_Tool.Controls
                     abilityModCell = r.Cells["colMod"];
                     abilityModCell.Value = modVal.ToString();
 
-                    abilityTotalCell.Value = Convert.ToInt32(abilityModCell.Value) + Convert.ToInt32(abilityRanksCell.Value) + Convert.ToInt32(abilityMiscCell.Value);
+                    abilityTotalCell.Value = PublicCode.ConvertToIntSafely(abilityModCell.Value.ToString()) + PublicCode.ConvertToIntSafely(abilityRanksCell.Value.ToString()) + PublicCode.ConvertToIntSafely(abilityMiscCell.Value.ToString());
                 }
             }
         }
@@ -732,14 +761,17 @@ namespace DM_Tool.Controls
                 DataGridViewRow r = dgvSkills.Rows[e.RowIndex];
                 if (!r.IsNewRow)
                 {
-
                     DataGridViewCell skillTypeCell = r.Cells["colAbility"];
                     DataGridViewCell abilityModCell = r.Cells["colMod"];
                     DataGridViewCell abilityRanksCell = r.Cells["colRanks"];
                     DataGridViewCell abilityMiscCell = r.Cells["colMisc"];
                     DataGridViewCell abilityTotalCell = r.Cells["colTotal"];
 
-                    abilityTotalCell.Value = (Convert.ToInt32(abilityModCell.Value) + Convert.ToInt32(abilityRanksCell.Value) + Convert.ToInt32(abilityMiscCell.Value)).ToString();
+                    abilityTotalCell.Value = (PublicCode.ConvertToIntSafely(abilityModCell.Value.ToString()) + PublicCode.ConvertToIntSafely(abilityRanksCell.Value.ToString()) + PublicCode.ConvertToIntSafely(abilityMiscCell.Value.ToString())).ToString();
+                }
+                if (e.ColumnIndex == dgvSkills.Columns["colSkillName"].Index)
+                {
+                    dgvSkills.Sort(dgvSkills.Columns["colSkillName"], ListSortDirection.Ascending);
                 }
             }
         }
@@ -750,16 +782,60 @@ namespace DM_Tool.Controls
 
             foreach (DataGridViewRow r in dgvSkills.Rows)
             {
+                DataGridViewCell abilitySkillName = r.Cells["colSkillName"];
                 DataGridViewCell abilityTotalCell = r.Cells["colTotal"];
                 DataGridViewCell abilityModCell = r.Cells["colMod"];
                 DataGridViewCell abilityRanksCell = r.Cells["colRanks"];
                 DataGridViewCell abilityMiscCell = r.Cells["colMisc"];
 
-                skillsList.Add(abilityTotalCell.Value + "|" + abilityModCell.Value + "|" + abilityRanksCell.Value + "|" + abilityMiscCell.Value);
+                skillsList.Add(abilitySkillName.Value + "|" + abilityTotalCell.Value + "|" + abilityModCell.Value + "|" + abilityRanksCell.Value + "|" + abilityMiscCell.Value);
             }
 
             return skillsList;
+        }
 
+        private List<List<string>> GetSpellsList()
+        {
+            List<List<string>> spellPages = new List<List<string>>();
+
+            foreach (TabPage p in tabSpellPages.TabPages)
+            {
+                List<string> spellPageInfo = new List<string>();
+                spellPageInfo.Add(p.Text);
+
+                foreach (Control c in p.Controls)
+                {
+                    try
+                    {
+                        spellPageInfo.Add(((SpellPage)c).GetSpellInfo());
+                    }
+                    catch
+                    {
+                    }
+                }
+
+                spellPages.Add(spellPageInfo);
+            }
+
+            return spellPages;
+        }
+
+        private List<string> GetEquipmentList()
+        {
+            List<string> equipmentList = new List<string>();
+
+            foreach (DataGridViewRow r in dgvEquipment.Rows)
+            {
+                if (r.Cells["colSlot"].Value != null || r.Cells["colItemName"].Value != null)
+                {
+                    DataGridViewCell itemSlot = r.Cells["colSlot"];
+                    DataGridViewCell itemName = r.Cells["colItemName"];
+
+                    equipmentList.Add(itemSlot.Value + "|" + itemName.Value);
+                }
+            }
+
+            return equipmentList;
         }
 
         private void tbCha_TextChanged(object sender, EventArgs e)
@@ -876,6 +952,39 @@ namespace DM_Tool.Controls
                     }
                     catch { }
                 }
+            }
+        }
+
+        private void tabSpells_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctxtNewSpellPage.Show(Cursor.Position);
+            }
+        }
+
+        private void addNewSpellPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextInputDialog txtDiag = new TextInputDialog("Spell page name?");
+            txtDiag.ShowDialog();
+
+            if (txtDiag.DialogResult == DialogResult.OK)
+            {
+                string className = txtDiag.GetText();
+
+                TabPage page = new TabPage(className);
+                TextInformationControl ctl = new TextInformationControl();//page, advRoom, this);
+                page.Controls.Add(ctl);
+                this.tabSpellPages.Controls.Add(page);
+                this.tabSpellPages.SelectedTab = page;
+            } 
+        }
+
+        private void tabInventoryContainers_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctxtInventory.Show(Cursor.Position);
             }
         }
     }

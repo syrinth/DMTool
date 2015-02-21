@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.tabAdventureSite = new System.Windows.Forms.TabControl();
             this.tabPageAdventureSite = new System.Windows.Forms.TabPage();
@@ -44,16 +43,6 @@
             this.tabPageAdventureSite.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRooms)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(15, 474);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 73;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnSave
             // 
@@ -176,7 +165,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabAdventureSite);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnSave);
             this.Name = "AdventureSiteControl";
             this.Size = new System.Drawing.Size(600, 500);
@@ -190,7 +178,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TabControl tabAdventureSite;
         private System.Windows.Forms.TabPage tabPageAdventureSite;

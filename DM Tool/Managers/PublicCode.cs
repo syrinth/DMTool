@@ -15,7 +15,6 @@ namespace DM_Tool.Controls
 
             if (!int.TryParse(val, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out rv))
             {
-                MessageBox.Show("Must be an integer!");
                 rv = 0;
             }
 

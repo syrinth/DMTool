@@ -40,3 +40,4 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csproj.GenerateResource.Cach
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.CharacterClassControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.CurrentInfoControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.XPLedgerControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.Spell_Controls.TextInformationControl.resources
