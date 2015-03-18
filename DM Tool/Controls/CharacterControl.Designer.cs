@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabCharacterSheet = new System.Windows.Forms.TabControl();
             this.tabPageCharacterSheet = new System.Windows.Forms.TabPage();
+            this.tbACVals = new System.Windows.Forms.TextBox();
             this.lblHP = new System.Windows.Forms.Label();
             this.tbHD = new System.Windows.Forms.TextBox();
             this.tbRacialHD = new System.Windows.Forms.TextBox();
@@ -62,12 +63,6 @@
             this.tbInitDex = new System.Windows.Forms.TextBox();
             this.tbReach = new System.Windows.Forms.TextBox();
             this.tbGrapple = new System.Windows.Forms.TextBox();
-            this.tbDefAC = new System.Windows.Forms.TextBox();
-            this.tbShieldAC = new System.Windows.Forms.TextBox();
-            this.tbArmorAC = new System.Windows.Forms.TextBox();
-            this.tbNatAC = new System.Windows.Forms.TextBox();
-            this.tbDexAC = new System.Windows.Forms.TextBox();
-            this.tbSizeAC = new System.Windows.Forms.TextBox();
             this.lblTotalAc = new System.Windows.Forms.Label();
             this.tbSpeed = new System.Windows.Forms.TextBox();
             this.cbSize = new System.Windows.Forms.ComboBox();
@@ -115,15 +110,16 @@
             this.addNewContainerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabEquipment = new System.Windows.Forms.TabPage();
             this.dgvEquipment = new System.Windows.Forms.DataGridView();
+            this.colSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSpells = new System.Windows.Forms.TabPage();
             this.tabSpellPages = new System.Windows.Forms.TabControl();
             this.ctxtNewSpellPage = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewSpontaneousPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.colSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colItemName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).BeginInit();
@@ -153,6 +149,7 @@
             // tabPageCharacterSheet
             // 
             this.tabPageCharacterSheet.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageCharacterSheet.Controls.Add(this.tbACVals);
             this.tabPageCharacterSheet.Controls.Add(this.lblHP);
             this.tabPageCharacterSheet.Controls.Add(this.tbHD);
             this.tabPageCharacterSheet.Controls.Add(this.tbRacialHD);
@@ -172,12 +169,6 @@
             this.tabPageCharacterSheet.Controls.Add(this.tbInitDex);
             this.tabPageCharacterSheet.Controls.Add(this.tbReach);
             this.tabPageCharacterSheet.Controls.Add(this.tbGrapple);
-            this.tabPageCharacterSheet.Controls.Add(this.tbDefAC);
-            this.tabPageCharacterSheet.Controls.Add(this.tbShieldAC);
-            this.tabPageCharacterSheet.Controls.Add(this.tbArmorAC);
-            this.tabPageCharacterSheet.Controls.Add(this.tbNatAC);
-            this.tabPageCharacterSheet.Controls.Add(this.tbDexAC);
-            this.tabPageCharacterSheet.Controls.Add(this.tbSizeAC);
             this.tabPageCharacterSheet.Controls.Add(this.lblTotalAc);
             this.tabPageCharacterSheet.Controls.Add(this.tbSpeed);
             this.tabPageCharacterSheet.Controls.Add(this.cbSize);
@@ -216,6 +207,13 @@
             this.tabPageCharacterSheet.Size = new System.Drawing.Size(586, 439);
             this.tabPageCharacterSheet.TabIndex = 0;
             this.tabPageCharacterSheet.Text = "Character Sheet";
+            // 
+            // tbACVals
+            // 
+            this.tbACVals.Location = new System.Drawing.Point(100, 133);
+            this.tbACVals.Name = "tbACVals";
+            this.tbACVals.Size = new System.Drawing.Size(156, 20);
+            this.tbACVals.TabIndex = 148;
             // 
             // lblHP
             // 
@@ -425,62 +423,6 @@
             this.tbGrapple.Size = new System.Drawing.Size(47, 20);
             this.tbGrapple.TabIndex = 129;
             // 
-            // tbDefAC
-            // 
-            this.tbDefAC.Location = new System.Drawing.Point(228, 133);
-            this.tbDefAC.Name = "tbDefAC";
-            this.tbDefAC.Size = new System.Drawing.Size(20, 20);
-            this.tbDefAC.TabIndex = 128;
-            this.tbDefAC.Text = "0";
-            this.tbDefAC.TextChanged += new System.EventHandler(this.tbDefAC_TextChanged);
-            // 
-            // tbShieldAC
-            // 
-            this.tbShieldAC.Location = new System.Drawing.Point(202, 133);
-            this.tbShieldAC.Name = "tbShieldAC";
-            this.tbShieldAC.Size = new System.Drawing.Size(20, 20);
-            this.tbShieldAC.TabIndex = 127;
-            this.tbShieldAC.Text = "0";
-            this.tbShieldAC.TextChanged += new System.EventHandler(this.tbShieldAC_TextChanged);
-            // 
-            // tbArmorAC
-            // 
-            this.tbArmorAC.Location = new System.Drawing.Point(176, 133);
-            this.tbArmorAC.Name = "tbArmorAC";
-            this.tbArmorAC.Size = new System.Drawing.Size(20, 20);
-            this.tbArmorAC.TabIndex = 126;
-            this.tbArmorAC.Text = "0";
-            this.tbArmorAC.TextChanged += new System.EventHandler(this.tbArmorAC_TextChanged);
-            // 
-            // tbNatAC
-            // 
-            this.tbNatAC.Location = new System.Drawing.Point(150, 133);
-            this.tbNatAC.Name = "tbNatAC";
-            this.tbNatAC.Size = new System.Drawing.Size(20, 20);
-            this.tbNatAC.TabIndex = 125;
-            this.tbNatAC.Text = "0";
-            this.tbNatAC.TextChanged += new System.EventHandler(this.tbNatAC_TextChanged);
-            // 
-            // tbDexAC
-            // 
-            this.tbDexAC.Enabled = false;
-            this.tbDexAC.Location = new System.Drawing.Point(124, 133);
-            this.tbDexAC.Name = "tbDexAC";
-            this.tbDexAC.ReadOnly = true;
-            this.tbDexAC.Size = new System.Drawing.Size(20, 20);
-            this.tbDexAC.TabIndex = 124;
-            this.tbDexAC.TextChanged += new System.EventHandler(this.tbDexAC_TextChanged);
-            // 
-            // tbSizeAC
-            // 
-            this.tbSizeAC.Enabled = false;
-            this.tbSizeAC.Location = new System.Drawing.Point(99, 133);
-            this.tbSizeAC.Name = "tbSizeAC";
-            this.tbSizeAC.ReadOnly = true;
-            this.tbSizeAC.Size = new System.Drawing.Size(20, 20);
-            this.tbSizeAC.TabIndex = 123;
-            this.tbSizeAC.TextChanged += new System.EventHandler(this.tbSizeAC_TextChanged);
-            // 
             // lblTotalAc
             // 
             this.lblTotalAc.AutoSize = true;
@@ -545,7 +487,7 @@
             // 
             this.tbTotalAC.Location = new System.Drawing.Point(60, 133);
             this.tbTotalAC.Name = "tbTotalAC";
-            this.tbTotalAC.Size = new System.Drawing.Size(33, 20);
+            this.tbTotalAC.Size = new System.Drawing.Size(26, 20);
             this.tbTotalAC.TabIndex = 112;
             this.tbTotalAC.Text = "0";
             // 
@@ -604,7 +546,6 @@
             this.tbCha.Size = new System.Drawing.Size(33, 20);
             this.tbCha.TabIndex = 105;
             this.tbCha.Text = "10";
-            this.tbCha.TextChanged += new System.EventHandler(this.tbCha_TextChanged);
             // 
             // lblCha
             // 
@@ -622,7 +563,6 @@
             this.tbWis.Size = new System.Drawing.Size(33, 20);
             this.tbWis.TabIndex = 103;
             this.tbWis.Text = "10";
-            this.tbWis.TextChanged += new System.EventHandler(this.tbWis_TextChanged);
             // 
             // lblWis
             // 
@@ -667,7 +607,6 @@
             this.tbInt.Size = new System.Drawing.Size(33, 20);
             this.tbInt.TabIndex = 98;
             this.tbInt.Text = "10";
-            this.tbInt.TextChanged += new System.EventHandler(this.tbInt_TextChanged);
             // 
             // tbCon
             // 
@@ -676,7 +615,6 @@
             this.tbCon.Size = new System.Drawing.Size(33, 20);
             this.tbCon.TabIndex = 97;
             this.tbCon.Text = "10";
-            this.tbCon.TextChanged += new System.EventHandler(this.tbCon_TextChanged);
             // 
             // tbDex
             // 
@@ -694,7 +632,6 @@
             this.tbStr.Size = new System.Drawing.Size(33, 20);
             this.tbStr.TabIndex = 95;
             this.tbStr.Text = "10";
-            this.tbStr.TextChanged += new System.EventHandler(this.tbStr_TextChanged);
             // 
             // lblStr
             // 
@@ -755,7 +692,6 @@
             this.cbType.Name = "cbType";
             this.cbType.Size = new System.Drawing.Size(121, 21);
             this.cbType.TabIndex = 83;
-            this.cbType.SelectedIndexChanged += new System.EventHandler(this.cbType_SelectedIndexChanged);
             // 
             // tabSkills
             // 
@@ -908,6 +844,27 @@
             this.dgvEquipment.Size = new System.Drawing.Size(572, 401);
             this.dgvEquipment.TabIndex = 0;
             // 
+            // colSlot
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colSlot.DefaultCellStyle = dataGridViewCellStyle6;
+            this.colSlot.FillWeight = 20F;
+            this.colSlot.HeaderText = "Slot";
+            this.colSlot.Name = "colSlot";
+            // 
+            // colItemName
+            // 
+            this.colItemName.FillWeight = 90F;
+            this.colItemName.HeaderText = "Item";
+            this.colItemName.Name = "colItemName";
+            // 
+            // colWeight
+            // 
+            this.colWeight.FillWeight = 15F;
+            this.colWeight.HeaderText = "Weight";
+            this.colWeight.Name = "colWeight";
+            // 
             // tabSpells
             // 
             this.tabSpells.Controls.Add(this.tabSpellPages);
@@ -957,31 +914,21 @@
             this.toolTip1.AutomaticDelay = 100;
             this.toolTip1.IsBalloon = true;
             // 
-            // colSlot
+            // btnUpdate
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colSlot.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colSlot.FillWeight = 20F;
-            this.colSlot.HeaderText = "Slot";
-            this.colSlot.Name = "colSlot";
-            // 
-            // colItemName
-            // 
-            this.colItemName.FillWeight = 90F;
-            this.colItemName.HeaderText = "Item";
-            this.colItemName.Name = "colItemName";
-            // 
-            // colWeight
-            // 
-            this.colWeight.FillWeight = 15F;
-            this.colWeight.HeaderText = "Weight";
-            this.colWeight.Name = "colWeight";
+            this.btnUpdate.Location = new System.Drawing.Point(3, 474);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 78;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // CharacterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabCharacterSheet);
             this.Name = "CharacterControl";
@@ -1024,12 +971,6 @@
         private System.Windows.Forms.TextBox tbInitDex;
         private System.Windows.Forms.TextBox tbReach;
         private System.Windows.Forms.TextBox tbGrapple;
-        private System.Windows.Forms.TextBox tbDefAC;
-        private System.Windows.Forms.TextBox tbShieldAC;
-        private System.Windows.Forms.TextBox tbArmorAC;
-        private System.Windows.Forms.TextBox tbNatAC;
-        private System.Windows.Forms.TextBox tbDexAC;
-        private System.Windows.Forms.TextBox tbSizeAC;
         private System.Windows.Forms.Label lblTotalAc;
         private System.Windows.Forms.TextBox tbSpeed;
         private System.Windows.Forms.ComboBox cbSize;
@@ -1094,5 +1035,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colSlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn colItemName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
+        private System.Windows.Forms.TextBox tbACVals;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

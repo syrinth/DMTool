@@ -64,10 +64,10 @@ namespace DM_Tool.Controls
             this.tbWis.Text = cSheet.wis.ToString();
             this.tbCha.Text = cSheet.cha.ToString();
 
-            this.tbNatAC.Text = cSheet.natAC.ToString();
-            this.tbArmorAC.Text = cSheet.armorAC.ToString();
-            this.tbShieldAC.Text = cSheet.shieldAC.ToString();
-            this.tbDefAC.Text = cSheet.defAC.ToString();
+            //this.tbNatAC.Text = cSheet.natAC.ToString();
+            //this.tbArmorAC.Text = cSheet.armorAC.ToString();
+            //this.tbShieldAC.Text = cSheet.shieldAC.ToString();
+            //this.tbDefAC.Text = cSheet.defAC.ToString();
             this.tbAttack.Text = cSheet.attack;
             this.tbFullAttack.Text = cSheet.fullAttack;
             this.tbSpace.Text = cSheet.space.ToString();
@@ -95,6 +95,7 @@ namespace DM_Tool.Controls
             }
 
             AssignEquipment(c._equipment);
+            UpdateAC();
 
             //Goes last to overwrite any issues
             this.tbHP.Text = cSheet.hp.ToString();
@@ -207,28 +208,12 @@ namespace DM_Tool.Controls
             cbSize.SelectedItem = "Medium";
         }
 
-        private void cbType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
-        }
-
         private void btnNewType_Click(object sender, EventArgs e)
         {
             frmNewCreatureType frm = new frmNewCreatureType();
             frm.ShowDialog();
 
             LoadTypes();
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-
-        private void tbHDNum_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
         }
 
         public void UpdateSheet()
@@ -376,46 +361,55 @@ namespace DM_Tool.Controls
             int totalAC = 10;
             int touchAC = 10;
             int flatFootedAC = 10;
-            try
+
+            string[] split = tbACVals.Text.Split(',');
+
+            for (int i = 0; i < split.Length; i++)
             {
-                if (tbSizeAC.Text != string.Empty)
+                try
                 {
-                    totalAC += Convert.ToInt32(tbSizeAC.Text);
-                    touchAC += Convert.ToInt32(tbSizeAC.Text);
-                    flatFootedAC += Convert.ToInt32(tbSizeAC.Text);
-                }
-                if (tbDexAC.Text != string.Empty)
-                {
-                    totalAC += Convert.ToInt32(tbDexAC.Text);
-                    touchAC += Convert.ToInt32(tbDexAC.Text);
-                    if (Convert.ToInt32(tbDexAC.Text) < 0)
+                    string modVal = split[i].Trim().Replace("+", "");
+                    string modType = modVal.Trim().Split(' ')[1];
+                    modVal = modVal.Split(' ')[0];
+                    switch (modType)
                     {
-                        flatFootedAC += Convert.ToInt32(tbDexAC.Text);
+                        case "Dex":
+                            totalAC += Convert.ToInt32(modVal);
+                            touchAC += Convert.ToInt32(modVal);
+                            if (Convert.ToInt32(modVal) < 0)
+                            {
+                                flatFootedAC += Convert.ToInt32(modVal);
+                            }
+                            break;
+                        case "Nat":
+                            totalAC += Convert.ToInt32(modVal);
+                            flatFootedAC += Convert.ToInt32(modVal);
+                            break;
+                        case "Armor":
+                            totalAC += Convert.ToInt32(modVal);
+                            flatFootedAC += Convert.ToInt32(modVal);
+                            break;
+                        case "Shield":
+                            totalAC += Convert.ToInt32(modVal);
+                            flatFootedAC += Convert.ToInt32(modVal);
+                            break;
+                        case "Def":
+                            totalAC += Convert.ToInt32(modVal);
+                            touchAC += Convert.ToInt32(modVal);
+                            flatFootedAC += Convert.ToInt32(modVal);
+                            break;
+                        case "Size":
+                            totalAC += Convert.ToInt32(modVal);
+                            touchAC += Convert.ToInt32(modVal);
+                            flatFootedAC += Convert.ToInt32(modVal);
+                            break;
+                        default:
+                            break;
                     }
                 }
-                if (tbNatAC.Text != string.Empty)
-                {
-                    totalAC += Convert.ToInt32(tbNatAC.Text);
-                    flatFootedAC += Convert.ToInt32(tbNatAC.Text);
-                }
-                if (tbArmorAC.Text != string.Empty)
-                {
-                    totalAC += Convert.ToInt32(tbArmorAC.Text);
-                    flatFootedAC += Convert.ToInt32(tbArmorAC.Text);
-                }
-                if (tbShieldAC.Text != string.Empty)
-                {
-                    totalAC += Convert.ToInt32(tbShieldAC.Text);
-                    flatFootedAC += Convert.ToInt32(tbShieldAC.Text);
-                }
-                if (tbDefAC.Text != string.Empty)
-                {
-                    totalAC += Convert.ToInt32(tbDefAC.Text);
-                    touchAC += Convert.ToInt32(tbDefAC.Text);
-                    flatFootedAC += Convert.ToInt32(tbDefAC.Text);
-                }
+                catch { }
             }
-            catch { }
+
             tbTotalAC.Text = totalAC.ToString();
             tbTouchAC.Text = touchAC.ToString();
             tbFFAC.Text = flatFootedAC.ToString();
@@ -552,21 +546,9 @@ namespace DM_Tool.Controls
             tbWill.Text = will.ToString();
         }
 
-        private void tbCon_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
-        }
-
         private void tbDex_TextChanged(object sender, EventArgs e)
         {
-            tbDexAC.Text = GetModifier(tbDex.Text).ToString();
             tbInitDex.Text = GetModifier(tbDex.Text).ToString();
-            UpdateSheet();
-        }
-
-        private void tbWis_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -611,44 +593,11 @@ namespace DM_Tool.Controls
             {
                 MessageBox.Show("Name cannot be empty!", "Error");
             }
-        }
-
-        private void tbSizeAC_TextChanged(object sender, EventArgs e)
-        {
-            CalculateAC();
-        }
-
-        private void tbDefAC_TextChanged(object sender, EventArgs e)
-        {
-            CalculateAC();
-        }
-
-        private void tbShieldAC_TextChanged(object sender, EventArgs e)
-        {
-            CalculateAC();
-        }
-
-        private void tbArmorAC_TextChanged(object sender, EventArgs e)
-        {
-            CalculateAC();
-        }
-
-        private void tbNatAC_TextChanged(object sender, EventArgs e)
-        {
-            CalculateAC();
-        }
-
-        private void tbDexAC_TextChanged(object sender, EventArgs e)
-        {
-            CalculateAC();
-        }
+        }       
 
         private void cbSize_SelectedIndexChanged(object sender, EventArgs e)
         {
             size = mgr.listCreatureSizes.Find(x => x.GetName().Equals(cbSize.SelectedItem.ToString()));
-            tbSizeAC.Text = size.GetModifier().ToString();
-
-            UpdateSheet();
         }
 
         private void tbInitDex_TextChanged(object sender, EventArgs e)
@@ -687,10 +636,6 @@ namespace DM_Tool.Controls
                 this.tbWis.Text = cSheet.wis.ToString();
                 this.tbCha.Text = cSheet.cha.ToString();
 
-                this.tbNatAC.Text = cSheet.natAC.ToString();
-                this.tbArmorAC.Text = cSheet.armorAC.ToString();
-                this.tbShieldAC.Text = cSheet.shieldAC.ToString();
-                this.tbDefAC.Text = cSheet.defAC.ToString();
                 this.tbAttack.Text = cSheet.attack;
                 this.tbFullAttack.Text = cSheet.fullAttack;
                 this.tbSpace.Text = cSheet.space.ToString();
@@ -711,8 +656,8 @@ namespace DM_Tool.Controls
                                             tbHP.Text, tbInit.Text, tbInitMisc.Text, tbSpeed.Text,
                                             tbBAB.Text, tbFort.Text, tbRef.Text, tbWill.Text,
                                             tbStr.Text, tbDex.Text, tbCon.Text, tbInt.Text,
-                                            tbWis.Text, tbCha.Text, tbNatAC.Text, tbArmorAC.Text,
-                                            tbShieldAC.Text, tbDefAC.Text, tbAttack.Text, tbFullAttack.Text, tbSpace.Text,
+                                            tbWis.Text, tbCha.Text, ParseValFromAC("Nat"), ParseValFromAC("Armor"),
+                                            ParseValFromAC("Shield"), ParseValFromAC("Def"), tbAttack.Text, tbFullAttack.Text, tbSpace.Text,
                                             tbReach.Text, GetSpecialsColumn("colSpecialAttacks"), GetSpecialsColumn("colSpecialQualities"), GetSpecialsColumn("colFeats"),
                                             tbHP.Text, tbTotalAC.Text, tbTouchAC.Text, tbFFAC.Text};
                 
@@ -737,11 +682,6 @@ namespace DM_Tool.Controls
                     abilityTotalCell.Value = PublicCode.ConvertToIntSafely(abilityModCell.Value.ToString()) + PublicCode.ConvertToIntSafely(abilityRanksCell.Value.ToString()) + PublicCode.ConvertToIntSafely(abilityMiscCell.Value.ToString());
                 }
             }
-        }
-
-        private void tbStr_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
         }
 
         private void CalculateSkills()
@@ -838,21 +778,6 @@ namespace DM_Tool.Controls
             return equipmentList;
         }
 
-        private void tbCha_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
-        }
-
-        private void tbInt_TextChanged(object sender, EventArgs e)
-        {
-            UpdateSheet();
-        }
-
-        private void tbFeats_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void FillSpecialsColumn(string values, string colName)
         {
             string[] split = values.Split(',');
@@ -917,7 +842,6 @@ namespace DM_Tool.Controls
         private void tbClassesLevels_Leave(object sender, EventArgs e)
         {
             GetClassLevels();
-            UpdateSheet();
         }
 
         private void GetClassLevels(){
@@ -986,6 +910,64 @@ namespace DM_Tool.Controls
             {
                 ctxtInventory.Show(Cursor.Position);
             }
+        }
+
+        private void UpdateAC()
+        {
+            if (_character != null)
+            {
+                tbACVals.Text = "";
+                CharacterSheet cSheet = _character.GetCharacterSheet();
+                AppendACValsToTextBox(cSheet.natAC.ToString(), "Nat");
+                AppendACValsToTextBox(cSheet.armorAC.ToString(), "Armor");
+                AppendACValsToTextBox(cSheet.shieldAC.ToString(), "Shield");
+                AppendACValsToTextBox(cSheet.defAC.ToString(), "Def");
+                AppendACValsToTextBox(size.GetModifier().ToString(), "Size");
+                AppendACValsToTextBox(GetModifier(tbDex.Text).ToString(), "Dex");
+            }
+        }
+
+        private void AppendACValsToTextBox(string val, string type){
+            int intVal = PublicCode.ConvertToIntSafely(val);
+            if (intVal == 0)
+            {
+                return;
+            }
+
+            if(tbACVals.Text.Length > 0){
+                tbACVals.Text += ", ";
+            }
+            
+            if (intVal > 0)
+            {
+                tbACVals.Text += "+";
+            }
+            tbACVals.Text += val + " " + type;
+        }
+
+        private string ParseValFromAC(string acType){
+            string[] split = tbACVals.Text.Split(',');
+
+            for (int i = 0; i < split.Length; i++)
+            {
+                try
+                {
+                    string[] acSplit = split[i].Replace("+", "").Trim().Split(' ');
+                    string modVal = acSplit[0];
+                    string modName = acSplit[1];
+                    if (modName == acType)
+                    {
+                        return modVal.Split(' ')[0];
+                    }
+                }
+                catch { }
+            }
+            return "";
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            UpdateSheet();
         }
     }
 }
