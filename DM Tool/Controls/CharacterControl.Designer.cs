@@ -42,12 +42,6 @@
             this.tbHD = new System.Windows.Forms.TextBox();
             this.tbRacialHD = new System.Windows.Forms.TextBox();
             this.chkCampaign = new System.Windows.Forms.CheckBox();
-            this.dgvSpecials = new System.Windows.Forms.DataGridView();
-            this.colFeats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecialAttacks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colSpecialQualities = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFlaws = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTrais = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbLevels = new System.Windows.Forms.TextBox();
             this.tbClasses = new System.Windows.Forms.TextBox();
             this.ctxtClasses = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -120,9 +114,16 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.lblFeats = new System.Windows.Forms.Label();
+            this.lblAttacks = new System.Windows.Forms.Label();
+            this.lblQualities = new System.Windows.Forms.Label();
+            this.lblOther = new System.Windows.Forms.Label();
+            this.tbFeats = new System.Windows.Forms.TextBox();
+            this.tbSpecAtks = new System.Windows.Forms.TextBox();
+            this.tbSpecQualities = new System.Windows.Forms.TextBox();
+            this.tbOther = new System.Windows.Forms.TextBox();
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).BeginInit();
             this.tabSkills.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).BeginInit();
             this.tabInventory.SuspendLayout();
@@ -149,12 +150,19 @@
             // tabPageCharacterSheet
             // 
             this.tabPageCharacterSheet.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageCharacterSheet.Controls.Add(this.tbOther);
+            this.tabPageCharacterSheet.Controls.Add(this.tbSpecQualities);
+            this.tabPageCharacterSheet.Controls.Add(this.tbSpecAtks);
+            this.tabPageCharacterSheet.Controls.Add(this.tbFeats);
+            this.tabPageCharacterSheet.Controls.Add(this.lblOther);
+            this.tabPageCharacterSheet.Controls.Add(this.lblQualities);
+            this.tabPageCharacterSheet.Controls.Add(this.lblAttacks);
+            this.tabPageCharacterSheet.Controls.Add(this.lblFeats);
             this.tabPageCharacterSheet.Controls.Add(this.tbACVals);
             this.tabPageCharacterSheet.Controls.Add(this.lblHP);
             this.tabPageCharacterSheet.Controls.Add(this.tbHD);
             this.tabPageCharacterSheet.Controls.Add(this.tbRacialHD);
             this.tabPageCharacterSheet.Controls.Add(this.chkCampaign);
-            this.tabPageCharacterSheet.Controls.Add(this.dgvSpecials);
             this.tabPageCharacterSheet.Controls.Add(this.tbLevels);
             this.tabPageCharacterSheet.Controls.Add(this.tbClasses);
             this.tabPageCharacterSheet.Controls.Add(this.tbRaceName);
@@ -250,48 +258,6 @@
             this.chkCampaign.TabIndex = 144;
             this.chkCampaign.Text = "Campaign";
             this.chkCampaign.UseVisualStyleBackColor = true;
-            // 
-            // dgvSpecials
-            // 
-            this.dgvSpecials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvSpecials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSpecials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colFeats,
-            this.colSpecialAttacks,
-            this.colSpecialQualities,
-            this.colFlaws,
-            this.colTrais});
-            this.dgvSpecials.Location = new System.Drawing.Point(8, 338);
-            this.dgvSpecials.MultiSelect = false;
-            this.dgvSpecials.Name = "dgvSpecials";
-            this.dgvSpecials.RowHeadersVisible = false;
-            this.dgvSpecials.Size = new System.Drawing.Size(572, 95);
-            this.dgvSpecials.TabIndex = 143;
-            // 
-            // colFeats
-            // 
-            this.colFeats.HeaderText = "Feats";
-            this.colFeats.Name = "colFeats";
-            // 
-            // colSpecialAttacks
-            // 
-            this.colSpecialAttacks.HeaderText = "Spec. Attacks";
-            this.colSpecialAttacks.Name = "colSpecialAttacks";
-            // 
-            // colSpecialQualities
-            // 
-            this.colSpecialQualities.HeaderText = "Spec. Qualities";
-            this.colSpecialQualities.Name = "colSpecialQualities";
-            // 
-            // colFlaws
-            // 
-            this.colFlaws.HeaderText = "Flaws";
-            this.colFlaws.Name = "colFlaws";
-            // 
-            // colTrais
-            // 
-            this.colTrais.HeaderText = "Traits";
-            this.colTrais.Name = "colTrais";
             // 
             // tbLevels
             // 
@@ -924,6 +890,70 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // lblFeats
+            // 
+            this.lblFeats.AutoSize = true;
+            this.lblFeats.Location = new System.Drawing.Point(8, 318);
+            this.lblFeats.Name = "lblFeats";
+            this.lblFeats.Size = new System.Drawing.Size(36, 13);
+            this.lblFeats.TabIndex = 149;
+            this.lblFeats.Text = "Feats:";
+            // 
+            // lblAttacks
+            // 
+            this.lblAttacks.AutoSize = true;
+            this.lblAttacks.Location = new System.Drawing.Point(8, 344);
+            this.lblAttacks.Name = "lblAttacks";
+            this.lblAttacks.Size = new System.Drawing.Size(46, 13);
+            this.lblAttacks.TabIndex = 150;
+            this.lblAttacks.Text = "Attacks:";
+            // 
+            // lblQualities
+            // 
+            this.lblQualities.AutoSize = true;
+            this.lblQualities.Location = new System.Drawing.Point(8, 370);
+            this.lblQualities.Name = "lblQualities";
+            this.lblQualities.Size = new System.Drawing.Size(50, 13);
+            this.lblQualities.TabIndex = 151;
+            this.lblQualities.Text = "Qualities:";
+            // 
+            // lblOther
+            // 
+            this.lblOther.AutoSize = true;
+            this.lblOther.Location = new System.Drawing.Point(8, 396);
+            this.lblOther.Name = "lblOther";
+            this.lblOther.Size = new System.Drawing.Size(36, 13);
+            this.lblOther.TabIndex = 152;
+            this.lblOther.Text = "Other:";
+            // 
+            // tbFeats
+            // 
+            this.tbFeats.Location = new System.Drawing.Point(59, 315);
+            this.tbFeats.Name = "tbFeats";
+            this.tbFeats.Size = new System.Drawing.Size(402, 20);
+            this.tbFeats.TabIndex = 153;
+            // 
+            // tbSpecAtks
+            // 
+            this.tbSpecAtks.Location = new System.Drawing.Point(60, 341);
+            this.tbSpecAtks.Name = "tbSpecAtks";
+            this.tbSpecAtks.Size = new System.Drawing.Size(398, 20);
+            this.tbSpecAtks.TabIndex = 154;
+            // 
+            // tbSpecQualities
+            // 
+            this.tbSpecQualities.Location = new System.Drawing.Point(60, 367);
+            this.tbSpecQualities.Name = "tbSpecQualities";
+            this.tbSpecQualities.Size = new System.Drawing.Size(398, 20);
+            this.tbSpecQualities.TabIndex = 155;
+            // 
+            // tbOther
+            // 
+            this.tbOther.Location = new System.Drawing.Point(60, 393);
+            this.tbOther.Name = "tbOther";
+            this.tbOther.Size = new System.Drawing.Size(398, 20);
+            this.tbOther.TabIndex = 156;
+            // 
             // CharacterControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -936,7 +966,6 @@
             this.tabCharacterSheet.ResumeLayout(false);
             this.tabPageCharacterSheet.ResumeLayout(false);
             this.tabPageCharacterSheet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSpecials)).EndInit();
             this.tabSkills.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).EndInit();
             this.tabInventory.ResumeLayout(false);
@@ -1003,12 +1032,6 @@
         private System.Windows.Forms.TextBox tbHP;
         private System.Windows.Forms.Label lblBABGrapple;
         private System.Windows.Forms.ComboBox cbType;
-        private System.Windows.Forms.DataGridView dgvSpecials;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFeats;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialAttacks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialQualities;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFlaws;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTrais;
         private System.Windows.Forms.CheckBox chkCampaign;
         private System.Windows.Forms.ContextMenuStrip ctxtClasses;
         private System.Windows.Forms.TextBox tbRacialHD;
@@ -1037,5 +1060,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.TextBox tbACVals;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.TextBox tbOther;
+        private System.Windows.Forms.TextBox tbSpecQualities;
+        private System.Windows.Forms.TextBox tbSpecAtks;
+        private System.Windows.Forms.TextBox tbFeats;
+        private System.Windows.Forms.Label lblOther;
+        private System.Windows.Forms.Label lblQualities;
+        private System.Windows.Forms.Label lblAttacks;
+        private System.Windows.Forms.Label lblFeats;
     }
 }

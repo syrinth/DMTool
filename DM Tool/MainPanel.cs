@@ -22,6 +22,7 @@ namespace DM_Tool
         public MainPanel()
         {
             InitializeComponent();
+            FindCampaigns();
 
             display = ListDisplay.ALL;
             mgr.listXP = new List<List<string>>();
@@ -294,7 +295,9 @@ namespace DM_Tool
                 mgr.SetCampaign(txtBox.GetText());
             }
 
-            Directory.CreateDirectory("./" + mgr.GetCampaign());
+            Directory.CreateDirectory("./" + "//Files//" + mgr.GetCampaign());
+            File.Create("./" +"//Files//" + mgr.GetCampaign() + "//index.txt");
+            FindCampaigns();
 
             mgr.WriteConfigFile();
             this.Text = mgr.GetCampaign();
@@ -395,22 +398,33 @@ namespace DM_Tool
             AddOrSelectPage(page);
         }
 
-        private void loadCampaignToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindCampaigns()
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Reset();
-            fbd.RootFolder = Environment.SpecialFolder.MyComputer;
-            fbd.SelectedPath = Environment.CurrentDirectory;
+            string filePath = Environment.CurrentDirectory + "\\Files";
 
-            DialogResult result = fbd.ShowDialog();        
-
-            if (result == DialogResult.OK)
+            List<string> dirs = new List<string>(Directory.EnumerateDirectories(filePath));
+            foreach (string s in dirs)
             {
-                string[] split = fbd.SelectedPath.Split('\\');
-                mgr.SetCampaign(split[split.Length -1]);
-            }
+                if(File.Exists(s+"\\index.txt")){
+                    string campaignName = Path.GetFileNameWithoutExtension(s);
 
-            Directory.CreateDirectory("./Files/" + mgr.GetCampaign());
+                    if (!loadCampaignToolStripMenuItem.DropDownItems.ContainsKey(campaignName))
+                    {
+                        ToolStripMenuItem newMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+                        newMenuItem.Name = campaignName;
+                        newMenuItem.Size = new System.Drawing.Size(164, 22);
+                        newMenuItem.Text = campaignName;
+                        newMenuItem.Click += new System.EventHandler(loadCampaign);
+
+                        loadCampaignToolStripMenuItem.DropDownItems.Add(newMenuItem);
+                    }
+                }
+            }
+        }
+
+        private void loadCampaign(object sender, EventArgs e)
+        {
+            mgr.SetCampaign(sender.ToString());
 
             mgr.WriteConfigFile();
             this.Text = mgr.GetCampaign();

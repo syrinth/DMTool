@@ -64,24 +64,19 @@ namespace DM_Tool.Controls
             this.tbWis.Text = cSheet.wis.ToString();
             this.tbCha.Text = cSheet.cha.ToString();
 
-            //this.tbNatAC.Text = cSheet.natAC.ToString();
-            //this.tbArmorAC.Text = cSheet.armorAC.ToString();
-            //this.tbShieldAC.Text = cSheet.shieldAC.ToString();
-            //this.tbDefAC.Text = cSheet.defAC.ToString();
             this.tbAttack.Text = cSheet.attack;
             this.tbFullAttack.Text = cSheet.fullAttack;
             this.tbSpace.Text = cSheet.space.ToString();
             this.tbReach.Text = cSheet.reach.ToString();
 
-            FillSpecialsColumn(cSheet.feats, "colFeats");
-            FillSpecialsColumn(cSheet.specialAttacks, "colSpecialAttacks");
-            FillSpecialsColumn(cSheet.specialQualities, "colSpecialQualities");
+            tbFeats.Text = cSheet.feats;
+            tbSpecAtks.Text = cSheet.specialAttacks;
+            tbSpecQualities.Text = cSheet.specialQualities;
 
             AssignCharacterSkills();
             tc = mgr.listCreatureTypes.Find(x => x.name.Equals(cbType.SelectedText));
             GetClassLevels();
             Loaded = true;
-            UpdateSheet();
 
             foreach (List<string> s in c._spells)
             {
@@ -641,9 +636,9 @@ namespace DM_Tool.Controls
                 this.tbSpace.Text = cSheet.space.ToString();
                 this.tbReach.Text = cSheet.reach.ToString();
 
-                FillSpecialsColumn(cSheet.feats, "colFeats");
-                FillSpecialsColumn(cSheet.specialAttacks, "colSpecialAttacks");
-                FillSpecialsColumn(cSheet.specialQualities, "colSpecialQualities");
+                tbFeats.Text = cSheet.feats;
+                tbSpecAtks.Text = cSheet.specialAttacks;
+                tbSpecQualities.Text = cSheet.specialQualities;
 
                 //Goes last to overwrite any issues
                 this.tbHP.Text = cSheet.hp.ToString();
@@ -658,7 +653,7 @@ namespace DM_Tool.Controls
                                             tbStr.Text, tbDex.Text, tbCon.Text, tbInt.Text,
                                             tbWis.Text, tbCha.Text, ParseValFromAC("Nat"), ParseValFromAC("Armor"),
                                             ParseValFromAC("Shield"), ParseValFromAC("Def"), tbAttack.Text, tbFullAttack.Text, tbSpace.Text,
-                                            tbReach.Text, GetSpecialsColumn("colSpecialAttacks"), GetSpecialsColumn("colSpecialQualities"), GetSpecialsColumn("colFeats"),
+                                            tbReach.Text, tbSpecAtks.Text, tbSpecQualities.Text, tbFeats.Text,
                                             tbHP.Text, tbTotalAC.Text, tbTouchAC.Text, tbFFAC.Text};
                 
         }
@@ -776,31 +771,6 @@ namespace DM_Tool.Controls
             }
 
             return equipmentList;
-        }
-
-        private void FillSpecialsColumn(string values, string colName)
-        {
-            string[] split = values.Split(',');
-            for (int i = 0; i < split.Length; i++)
-            {
-                if (dgvSpecials.Rows[i].IsNewRow)
-                {
-                    dgvSpecials.Rows.Add();
-                }
-                dgvSpecials.Rows[i].Cells[colName].Value = split[i].Trim();
-            }
-        }
-
-        private string GetSpecialsColumn(string colName)
-        {
-            string rv = string.Empty;
-
-            foreach (DataGridViewRow r in dgvSpecials.Rows)
-            {
-                rv += r.Cells[colName].Value + ", ";
-            }
-
-            return rv.Trim(); ;
         }
 
         private List<Character> GetRightCharacterList()
