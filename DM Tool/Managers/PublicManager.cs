@@ -360,8 +360,9 @@ namespace DM_Tool
                 characters = (List<Character>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
             }
 
             return characters;

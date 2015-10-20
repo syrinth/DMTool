@@ -88,6 +88,7 @@
             this.dgvCombat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCombat.Size = new System.Drawing.Size(585, 211);
             this.dgvCombat.TabIndex = 0;
+            this.dgvCombat.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvCombat_CellBeginEdit);
             this.dgvCombat.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
             this.dgvCombat.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCombat_EditingControlShowing);
             this.dgvCombat.Leave += new System.EventHandler(this.dgvCombat_Leave);

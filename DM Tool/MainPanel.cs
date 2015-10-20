@@ -287,12 +287,12 @@ namespace DM_Tool
 
         private void newCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TextInputDialog txtBox = new TextInputDialog("Enter Campaign Name");
+            CampaignCreatorDialog txtBox = new CampaignCreatorDialog();
             txtBox.ShowDialog();
 
             if (txtBox.DialogResult == DialogResult.OK)
             {
-                mgr.SetCampaign(txtBox.GetText());
+                mgr.SetCampaign(txtBox.GetName());
             }
 
             Directory.CreateDirectory("./" + "//Files//" + mgr.GetCampaign());
@@ -571,6 +571,39 @@ namespace DM_Tool
                 page.Controls.Add(aoc);
                 aoc.Dock = DockStyle.Fill;
                 AddOrSelectPage(page);
+            }
+        }
+
+        private void tabOpenObjects_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left && e.Modifiers == Keys.Control)
+            {
+                if (tabOpenObjects.SelectedTab != null)
+                {
+                    int index = tabOpenObjects.SelectedIndex;
+                    if (index > 0)
+                    {
+                        TabPage current = tabOpenObjects.TabPages[index];
+                        TabPage prev = tabOpenObjects.TabPages[index - 1];
+                        tabOpenObjects.TabPages[index - 1] = current;
+                        tabOpenObjects.TabPages[index] = prev;
+                    }
+                }
+            }
+
+            if (e.KeyCode == Keys.Right && e.Modifiers == Keys.Control)
+            {
+                if (tabOpenObjects.SelectedTab != null)
+                {
+                    int index = tabOpenObjects.SelectedIndex;
+                    if (index < tabOpenObjects.TabPages.Count-1)
+                    {
+                        TabPage current = tabOpenObjects.TabPages[index];
+                        TabPage next = tabOpenObjects.TabPages[index + 1];
+                        tabOpenObjects.TabPages[index + 1] = current;
+                        tabOpenObjects.TabPages[index] = next;
+                    }
+                }
             }
         }
     }

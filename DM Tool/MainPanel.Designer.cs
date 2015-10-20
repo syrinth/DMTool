@@ -118,6 +118,7 @@
             this.dgView.Size = new System.Drawing.Size(222, 507);
             this.dgView.TabIndex = 2;
             this.dgView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgView_CellClick);
+            this.dgView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabOpenObjects_KeyDown);
             this.dgView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tabOpenObjects_KeyPress);
             this.dgView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgView_MouseClick);
             // 
@@ -155,6 +156,7 @@
             this.tabOpenObjects.SelectedIndex = 0;
             this.tabOpenObjects.Size = new System.Drawing.Size(600, 537);
             this.tabOpenObjects.TabIndex = 0;
+            this.tabOpenObjects.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tabOpenObjects_KeyDown);
             this.tabOpenObjects.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tabOpenObjects_KeyPress);
             this.tabOpenObjects.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabOpenObjects_MouseDown);
             // 
@@ -305,21 +307,21 @@
             // baseItemsToolStripMenuItem
             // 
             this.baseItemsToolStripMenuItem.Name = "baseItemsToolStripMenuItem";
-            this.baseItemsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.baseItemsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.baseItemsToolStripMenuItem.Text = "Base Items";
             this.baseItemsToolStripMenuItem.Click += new System.EventHandler(this.baseItemsToolStripMenuItem_Click);
             // 
             // qualityToolStripMenuItem
             // 
             this.qualityToolStripMenuItem.Name = "qualityToolStripMenuItem";
-            this.qualityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.qualityToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.qualityToolStripMenuItem.Text = "Quality";
             this.qualityToolStripMenuItem.Click += new System.EventHandler(this.qualityToolStripMenuItem_Click);
             // 
             // hardMaterialsToolStripMenuItem
             // 
             this.hardMaterialsToolStripMenuItem.Name = "hardMaterialsToolStripMenuItem";
-            this.hardMaterialsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hardMaterialsToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.hardMaterialsToolStripMenuItem.Text = "HardMaterials";
             this.hardMaterialsToolStripMenuItem.Click += new System.EventHandler(this.hardMaterialsToolStripMenuItem_Click);
             // 

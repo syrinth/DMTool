@@ -28,7 +28,6 @@ E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.HardMaterialContr
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.QualityControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.MainPanel.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.frmNewCreatureType.resources
-E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CharacterSheetControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Properties.Resources.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.TypeControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.TextInputDialog.resources
@@ -38,3 +37,6 @@ E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.pdb
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CharacterClassControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.CurrentInfoControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.XPLedgerControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\Interop.MSScriptControl.dll
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.csproj.ResolveComReference.cache
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.Spell_Controls.TextInformationControl.resources

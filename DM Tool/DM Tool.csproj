@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\AdventureSite.cs" />
-    <Compile Include="Classes\Character.cs" />
-    <Compile Include="Classes\CharacterClass.cs" />
-    <Compile Include="Classes\CreatureSize.cs" />
+    <Compile Include="Classes\ThirdEd\Character.cs" />
+    <Compile Include="Classes\ThirdEd\CharacterClass.cs" />
+    <Compile Include="Classes\ThirdEd\CreatureSize.cs" />
     <Compile Include="Classes\PlotPoint.cs" />
     <Compile Include="Classes\Room.cs" />
     <Compile Include="Classes\TableItems\HardMaterial.cs" />
@@ -67,18 +67,18 @@
     <Compile Include="Controls\ArtObjectControl.Designer.cs">
       <DependentUpon>ArtObjectControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\CreatureType.cs" />
+    <Compile Include="Classes\ThirdEd\CreatureType.cs" />
     <Compile Include="Classes\DatabaseClass.cs" />
-    <Compile Include="Controls\CharacterClassControl.cs">
+    <Compile Include="Controls\3.5\CharacterClassControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CharacterClassControl.Designer.cs">
+    <Compile Include="Controls\3.5\CharacterClassControl.Designer.cs">
       <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CharacterControl.cs">
+    <Compile Include="Controls\3.5\CharacterControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\CharacterControl.Designer.cs">
+    <Compile Include="Controls\3.5\CharacterControl.Designer.cs">
       <DependentUpon>CharacterControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CurrentInfoControl.cs">
@@ -87,12 +87,18 @@
     <Compile Include="Controls\CurrentInfoControl.Designer.cs">
       <DependentUpon>CurrentInfoControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Spell Controls\SpellPage.cs" />
-    <Compile Include="Controls\Spell Controls\TextInformationControl.cs">
+    <Compile Include="Controls\3.5\Spell Controls\SpellPage.cs" />
+    <Compile Include="Controls\3.5\Spell Controls\TextInformationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Spell Controls\TextInformationControl.Designer.cs">
+    <Compile Include="Controls\3.5\Spell Controls\TextInformationControl.Designer.cs">
       <DependentUpon>TextInformationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CampaignCreatorDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CampaignCreatorDialog.Designer.cs">
+      <DependentUpon>CampaignCreatorDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Managers\PublicCode.cs" />
     <Compile Include="Controls\RoomControl.cs">
@@ -101,22 +107,22 @@
     <Compile Include="Controls\RoomControl.Designer.cs">
       <DependentUpon>RoomControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tables\BaseItemControl.cs">
+    <Compile Include="Controls\3.5\Tables\BaseItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tables\BaseItemControl.Designer.cs">
+    <Compile Include="Controls\3.5\Tables\BaseItemControl.Designer.cs">
       <DependentUpon>BaseItemControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tables\HardMaterialControl.cs">
+    <Compile Include="Controls\3.5\Tables\HardMaterialControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tables\HardMaterialControl.Designer.cs">
+    <Compile Include="Controls\3.5\Tables\HardMaterialControl.Designer.cs">
       <DependentUpon>HardMaterialControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tables\QualityControl.cs">
+    <Compile Include="Controls\3.5\Tables\QualityControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Tables\QualityControl.Designer.cs">
+    <Compile Include="Controls\3.5\Tables\QualityControl.Designer.cs">
       <DependentUpon>QualityControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\XPLedgerControl.cs">
@@ -137,7 +143,7 @@
     <Compile Include="frmNewCreatureType.Designer.cs">
       <DependentUpon>frmNewCreatureType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\CharacterSheet.cs" />
+    <Compile Include="Classes\ThirdEd\CharacterSheet.cs" />
     <Compile Include="Other\CampaignSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     <Compile Include="Combat.Designer.cs">
       <DependentUpon>Combat.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CampaignCreatorDialog.resx">
+      <DependentUpon>CampaignCreatorDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Combat.resx">
       <DependentUpon>Combat.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,10 +184,10 @@
     <EmbeddedResource Include="Controls\ArtObjectControl.resx">
       <DependentUpon>ArtObjectControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CharacterClassControl.resx">
+    <EmbeddedResource Include="Controls\3.5\CharacterClassControl.resx">
       <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CharacterControl.resx">
+    <EmbeddedResource Include="Controls\3.5\CharacterControl.resx">
       <DependentUpon>CharacterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CurrentInfoControl.resx">
@@ -187,16 +196,16 @@
     <EmbeddedResource Include="Controls\RoomControl.resx">
       <DependentUpon>RoomControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Spell Controls\TextInformationControl.resx">
+    <EmbeddedResource Include="Controls\3.5\Spell Controls\TextInformationControl.resx">
       <DependentUpon>TextInformationControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tables\BaseItemControl.resx">
+    <EmbeddedResource Include="Controls\3.5\Tables\BaseItemControl.resx">
       <DependentUpon>BaseItemControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tables\HardMaterialControl.resx">
+    <EmbeddedResource Include="Controls\3.5\Tables\HardMaterialControl.resx">
       <DependentUpon>HardMaterialControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Tables\QualityControl.resx">
+    <EmbeddedResource Include="Controls\3.5\Tables\QualityControl.resx">
       <DependentUpon>QualityControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\XPLedgerControl.resx">
@@ -220,9 +229,6 @@
     <EmbeddedResource Include="Controls\TypeControl.resx">
       <DependentUpon>TypeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TextInputDialog.resx">
-      <DependentUpon>TextInputDialog.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -233,7 +239,20 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="MSScriptControl">
+      <Guid>{0E59F1D2-1FBE-11D0-8FF2-00A0D10038BC}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\Pokemon\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

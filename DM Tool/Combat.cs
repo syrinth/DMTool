@@ -31,9 +31,6 @@ namespace DM_Tool
             _mainPanel = mainPanel;
             _parentPage = parentPage;
             this.Init.ValueType = typeof(int);
-
-            var source = new AutoCompleteStringCollection();
-            source.AddRange(mgr.GetCharacterNames());
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -99,6 +96,18 @@ namespace DM_Tool
                             }
                         }
                     }
+                }
+                else if (e.ColumnIndex == dgvCombat.Columns["currHP"].Index)
+                {
+                    MSScriptControl.ScriptControl sc = new MSScriptControl.ScriptControl();
+                    sc.Language = "VBScript";
+
+                    DataGridViewRow currRow = dgvCombat.Rows[e.RowIndex];
+                    DataGridViewCell cell = currRow.Cells["currHP"];
+                    string expression = cell.Value.ToString();
+
+                    object result = sc.Eval(expression);
+                    cell.Value = result.ToString();
                 }
             }
         }
@@ -311,19 +320,36 @@ namespace DM_Tool
 
         private void dgvCombat_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            TextBox currTextBox = e.Control as TextBox;
+
             if (dgvCombat.CurrentCell.ColumnIndex == 0)
             {
                 var source = new AutoCompleteStringCollection();
                 source.AddRange(mgr.GetCharacterNames());
 
-                TextBox prodCode = e.Control as TextBox;
-                if (prodCode != null)
+                if (currTextBox != null)
                 {
-                    prodCode.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                    prodCode.AutoCompleteCustomSource = source;
-                    prodCode.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
+                    currTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                    currTextBox.AutoCompleteCustomSource = source;
+                    currTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
                 }
+            }
+            else
+            {
+                if (currTextBox != null)
+                {
+                    currTextBox.AutoCompleteCustomSource = null;
+                    currTextBox.AutoCompleteSource = AutoCompleteSource.None;
+                }
+            }
+        }
+
+        private void dgvCombat_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            TextBox currTextBox = sender as TextBox;
+            if (currTextBox != null)
+            {
+                currTextBox.Select(0, 0);
             }
         }
     }

@@ -9,17 +9,22 @@ using System.Windows.Forms;
 
 namespace DM_Tool
 {
-    public partial class TextInputDialog : Form
+    public partial class CampaignCreatorDialog : Form
     {
-        public TextInputDialog(string lblText){
+        public CampaignCreatorDialog()
+        {
             InitializeComponent();
-
-            lbl.Text = lblText;
+            cbType.SelectedIndex = 0;
         }
 
-        public string GetText()
+        public string GetName()
         {
             return tbFileName.Text;
+        }
+
+        public string GetCampaignType()
+        {
+            return cbType.SelectedText;
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
