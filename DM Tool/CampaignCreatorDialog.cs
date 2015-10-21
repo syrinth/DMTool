@@ -24,7 +24,7 @@ namespace DM_Tool
 
         public string GetCampaignType()
         {
-            return cbType.SelectedText;
+            return cbType.SelectedItem.ToString();
         }
 
         private void btnCreate_Click(object sender, EventArgs e)

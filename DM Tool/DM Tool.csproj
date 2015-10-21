@@ -100,6 +100,9 @@
     <Compile Include="CampaignCreatorDialog.Designer.cs">
       <DependentUpon>CampaignCreatorDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Managers\PTU1_05Manager.cs" />
+    <Compile Include="Managers\DnDThirdEdManager.cs" />
+    <Compile Include="Managers\EditionInterface.cs" />
     <Compile Include="Managers\PublicCode.cs" />
     <Compile Include="Controls\RoomControl.cs">
       <SubType>UserControl</SubType>

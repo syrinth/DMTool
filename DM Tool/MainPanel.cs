@@ -14,7 +14,7 @@ namespace DM_Tool
     public partial class MainPanel : Form
     {
         private enum ListDisplay { ALL, TYPES, CHARACTERS, CHARCLASSES, BASEITEMS, ADVSITES};
-        private List<string> baseMenu = new List<string> { "Types", "Characters", "Character Classes", "Base Items", "Adventure Sites"};
+        private List<string> baseMenu;
 
         public PublicManager mgr = PublicManager.GetInstance();
 
@@ -22,25 +22,12 @@ namespace DM_Tool
         public MainPanel()
         {
             InitializeComponent();
-            FindCampaigns();
 
             display = ListDisplay.ALL;
-            mgr.listXP = new List<List<string>>();
-            mgr.listCreatureTypes = new List<CreatureType>();
-            mgr.listCombinedCharacters = new List<Character>();
-            mgr.listCharacters = new List<Character>();
-            mgr.listCampaignCharacters = new List<Character>();
-            mgr.listBaseItems = new List<BaseItem>();
-            mgr.listQualities = new List<Quality>();
-            mgr.listHardMaterials = new List<HardMaterial>();
-            mgr.listBaseItemNames = new List<string>();
-            mgr.listCreatureSizes = new List<CreatureSize>();
-            mgr.listAdvSites = new List<AdventureSite>();
-            mgr.listCharacterClasses = new List<CharacterClass>();
             mgr.SetMain(this);
-            mgr.LoadDefault();
             SetMenuToBase();
-            this.Text = mgr.GetCampaign();
+            FindCampaigns();
+            this.Text = mgr.GetCampaignName();
         }
 
         private void saveCampaignToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,8 +173,12 @@ namespace DM_Tool
             tabOpenObjects.Focus();
         }
 
+        /// <summary>
+        /// Sets the menu to the base, default state of showing all object headers
+        /// </summary>
         public void SetMenuToBase()
         {
+            baseMenu = mgr.GetBaseMenuEntries();
             display = ListDisplay.ALL;
             dgView.Rows.Clear();
             foreach (string s in baseMenu)
@@ -292,15 +283,17 @@ namespace DM_Tool
 
             if (txtBox.DialogResult == DialogResult.OK)
             {
-                mgr.SetCampaign(txtBox.GetName());
+                string name = txtBox.GetName();
+                Directory.CreateDirectory("./" + "//Files//" + name);
+                mgr.SetCampaignName(name);
+                mgr.SetCampaignType(txtBox.GetCampaignType());
             }
 
-            Directory.CreateDirectory("./" + "//Files//" + mgr.GetCampaign());
-            File.Create("./" +"//Files//" + mgr.GetCampaign() + "//index.txt");
+            mgr.WriteCampaignConfigFile();
             FindCampaigns();
 
             mgr.WriteConfigFile();
-            this.Text = mgr.GetCampaign();
+            this.Text = mgr.GetCampaignName();
             mgr.LoadCampaign();
         }
 
@@ -405,7 +398,7 @@ namespace DM_Tool
             List<string> dirs = new List<string>(Directory.EnumerateDirectories(filePath));
             foreach (string s in dirs)
             {
-                if(File.Exists(s+"\\index.txt")){
+                if(File.Exists(s+"\\config.txt")){
                     string campaignName = Path.GetFileNameWithoutExtension(s);
 
                     if (!loadCampaignToolStripMenuItem.DropDownItems.ContainsKey(campaignName))
@@ -422,12 +415,17 @@ namespace DM_Tool
             }
         }
 
+        /// <summary>
+        /// Loads the selected campaign information.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loadCampaign(object sender, EventArgs e)
         {
-            mgr.SetCampaign(sender.ToString());
-
+            mgr.SetCampaignName(sender.ToString());
+            mgr.CheckCampaignConfigFile();
             mgr.WriteConfigFile();
-            this.Text = mgr.GetCampaign();
+            this.Text = mgr.GetCampaignName();
             SetMenuToBase();
             tabOpenObjects.TabPages.Clear();
 

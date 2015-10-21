@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using DM_Tool.Classes;
 using DM_Tool.Controls;
+using DM_Tool.Managers;
 
 namespace DM_Tool
 {
@@ -17,8 +18,17 @@ namespace DM_Tool
     {
         private static  PublicManager instance;
 
+        #region Config File Defines
         private string configFile = "./Files/config.txt";
         private string campaignHash = "##Campaign Name:";
+        private string campaignTypeHash = "##Campaign Type:";
+        #endregion
+
+        private const string EditionDnD3_5 = "D&D3.5";
+        private const string EditionPokemon = "Pokemon";
+        private const string EditionDnD5 = "D&D5";
+        public static string _campaignName;
+        public static string _campaignType;
 
         public int totalQualityRatios;
         public int totalBaseItemRatios;
@@ -31,16 +41,17 @@ namespace DM_Tool
         public List<AdventureSite> listAdvSites;
         public List<BaseItem> listBaseItems;
         public List<string> listBaseItemNames;
+        public List<HardMaterial> listHardMaterials;        
+        public List<Quality> listQualities;
+
+        //3.5 guys
         public List<CreatureSize> listCreatureSizes;
         public List<CreatureType> listCreatureTypes;
-        public List<HardMaterial> listHardMaterials;
         public List<Character> listCombinedCharacters;
         public List<Character> listCharacters;
         public List<Character> listCampaignCharacters;
         public List<CharacterClass> listCharacterClasses;
-        public List<Quality> listQualities;
 
-        private static string Campaign;
         private static string xmlXPLedger = "./Files/*/XPLedger.xml";
         private static string xmlAdventures = "./Files/*/AdventureSites.xml";
         private static string xmlBaseItems = "./Files/BaseItems.xml";
@@ -53,6 +64,8 @@ namespace DM_Tool
 
         private static XmlWriterSettings ws = new XmlWriterSettings();
 
+        private static EditionObject EditionManager;
+
         public MainPanel _main;
 
         private PublicManager()
@@ -60,7 +73,26 @@ namespace DM_Tool
             totalQualityRatios = 0;
             totalBaseItemRatios = 0;
             totalHardMaterialRatios = 0;
-            ConfigFile();
+
+            listXP = new List<List<string>>();
+            listBaseItems = new List<BaseItem>();
+            listQualities = new List<Quality>();
+            listHardMaterials = new List<HardMaterial>();
+            listBaseItemNames = new List<string>();
+            listAdvSites = new List<AdventureSite>();
+
+            // 3.5 guys
+            listCreatureTypes = new List<CreatureType>();
+            listCombinedCharacters = new List<Character>();
+            listCharacters = new List<Character>();
+            listCampaignCharacters = new List<Character>();
+            listCharacterClasses = new List<CharacterClass>();
+            listCreatureSizes = new List<CreatureSize>();
+
+            CheckConfigFile();
+            CheckCampaignConfigFile();
+            LoadCampaignInformation();
+
             ws.NewLineHandling = NewLineHandling.Entitize;
         }
 
@@ -87,14 +119,17 @@ namespace DM_Tool
         }
 
         #region CampaignInfo
-        public void SetCampaign(string val)
+        public void SetCampaignName(string name)
         {
-            Campaign = val;
+            _campaignName = name;
         }
-
-        public string GetCampaign()
+        public void SetCampaignType(string type)
         {
-            return Campaign;
+            _campaignType = type;
+        }
+        public string GetCampaignName()
+        {
+            return _campaignName;
         }
 
         public void LoadCampaign()
@@ -108,28 +143,34 @@ namespace DM_Tool
             listCombinedCharacters.Sort((p1, p2) => string.Compare(p1.GetName(), p2.GetName(), true));
         }
         #endregion
-        #region Config File
-        public void ConfigFile()
+        #region Config Files
+        
+        /// <summary>
+        /// Read the DMTool config file for default setting information.
+        /// </summary>
+        public void CheckConfigFile()
         {
+            //If no file, create it.
             if (!File.Exists(configFile))
             {
                 File.Create(configFile);
             }
             else
             {
+                //read in from the config file and determine what the
+                //last campaign was set to.
                 string line;
                 System.IO.StreamReader file = new System.IO.StreamReader(configFile);
                 while ((line = file.ReadLine()) != null)
                 {
                     if (line.Contains(campaignHash))
                     {
-                        Campaign = line.Split(':')[1];
+                        _campaignName = line.Split(':')[1];
                     }
                 }
                 file.Close();
             }
         }
-
         public void WriteConfigFile()
         {
             if (!File.Exists(configFile))
@@ -137,9 +178,59 @@ namespace DM_Tool
                 File.Delete(configFile);
             }
             System.IO.StreamWriter file = new System.IO.StreamWriter(configFile);
-            file.WriteLine(campaignHash + Campaign);
+            file.WriteLine(campaignHash + _campaignName);
             file.Close();
         }
+        public void CheckCampaignConfigFile()
+        {
+            string fileName = "./" + "//Files//" + GetCampaignName() + "//config.txt";
+            //If no file, create it.
+            if (!File.Exists(fileName))
+            {
+                File.Create(fileName);
+            }
+            else
+            {
+                //read in from the config file and determine what the
+                //last campaign was set to.
+                string line;
+                System.IO.StreamReader file = new System.IO.StreamReader(fileName);
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (line.Contains(campaignHash))
+                    {
+                        _campaignName = line.Split(':')[1];
+                    }
+                    if (line.Contains(campaignTypeHash))
+                    {
+                        _campaignType = line.Split(':')[1];
+
+                        if (_campaignType == EditionDnD3_5)
+                        {
+                            EditionManager = DnDThirdEdManager.GetInstance();
+                        }
+                        else if (_campaignType == EditionPokemon)
+                        {
+                            EditionManager = PTU1_05Manager.GetInstance();
+                        }
+                    }
+                }
+                file.Close();
+            }
+        }
+        public void WriteCampaignConfigFile()
+        {
+            string filePath = "./" + "//Files//" + GetCampaignName() + "//config.txt";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            using (StreamWriter sw = new StreamWriter(filePath, true))
+            {
+                sw.WriteLine(campaignHash + _campaignName);
+                sw.WriteLine(campaignTypeHash + _campaignType);
+            }
+        }     
         #endregion
 
         public void DisplayCharacters()
@@ -219,7 +310,7 @@ namespace DM_Tool
         static public void SerializeAdventuresToXML(List<AdventureSite> sites)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<AdventureSite>));
-            using (XmlWriter wr = XmlWriter.Create(xmlAdventures.Replace("*", Campaign), ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlAdventures.Replace("*", _campaignName), ws))
             {
                 serializer.Serialize(wr, sites);
             }
@@ -237,7 +328,7 @@ namespace DM_Tool
         static public void SerializeCampaignCharactersToXML(List<Character> characters)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Character>));
-            using (XmlWriter wr = XmlWriter.Create(xmlCharacters.Replace("*", Campaign), ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlCharacters.Replace("*", _campaignName), ws))
             {
                 serializer.Serialize(wr, characters);
             }
@@ -300,7 +391,7 @@ namespace DM_Tool
         static public void SerializeXPLedgerToXML(List<List<string>> xpList)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<List<string>>));
-            using (XmlWriter wr = XmlWriter.Create(xmlXPLedger.Replace("*", Campaign), ws))
+            using (XmlWriter wr = XmlWriter.Create(xmlXPLedger.Replace("*", _campaignName), ws))
             {
                 serializer.Serialize(wr, xpList);
             }
@@ -310,7 +401,7 @@ namespace DM_Tool
 
         #region Deserialization
 
-        public void LoadDefault()
+        public void LoadCampaignInformation()
         {
             listCreatureTypes = DeserializeCreatureTypesFromXML();
             listCharacters = DeserializeCharactersFromXML();
@@ -338,7 +429,7 @@ namespace DM_Tool
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<AdventureSite>));
-                TextReader textReader = new StreamReader(xmlAdventures.Replace("*", Campaign));
+                TextReader textReader = new StreamReader(xmlAdventures.Replace("*", _campaignName));
                 advs = (List<AdventureSite>)deserializer.Deserialize(textReader);
                 textReader.Close();
 
@@ -373,7 +464,7 @@ namespace DM_Tool
             List<Character> characters = new List<Character>();
             try
             {
-                string name = xmlCharacters.Replace("*", Campaign);
+                string name = xmlCharacters.Replace("*", _campaignName);
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<Character>));
                 TextReader textReader = new StreamReader(name);
                 characters = (List<Character>)deserializer.Deserialize(textReader);
@@ -495,7 +586,7 @@ namespace DM_Tool
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<List<string>>));
-                TextReader textReader = new StreamReader(xmlXPLedger.Replace("*", Campaign));
+                TextReader textReader = new StreamReader(xmlXPLedger.Replace("*", _campaignName));
                 xpLedger = (List<List<string>>)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
@@ -517,6 +608,11 @@ namespace DM_Tool
             {
                 return listCharacters;
             }
+        }
+
+        public List<String> GetBaseMenuEntries()
+        {
+            return EditionManager.GetBaseMenuItems();
         }
     }
 }
