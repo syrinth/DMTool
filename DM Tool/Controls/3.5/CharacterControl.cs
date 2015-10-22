@@ -894,6 +894,9 @@ namespace DM_Tool.Controls
                 AppendACValsToTextBox(cSheet.defAC.ToString(), "Def");
                 AppendACValsToTextBox(size.GetModifier().ToString(), "Size");
                 AppendACValsToTextBox(GetModifier(tbDex.Text).ToString(), "Dex");
+
+                int val = 10 + cSheet.natAC + cSheet.armorAC +cSheet.shieldAC + cSheet.defAC + size.GetModifier() + GetModifier(tbDex.Text);
+                tbTotalAC.Text = val.ToString();
             }
         }
 
