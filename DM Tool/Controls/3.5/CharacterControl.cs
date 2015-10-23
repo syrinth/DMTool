@@ -560,9 +560,17 @@ namespace DM_Tool.Controls
                     try
                     {
                         Character character = GetRightCharacterList().Find(x => x.GetName().Equals(tbName.Text));
-                        if (tc != null)
+                        if (character != null)
                         {
                             GetRightCharacterList().Remove(character);
+                        }
+                        if (chkCampaign.Checked)
+                        {
+                            character = mgr.listCharacters.Find(x => x.GetName().Equals(tbName.Text));
+                            if (character != null)
+                            {
+                                mgr.listCharacters.Remove(character);
+                            }
                         }
                     }
                     catch { }
@@ -574,14 +582,8 @@ namespace DM_Tool.Controls
                     GetRightCharacterList().Sort((a, b) => a.GetName().CompareTo(b.GetName()));
                 }
                 catch { }
-                if (chkCampaign.Checked)
-                {
-                    PublicManager.SerializeCampaignCharactersToXML(mgr.listCampaignCharacters);
-                }
-                else
-                {
-                    PublicManager.SerializeCharactersToXML(mgr.listCharacters);
-                }
+                PublicManager.SerializeCampaignCharactersToXML(mgr.listCampaignCharacters);
+                PublicManager.SerializeCharactersToXML(mgr.listCharacters);
                 mgr.DisplayCharacters();
             }
             else
