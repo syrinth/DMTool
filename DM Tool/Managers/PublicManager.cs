@@ -194,28 +194,30 @@ namespace DM_Tool
                 //read in from the config file and determine what the
                 //last campaign was set to.
                 string line;
-                System.IO.StreamReader file = new System.IO.StreamReader(fileName);
-                while ((line = file.ReadLine()) != null)
-                {
-                    if (line.Contains(campaignHash))
+                if(File.Exists(fileName)){
+                    System.IO.StreamReader file = new System.IO.StreamReader(fileName);
+                    while ((line = file.ReadLine()) != null)
                     {
-                        _campaignName = line.Split(':')[1];
-                    }
-                    if (line.Contains(campaignTypeHash))
-                    {
-                        _campaignType = line.Split(':')[1];
+                        if (line.Contains(campaignHash))
+                        {
+                            _campaignName = line.Split(':')[1];
+                        }
+                        if (line.Contains(campaignTypeHash))
+                        {
+                            _campaignType = line.Split(':')[1];
 
-                        if (_campaignType == EditionDnD3_5)
-                        {
-                            EditionManager = DnDThirdEdManager.GetInstance();
-                        }
-                        else if (_campaignType == EditionPokemon)
-                        {
-                            EditionManager = PTU1_05Manager.GetInstance();
+                            if (_campaignType == EditionDnD3_5)
+                            {
+                                EditionManager = DnDThirdEdManager.GetInstance();
+                            }
+                            else if (_campaignType == EditionPokemon)
+                            {
+                                EditionManager = PTU1_05Manager.GetInstance();
+                            }
                         }
                     }
+                    file.Close();
                 }
-                file.Close();
             }
         }
         public void WriteCampaignConfigFile()
@@ -612,7 +614,14 @@ namespace DM_Tool
 
         public List<String> GetBaseMenuEntries()
         {
-            return EditionManager.GetBaseMenuItems();
+            if (EditionManager != null)
+            {
+                return EditionManager.GetBaseMenuItems();
+            }
+            else
+            {
+                return new List<String>();
+            }
         }
     }
 }
