@@ -25,3 +25,9 @@ DM Tool/bin/Debug/Files/config.txt
 DM Tool/bin/Debug/Files/kalos/config.txt
 DM Tool/obj/x86/Debug/DM Tool.exe
 DM Tool/obj/x86/Debug/DM Tool.pdb
+DM Tool.suo
+DM Tool/bin/Debug/DM Tool.exe
+DM Tool/bin/Debug/Files/config.txt
+*.exe
+*.exe
+DM Tool/bin/Debug/DM Tool.exe
