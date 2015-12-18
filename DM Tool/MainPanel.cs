@@ -32,6 +32,10 @@ namespace DM_Tool
 
         private void saveCampaignToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            foreach (TabPage page in tabOpenObjects.TabPages)
+            {
+                page.Controls.ToString();
+            }
             mgr.Save();
         }
 
@@ -338,6 +342,17 @@ namespace DM_Tool
                     tabOpenObjects.SelectedTab.Dispose();
                 }
             }
+
+            if (Form.ModifierKeys == Keys.Control)
+            {
+                if (e.KeyChar == (char)Keys.S)
+                {
+                    if (tabOpenObjects.SelectedTab != null)
+                    {
+                        MessageBox.Show("1");
+                    }
+                }
+            }
         }
 
         private void closeThisToolStripMenuItem_Click(object sender, EventArgs e)
@@ -603,6 +618,16 @@ namespace DM_Tool
                     }
                 }
             }
+        }
+
+        private void calendarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string currentInfo = "Calendar";
+            TabPage page = new TabPage(currentInfo);
+            CalendarControl mc = new CalendarControl(page);
+            page.Controls.Add(mc);
+            mc.Dock = DockStyle.Fill;
+            AddOrSelectPage(page);
         }
     }
 }

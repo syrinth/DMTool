@@ -43,3 +43,4 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.Spell_Controls.Text
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\Interop.MSScriptControl.dll
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csproj.ResolveComReference.cache
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.CampaignCreatorDialog.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.CalendarControl.resources

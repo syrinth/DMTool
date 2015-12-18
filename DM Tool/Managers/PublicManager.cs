@@ -61,10 +61,13 @@ namespace DM_Tool
         private static string xmlCharacters = "./Files/*/Characters.xml";
         private static string xmlCharacterClasses = "./Files/CharacterClasses.xml";
         private static string xmlQualities = "./Files/Qualitys.xml";
+        private static string xmlCalendar = "./Files/*/Calendar.xml";
 
         private static XmlWriterSettings ws = new XmlWriterSettings();
 
         private static EditionObject EditionManager;
+
+        private static Calendar _calendar;
 
         public MainPanel _main;
 
@@ -118,6 +121,10 @@ namespace DM_Tool
             return names.ToArray();
         }
 
+        public Calendar GetCalendar()
+        {
+            return _calendar;
+        }
         #region CampaignInfo
         public void SetCampaignName(string name)
         {
@@ -399,6 +406,15 @@ namespace DM_Tool
             }
         }
 
+        static public void SerializeCalendarToXML()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Calendar));
+            using (XmlWriter wr = XmlWriter.Create(xmlCalendar.Replace("*", _campaignName), ws))
+            {
+                serializer.Serialize(wr, _calendar);
+            }
+        }
+
         #endregion
 
         #region Deserialization
@@ -423,6 +439,8 @@ namespace DM_Tool
             listCombinedCharacters.Clear();
             listCombinedCharacters.AddRange(listCharacters);
             listCombinedCharacters.AddRange(listCampaignCharacters);
+
+            _calendar = DeserializeCalendarFromXML();
         }
 
         static public List<AdventureSite> DeserializeAdventuresFromXML()
@@ -580,6 +598,23 @@ namespace DM_Tool
             }
 
             return advs;
+        }
+
+        static public Calendar DeserializeCalendarFromXML()
+        {
+            Calendar cal = new Calendar();
+            try
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(Calendar));
+                TextReader textReader = new StreamReader(xmlCalendar.Replace("*", _campaignName));
+                cal = (Calendar)deserializer.Deserialize(textReader);
+                textReader.Close();
+            }
+            catch
+            {
+            }
+
+            return cal;
         }
 
         static public List<List<string>> DeserializeXPLedgerFromXML()

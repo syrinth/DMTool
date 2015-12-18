@@ -33,6 +33,8 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.tbLocation = new System.Windows.Forms.TextBox();
             this.dtpTime = new System.Windows.Forms.DateTimePicker();
+            this.tbCurrentDate = new System.Windows.Forms.TextBox();
+            this.btnNext = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSave
@@ -43,6 +45,7 @@
             this.btnSave.TabIndex = 73;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblLocation
             // 
@@ -74,18 +77,39 @@
             // dtpTime
             // 
             this.dtpTime.CustomFormat = "hh:mm  tt";
+            this.dtpTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTime.Location = new System.Drawing.Point(522, 3);
+            this.dtpTime.Location = new System.Drawing.Point(393, 18);
             this.dtpTime.Name = "dtpTime";
             this.dtpTime.ShowUpDown = true;
-            this.dtpTime.Size = new System.Drawing.Size(75, 20);
+            this.dtpTime.Size = new System.Drawing.Size(190, 49);
             this.dtpTime.TabIndex = 82;
             this.dtpTime.ValueChanged += new System.EventHandler(this.dtpTime_ValueChanged);
+            // 
+            // tbCurrentDate
+            // 
+            this.tbCurrentDate.Location = new System.Drawing.Point(98, 47);
+            this.tbCurrentDate.Name = "tbCurrentDate";
+            this.tbCurrentDate.Size = new System.Drawing.Size(200, 20);
+            this.tbCurrentDate.TabIndex = 84;
+            this.tbCurrentDate.Leave += new System.EventHandler(this.tbCurrentDate_Leave);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(304, 45);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(61, 23);
+            this.btnNext.TabIndex = 83;
+            this.btnNext.Text = "Next Day";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // CurrentInfoControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tbCurrentDate);
+            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.dtpTime);
             this.Controls.Add(this.tbLocation);
             this.Controls.Add(this.lblDate);
@@ -105,5 +129,7 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.TextBox tbLocation;
         private System.Windows.Forms.DateTimePicker dtpTime;
+        private System.Windows.Forms.TextBox tbCurrentDate;
+        private System.Windows.Forms.Button btnNext;
     }
 }
