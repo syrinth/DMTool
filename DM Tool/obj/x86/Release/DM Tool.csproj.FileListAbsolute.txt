@@ -30,7 +30,6 @@ E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.MainPanel.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.frmNewCreatureType.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Properties.Resources.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.TypeControl.resources
-E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.TextInputDialog.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.csproj.GenerateResource.Cache
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.exe
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.pdb
@@ -40,3 +39,5 @@ E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.XPLedgerControl.r
 E:\Programming\DMTool\DM Tool\obj\x86\Release\Interop.MSScriptControl.dll
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM Tool.csproj.ResolveComReference.cache
 E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.Controls.Spell_Controls.TextInformationControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.CampaignCreatorDialog.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Release\DM_Tool.CalendarControl.resources

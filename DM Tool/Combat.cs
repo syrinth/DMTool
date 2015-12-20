@@ -294,7 +294,6 @@ namespace DM_Tool
 
             if (character != null)
             {
-
                 if (_mainPanel.PageOpen(charName))
                 {
                     return;

@@ -148,6 +148,7 @@ namespace DM_Tool
             listCombinedCharacters.AddRange(listCharacters);
             listCombinedCharacters.AddRange(listCampaignCharacters);
             listCombinedCharacters.Sort((p1, p2) => string.Compare(p1.GetName(), p2.GetName(), true));
+            _calendar = DeserializeCalendarFromXML();
         }
         #endregion
         #region Config Files

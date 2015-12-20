@@ -13,9 +13,12 @@ namespace DM_Tool.Classes
         public List<Month> _totalMonths;
         public string _currMonth;
         public int _currDay;
+        public string _currDayOfWeek;
+        public List<string> _daysOfWeek;
 
         public Calendar(){
             _totalMonths = new List<Month>();
+            _daysOfWeek = new List<string>();
         }
 
         public void AddMonth(string name, int days)
@@ -40,6 +43,27 @@ namespace DM_Tool.Classes
             {
                 _currMonth = _totalMonths[0].GetName();
                 _currYear++;
+            }
+        }
+
+        public void GoToNextDayOfWeek()
+        {
+            foreach (string s in _daysOfWeek)
+            {
+                if (s == _currDayOfWeek)
+                {
+                    int i = _daysOfWeek.IndexOf(s) +1;
+
+                    if (i < _daysOfWeek.Count)
+                    {
+                        _currDayOfWeek = _daysOfWeek[i];
+                    }
+                    else
+                    {
+                        _currDayOfWeek = _daysOfWeek[0];
+                    }
+                    break;
+                }
             }
         }
 
@@ -114,6 +138,54 @@ namespace DM_Tool.Classes
         public string GetTime()
         {
             return _time;
+        }
+
+        public void SetCurrentDayOfWeek(string val)
+        {
+            _currDayOfWeek = val;
+        }
+
+        public string GetCurrentDayOfWeek()
+        {
+            return _currDayOfWeek;
+        }
+
+        public void SetDaysOfWeek(string[] val)
+        {
+            _daysOfWeek.Clear();
+            foreach (string s in val)
+            {
+                string temp = s;
+                if (s.Contains("{"))
+                {
+                    temp = s.Trim(new char[] { '{', '}' });
+                    _currDayOfWeek = temp;
+                }
+                _daysOfWeek.Add(temp);
+            }
+        }
+
+        public List<string> GetDaysOfWeek()
+        {
+            return _daysOfWeek;
+        }
+
+        public string PrintDaysOfWeek()
+        {
+            string val = string.Empty;
+            foreach (string s in _daysOfWeek)
+            {
+                if (_currDayOfWeek == s)
+                {
+                    val = val + "{" + s + "}, ";
+                }
+                else
+                {
+                    val = val + s + ", ";
+                }
+            }
+
+            return val.Trim(new char[] {',', ' '});
         }
 
         public class Month

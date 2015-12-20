@@ -34,9 +34,8 @@
             this.lblMonthName = new System.Windows.Forms.Label();
             this.tbMonthNames = new System.Windows.Forms.TextBox();
             this.lblDaysPerWeek = new System.Windows.Forms.Label();
-            this.tbDaysPerWeek = new System.Windows.Forms.TextBox();
+            this.tbDaysOfWeek = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
             this.lblCurrentDate = new System.Windows.Forms.Label();
             this.tbCurrentDate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -89,12 +88,12 @@
             this.lblDaysPerWeek.TabIndex = 10;
             this.lblDaysPerWeek.Text = "Days per Week:";
             // 
-            // tbDaysPerWeek
+            // tbDaysOfWeek
             // 
-            this.tbDaysPerWeek.Location = new System.Drawing.Point(87, 88);
-            this.tbDaysPerWeek.Name = "tbDaysPerWeek";
-            this.tbDaysPerWeek.Size = new System.Drawing.Size(188, 20);
-            this.tbDaysPerWeek.TabIndex = 9;
+            this.tbDaysOfWeek.Location = new System.Drawing.Point(87, 88);
+            this.tbDaysOfWeek.Name = "tbDaysOfWeek";
+            this.tbDaysOfWeek.Size = new System.Drawing.Size(492, 20);
+            this.tbDaysOfWeek.TabIndex = 9;
             // 
             // btnSave
             // 
@@ -105,16 +104,6 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(276, 8);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 13;
-            this.btnNext.Text = "Next Day";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // lblCurrentDate
             // 
@@ -138,10 +127,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tbCurrentDate);
-            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblDaysPerWeek);
-            this.Controls.Add(this.tbDaysPerWeek);
+            this.Controls.Add(this.tbDaysOfWeek);
             this.Controls.Add(this.lblMonthName);
             this.Controls.Add(this.tbMonthNames);
             this.Controls.Add(this.lblDaysPerYear);
@@ -163,9 +151,8 @@
         private System.Windows.Forms.Label lblMonthName;
         private System.Windows.Forms.TextBox tbMonthNames;
         private System.Windows.Forms.Label lblDaysPerWeek;
-        private System.Windows.Forms.TextBox tbDaysPerWeek;
+        private System.Windows.Forms.TextBox tbDaysOfWeek;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Label lblCurrentDate;
         private System.Windows.Forms.TextBox tbCurrentDate;
 

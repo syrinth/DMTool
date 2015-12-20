@@ -42,8 +42,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.campaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.currentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calendarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xPLedgerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.newCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadCampaignToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -209,7 +207,6 @@
             // 
             this.campaignToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentToolStripMenuItem,
-            this.xPLedgerToolStripMenuItem,
             this.toolStripSeparator1,
             this.newCampaignToolStripMenuItem,
             this.loadCampaignToolStripMenuItem,
@@ -220,43 +217,27 @@
             // 
             // currentToolStripMenuItem
             // 
-            this.currentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.calendarToolStripMenuItem});
             this.currentToolStripMenuItem.Name = "currentToolStripMenuItem";
-            this.currentToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.currentToolStripMenuItem.Text = "Current";
+            this.currentToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.currentToolStripMenuItem.Text = "Current Info";
             this.currentToolStripMenuItem.Click += new System.EventHandler(this.currentToolStripMenuItem_Click);
-            // 
-            // calendarToolStripMenuItem
-            // 
-            this.calendarToolStripMenuItem.Name = "calendarToolStripMenuItem";
-            this.calendarToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
-            this.calendarToolStripMenuItem.Text = "Calendar";
-            this.calendarToolStripMenuItem.Click += new System.EventHandler(this.calendarToolStripMenuItem_Click);
-            // 
-            // xPLedgerToolStripMenuItem
-            // 
-            this.xPLedgerToolStripMenuItem.Name = "xPLedgerToolStripMenuItem";
-            this.xPLedgerToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.xPLedgerToolStripMenuItem.Text = "XP Ledger";
-            this.xPLedgerToolStripMenuItem.Click += new System.EventHandler(this.xPLedgerToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
             // 
             // newCampaignToolStripMenuItem
             // 
             this.newCampaignToolStripMenuItem.Name = "newCampaignToolStripMenuItem";
-            this.newCampaignToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.newCampaignToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.newCampaignToolStripMenuItem.Text = "New Campaign";
             this.newCampaignToolStripMenuItem.Click += new System.EventHandler(this.newCampaignToolStripMenuItem_Click);
             // 
             // loadCampaignToolStripMenuItem
             // 
             this.loadCampaignToolStripMenuItem.Name = "loadCampaignToolStripMenuItem";
-            this.loadCampaignToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.loadCampaignToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.loadCampaignToolStripMenuItem.Text = "Load Campaign";
             // 
             // saveCampaignToolStripMenuItem
@@ -427,12 +408,10 @@
         private System.Windows.Forms.ToolStripMenuItem closeAllOpenTabsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeAllToTheRightToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem currentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xPLedgerToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ContextMenuStrip ctxtMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem calendarToolStripMenuItem;
     }
 }
 

@@ -451,19 +451,9 @@ namespace DM_Tool
         {
             string currentInfo = "Current Info";
             TabPage page = new TabPage(currentInfo);
-            CurrentInfoControl mc = new CurrentInfoControl(page);
+            CurrentInfoControl mc = new CurrentInfoControl(page, this, PublicManager.DeserializeXPLedgerFromXML());
             page.Controls.Add(mc);
             mc.Dock = DockStyle.Fill;
-            AddOrSelectPage(page);
-        }
-
-        private void xPLedgerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string currentInfo = "XP Ledger";
-            TabPage page = new TabPage(currentInfo);
-            XPLedgerControl xp = new XPLedgerControl(page, PublicManager.DeserializeXPLedgerFromXML());
-            page.Controls.Add(xp);
-            xp.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
         }
 
@@ -618,16 +608,6 @@ namespace DM_Tool
                     }
                 }
             }
-        }
-
-        private void calendarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string currentInfo = "Calendar";
-            TabPage page = new TabPage(currentInfo);
-            CalendarControl mc = new CalendarControl(page);
-            page.Controls.Add(mc);
-            mc.Dock = DockStyle.Fill;
-            AddOrSelectPage(page);
         }
     }
 }

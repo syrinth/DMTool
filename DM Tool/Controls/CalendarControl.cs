@@ -42,6 +42,7 @@ namespace DM_Tool
             tbMonthNames.Text = tbMonthNames.Text.Trim(new char[] {',', ' '});
             tbNumDays.Text = tbNumDays.Text.Trim(new char[] { ',', ' ' });
 
+            tbDaysOfWeek.Text = _calendar.PrintDaysOfWeek();
             tbCurrentDate.Text = _calendar.GetCurrentMonth() + " " + _calendar.GetCurrentDay() + ", " + _calendar.GetCurrentYear();
         }
 
@@ -65,6 +66,8 @@ namespace DM_Tool
                 }
                 i++;
             }
+
+            _calendar.SetDaysOfWeek(tbDaysOfWeek.Text.Split(new string[] { ", " }, StringSplitOptions.None));
 
             PublicManager.SerializeCalendarToXML();
         }
@@ -107,39 +110,6 @@ namespace DM_Tool
                 }
 
                 tbCurrentDate.Text = date[0] + " " + date[1] + ", " + date[3];
-            }
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            string[] date = ParseDate();
-            int maxDays = _calendar.GetMonthDays(date[0]);
-            if (date.Length == 4)
-            {
-                int currDay = PublicCode.ConvertToIntSafely(date[1])+1;
-
-                if (currDay > 0 && currDay <= maxDays)
-                {
-                    _calendar.SetCurrentDay(currDay);
-                }
-                else
-                {
-                    if (currDay <= 0)
-                    {
-                        date[1] = "1";
-                        _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[1]));
-                    }
-                    else if (currDay > maxDays)
-                    {
-                        //increment the month
-                        _calendar.GoToNextMonth();
-                        date[0] = _calendar.GetCurrentMonth();
-                        date[3] = _calendar.GetCurrentYear().ToString();
-                        currDay = 1;
-                        _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[1]));
-                    }
-                }
-                tbCurrentDate.Text = date[0] + " " + currDay + ", " + date[3];
             }
         }
     }
