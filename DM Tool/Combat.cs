@@ -52,6 +52,12 @@ namespace DM_Tool
             {
                 if (e.ColumnIndex == dgvCombat.Columns["Init"].Index)
                 {
+                    DataGridViewRow currRow = dgvCombat.Rows[e.RowIndex];
+                    DataGridViewCell cell = currRow.Cells["Init"];
+                    this.dgvCombat.CellValueChanged -= new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
+                    cell.Value = PublicCode.ConvertToIntSafely(dgvCombat.CurrentCell.EditedFormattedValue.ToString());
+                    this.dgvCombat.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
+
                     dgvCombat.Sort(dgvCombat.Columns["Init"], ListSortDirection.Descending);
                 }
                 else if (e.ColumnIndex == dgvCombat.Columns["CharacterName"].Index)
@@ -99,15 +105,18 @@ namespace DM_Tool
                 }
                 else if (e.ColumnIndex == dgvCombat.Columns["currHP"].Index)
                 {
+                    //Need to remove handlers, otherwise we get into infinite loop
+                    this.dgvCombat.CellValueChanged -= new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
                     MSScriptControl.ScriptControl sc = new MSScriptControl.ScriptControl();
                     sc.Language = "VBScript";
 
                     DataGridViewRow currRow = dgvCombat.Rows[e.RowIndex];
                     DataGridViewCell cell = currRow.Cells["currHP"];
-                    string expression = cell.Value.ToString();
+                    string expression = cell.EditedFormattedValue.ToString();
 
                     object result = sc.Eval(expression);
                     cell.Value = result.ToString();
+                    this.dgvCombat.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
                 }
             }
         }
@@ -250,6 +259,8 @@ namespace DM_Tool
 
                 }
                 dgvCombat.Rows.Remove(dgvCombat.SelectedRows[0]);
+
+                dgvCombat.ClearSelection();
             }
         }
 
@@ -349,6 +360,56 @@ namespace DM_Tool
             if (currTextBox != null)
             {
                 currTextBox.Select(0, 0);
+            }
+        }
+
+        private void setActiveTurnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!dgvCombat.SelectedRows[0].IsNewRow)
+            {
+                currentTurn.DefaultCellStyle.BackColor = color;
+
+                currentTurn = dgvCombat.SelectedRows[0];
+                currentTurn.DefaultCellStyle.BackColor = Color.Red;
+
+                dgvCombat.ClearSelection();
+            }
+        }
+
+        private void moveUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!dgvCombat.SelectedRows[0].IsNewRow)
+            {
+                int i = dgvCombat.SelectedRows[0].Index;
+                var r10 = dgvCombat.Rows[i];
+                var r1 = dgvCombat.Rows[i-1];
+                dgvCombat.Rows.Remove(r1);
+                dgvCombat.Rows.Remove(r10);
+                dgvCombat.Rows.Insert(i-1, r10);
+                dgvCombat.Rows.Insert(i, r1);
+
+                dgvCombat.Rows[i - 1].Selected = true;
+            }
+        }
+
+        private void moveDownToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int i = dgvCombat.SelectedRows[0].Index;
+            var r10 = dgvCombat.Rows[i];
+            var r1 = dgvCombat.Rows[i + 1];
+            dgvCombat.Rows.Remove(r1);
+            dgvCombat.Rows.Remove(r10);
+            dgvCombat.Rows.Insert(i, r1);
+            dgvCombat.Rows.Insert(i + 1, r10);
+
+            dgvCombat.Rows[i + 1].Selected = true;
+        }
+
+        private void dgvCombat_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Context == (DataGridViewDataErrorContexts.Parsing | DataGridViewDataErrorContexts.Commit))
+            {
+                MessageBox.Show("Must be an Int, FFS.");
             }
         }
     }

@@ -42,7 +42,11 @@
             this.Icon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ctxtCombat = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openCharacterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setActiveTurnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ctxtMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.moveUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -90,6 +94,7 @@
             this.dgvCombat.TabIndex = 0;
             this.dgvCombat.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvCombat_CellBeginEdit);
             this.dgvCombat.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCombat_CellValueChanged);
+            this.dgvCombat.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvCombat_DataError);
             this.dgvCombat.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCombat_EditingControlShowing);
             this.dgvCombat.Leave += new System.EventHandler(this.dgvCombat_Leave);
             this.dgvCombat.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvCombat_MouseDown);
@@ -152,23 +157,53 @@
             // 
             this.ctxtCombat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openCharacterToolStripMenuItem,
-            this.ctxtMenuItemDelete});
+            this.setActiveTurnToolStripMenuItem,
+            this.ctxtMenuItemDelete,
+            this.toolStripSeparator1,
+            this.moveUpToolStripMenuItem,
+            this.moveDownToolStripMenuItem});
             this.ctxtCombat.Name = "ctxtCombat";
-            this.ctxtCombat.Size = new System.Drawing.Size(158, 48);
+            this.ctxtCombat.Size = new System.Drawing.Size(195, 120);
             // 
             // openCharacterToolStripMenuItem
             // 
             this.openCharacterToolStripMenuItem.Name = "openCharacterToolStripMenuItem";
-            this.openCharacterToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.openCharacterToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.openCharacterToolStripMenuItem.Text = "Open Character";
             this.openCharacterToolStripMenuItem.Click += new System.EventHandler(this.openCharacterToolStripMenuItem_Click);
+            // 
+            // setActiveTurnToolStripMenuItem
+            // 
+            this.setActiveTurnToolStripMenuItem.Name = "setActiveTurnToolStripMenuItem";
+            this.setActiveTurnToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.setActiveTurnToolStripMenuItem.Text = "Set Active Turn";
+            this.setActiveTurnToolStripMenuItem.Click += new System.EventHandler(this.setActiveTurnToolStripMenuItem_Click);
             // 
             // ctxtMenuItemDelete
             // 
             this.ctxtMenuItemDelete.Name = "ctxtMenuItemDelete";
-            this.ctxtMenuItemDelete.Size = new System.Drawing.Size(157, 22);
-            this.ctxtMenuItemDelete.Text = "Delete";
+            this.ctxtMenuItemDelete.Size = new System.Drawing.Size(194, 22);
+            this.ctxtMenuItemDelete.Text = "Remove From Combat";
             this.ctxtMenuItemDelete.Click += new System.EventHandler(this.ctxtMenuItemDelete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
+            // 
+            // moveUpToolStripMenuItem
+            // 
+            this.moveUpToolStripMenuItem.Name = "moveUpToolStripMenuItem";
+            this.moveUpToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.moveUpToolStripMenuItem.Text = "Move Up";
+            this.moveUpToolStripMenuItem.Click += new System.EventHandler(this.moveUpToolStripMenuItem_Click);
+            // 
+            // moveDownToolStripMenuItem
+            // 
+            this.moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
+            this.moveDownToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.moveDownToolStripMenuItem.Text = "Move Down";
+            this.moveDownToolStripMenuItem.Click += new System.EventHandler(this.moveDownToolStripMenuItem_Click);
             // 
             // btnReset
             // 
@@ -326,5 +361,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn reflex;
         private System.Windows.Forms.DataGridViewTextBoxColumn will;
         private System.Windows.Forms.DataGridViewTextBoxColumn Icon;
+        private System.Windows.Forms.ToolStripMenuItem setActiveTurnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem;
     }
 }
