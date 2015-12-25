@@ -76,11 +76,11 @@
     <Compile Include="Controls\3.5\CharacterClassControl.Designer.cs">
       <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\3.5\CharacterControl.cs">
+    <Compile Include="Controls\3.5\StatBlockControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\3.5\CharacterControl.Designer.cs">
-      <DependentUpon>CharacterControl.cs</DependentUpon>
+    <Compile Include="Controls\3.5\StatBlockControl.Designer.cs">
+      <DependentUpon>StatBlockControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CalendarControl.cs">
       <SubType>UserControl</SubType>
@@ -147,7 +147,7 @@
     <Compile Include="frmNewCreatureType.Designer.cs">
       <DependentUpon>frmNewCreatureType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\ThirdEd\CharacterSheet.cs" />
+    <Compile Include="Classes\ThirdEd\StatBlock.cs" />
     <Compile Include="Other\CampaignSelector.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,8 +191,8 @@
     <EmbeddedResource Include="Controls\3.5\CharacterClassControl.resx">
       <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\3.5\CharacterControl.resx">
-      <DependentUpon>CharacterControl.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\3.5\StatBlockControl.resx">
+      <DependentUpon>StatBlockControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CalendarControl.resx">
       <DependentUpon>CalendarControl.cs</DependentUpon>

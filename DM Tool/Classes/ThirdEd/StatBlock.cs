@@ -8,12 +8,12 @@ using DM_Tool.Controls;
 
 namespace DM_Tool
 {
-    public class CharacterSheet : DatabaseClass
+    public class StatBlock : DatabaseClass
     {
-        public CharacterSheet(){
+        public StatBlock(){
         }
 
-        public CharacterSheet(string[] vals)//string name, string raceName, string classes, string levels, string type, string size, string hdNum, string hdSize, string hp, string init, string initMisc, string speed, string bab, string fort, string reflex, string will, string str, string dex, string con, string intelligence, string wis, string cha, string natAC, string armorAC, string shieldAC, string defAC, string attack, string fullAttack, string space, string reach, string specialAttacks, string specialQualities, string feats, string maxHP, string totalAC, string touchAC, string ffAC)
+        public StatBlock(string[] vals)//string name, string raceName, string classes, string levels, string type, string size, string hdNum, string hdSize, string hp, string init, string initMisc, string speed, string bab, string fort, string reflex, string will, string str, string dex, string con, string intelligence, string wis, string cha, string natAC, string armorAC, string shieldAC, string defAC, string attack, string fullAttack, string space, string reach, string specialAttacks, string specialQualities, string feats, string maxHP, string totalAC, string touchAC, string ffAC)
         {
             int count = 0;
             this._name = vals[count++];
@@ -56,8 +56,11 @@ namespace DM_Tool
 
             this._touchAC = PublicCode.ConvertToIntSafely(vals[count++]);
             this._ffAC = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._grapple = PublicCode.ConvertToIntSafely(vals[count++]);
+            this._hdInfo = vals[count++];
         }
 
+        #region get and Set
         private string _name;
         public string name
         {
@@ -149,6 +152,13 @@ namespace DM_Tool
             set { _hitDieNum = value; }
         }
 
+        private string _hdInfo;
+        public string hdInfo
+        {
+            get { return _hdInfo; }
+            set { _hdInfo = value; }
+        }
+
         private int _hp;
         public int hp
         {
@@ -182,6 +192,13 @@ namespace DM_Tool
         {
             get { return _baseAttackBonus; }
             set { _baseAttackBonus = value; }
+        }
+
+        private int _grapple;
+        public int grapple
+        {
+            get { return _grapple; }
+            set { _grapple = value; }
         }
 
         private int _fortSave;
@@ -442,5 +459,6 @@ namespace DM_Tool
             get { return _ffAC; }
             set { _ffAC = value; }
         }
+        #endregion
     }
 }

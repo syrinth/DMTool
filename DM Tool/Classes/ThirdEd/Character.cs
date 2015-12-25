@@ -9,7 +9,7 @@ namespace DM_Tool.Classes
     {
         public string _name;
         public bool _campaignSpecific = false;
-        public CharacterSheet _characterSheet;
+        public StatBlock _characterSheet;
         public List<string> _skills;
         public List<List<string>> _spells;
         public List<string> _equipment;
@@ -20,7 +20,7 @@ namespace DM_Tool.Classes
 
         public Character(string[] charSheetVals, bool campaignSpecific, List<string> skills, List<List<string>> spells, List<string> equipment)
         {
-            _characterSheet = new CharacterSheet(charSheetVals);
+            _characterSheet = new StatBlock(charSheetVals);
             _skills = skills;
             _name = _characterSheet.name;
             _campaignSpecific = campaignSpecific;
@@ -28,7 +28,7 @@ namespace DM_Tool.Classes
             _equipment = equipment;
         }
 
-        public CharacterSheet GetCharacterSheet()
+        public StatBlock GetCharacterSheet()
         {
             return _characterSheet;
         }

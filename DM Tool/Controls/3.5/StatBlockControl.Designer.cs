@@ -1,6 +1,6 @@
 ﻿namespace DM_Tool.Controls
 {
-    partial class CharacterControl
+    partial class StatBlockControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,17 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabCharacterSheet = new System.Windows.Forms.TabControl();
             this.tabPageCharacterSheet = new System.Windows.Forms.TabPage();
+            this.tbOther = new System.Windows.Forms.TextBox();
+            this.tbSpecQualities = new System.Windows.Forms.TextBox();
+            this.tbSpecAtks = new System.Windows.Forms.TextBox();
+            this.tbFeats = new System.Windows.Forms.TextBox();
+            this.lblOther = new System.Windows.Forms.Label();
+            this.lblQualities = new System.Windows.Forms.Label();
+            this.lblAttacks = new System.Windows.Forms.Label();
+            this.lblFeats = new System.Windows.Forms.Label();
             this.tbACVals = new System.Windows.Forms.TextBox();
             this.lblHP = new System.Windows.Forms.Label();
             this.tbHD = new System.Windows.Forms.TextBox();
+            this.ctxtUpdate = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbRacialHD = new System.Windows.Forms.TextBox();
             this.chkCampaign = new System.Windows.Forms.CheckBox();
             this.tbLevels = new System.Windows.Forms.TextBox();
@@ -113,17 +123,9 @@
             this.addNewSpontaneousPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.lblFeats = new System.Windows.Forms.Label();
-            this.lblAttacks = new System.Windows.Forms.Label();
-            this.lblQualities = new System.Windows.Forms.Label();
-            this.lblOther = new System.Windows.Forms.Label();
-            this.tbFeats = new System.Windows.Forms.TextBox();
-            this.tbSpecAtks = new System.Windows.Forms.TextBox();
-            this.tbSpecQualities = new System.Windows.Forms.TextBox();
-            this.tbOther = new System.Windows.Forms.TextBox();
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
+            this.ctxtUpdate.SuspendLayout();
             this.tabSkills.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).BeginInit();
             this.tabInventory.SuspendLayout();
@@ -216,6 +218,70 @@
             this.tabPageCharacterSheet.TabIndex = 0;
             this.tabPageCharacterSheet.Text = "Character Sheet";
             // 
+            // tbOther
+            // 
+            this.tbOther.Location = new System.Drawing.Point(60, 393);
+            this.tbOther.Name = "tbOther";
+            this.tbOther.Size = new System.Drawing.Size(398, 20);
+            this.tbOther.TabIndex = 156;
+            // 
+            // tbSpecQualities
+            // 
+            this.tbSpecQualities.Location = new System.Drawing.Point(60, 367);
+            this.tbSpecQualities.Name = "tbSpecQualities";
+            this.tbSpecQualities.Size = new System.Drawing.Size(398, 20);
+            this.tbSpecQualities.TabIndex = 155;
+            // 
+            // tbSpecAtks
+            // 
+            this.tbSpecAtks.Location = new System.Drawing.Point(60, 341);
+            this.tbSpecAtks.Name = "tbSpecAtks";
+            this.tbSpecAtks.Size = new System.Drawing.Size(398, 20);
+            this.tbSpecAtks.TabIndex = 154;
+            // 
+            // tbFeats
+            // 
+            this.tbFeats.Location = new System.Drawing.Point(59, 315);
+            this.tbFeats.Name = "tbFeats";
+            this.tbFeats.Size = new System.Drawing.Size(402, 20);
+            this.tbFeats.TabIndex = 153;
+            // 
+            // lblOther
+            // 
+            this.lblOther.AutoSize = true;
+            this.lblOther.Location = new System.Drawing.Point(8, 396);
+            this.lblOther.Name = "lblOther";
+            this.lblOther.Size = new System.Drawing.Size(36, 13);
+            this.lblOther.TabIndex = 152;
+            this.lblOther.Text = "Other:";
+            // 
+            // lblQualities
+            // 
+            this.lblQualities.AutoSize = true;
+            this.lblQualities.Location = new System.Drawing.Point(8, 370);
+            this.lblQualities.Name = "lblQualities";
+            this.lblQualities.Size = new System.Drawing.Size(50, 13);
+            this.lblQualities.TabIndex = 151;
+            this.lblQualities.Text = "Qualities:";
+            // 
+            // lblAttacks
+            // 
+            this.lblAttacks.AutoSize = true;
+            this.lblAttacks.Location = new System.Drawing.Point(8, 344);
+            this.lblAttacks.Name = "lblAttacks";
+            this.lblAttacks.Size = new System.Drawing.Size(46, 13);
+            this.lblAttacks.TabIndex = 150;
+            this.lblAttacks.Text = "Attacks:";
+            // 
+            // lblFeats
+            // 
+            this.lblFeats.AutoSize = true;
+            this.lblFeats.Location = new System.Drawing.Point(8, 318);
+            this.lblFeats.Name = "lblFeats";
+            this.lblFeats.Size = new System.Drawing.Size(36, 13);
+            this.lblFeats.TabIndex = 149;
+            this.lblFeats.Text = "Feats:";
+            // 
             // tbACVals
             // 
             this.tbACVals.Location = new System.Drawing.Point(100, 133);
@@ -234,11 +300,26 @@
             // 
             // tbHD
             // 
+            this.tbHD.ContextMenuStrip = this.ctxtUpdate;
             this.tbHD.Location = new System.Drawing.Point(8, 59);
             this.tbHD.Name = "tbHD";
             this.tbHD.Size = new System.Drawing.Size(205, 20);
             this.tbHD.TabIndex = 146;
             this.toolTip1.SetToolTip(this.tbHD, "Hit Dice HP calculations");
+            // 
+            // ctxtUpdate
+            // 
+            this.ctxtUpdate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateToolStripMenuItem});
+            this.ctxtUpdate.Name = "ctxtUpdate";
+            this.ctxtUpdate.Size = new System.Drawing.Size(113, 26);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.updateToolStripMenuItem.Text = "Update";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // tbRacialHD
             // 
@@ -314,6 +395,7 @@
             // 
             // tbFFAC
             // 
+            this.tbFFAC.ContextMenuStrip = this.ctxtUpdate;
             this.tbFFAC.Location = new System.Drawing.Point(394, 133);
             this.tbFFAC.Name = "tbFFAC";
             this.tbFFAC.Size = new System.Drawing.Size(20, 20);
@@ -331,6 +413,7 @@
             // 
             // tbTouchAC
             // 
+            this.tbTouchAC.ContextMenuStrip = this.ctxtUpdate;
             this.tbTouchAC.Location = new System.Drawing.Point(302, 133);
             this.tbTouchAC.Name = "tbTouchAC";
             this.tbTouchAC.Size = new System.Drawing.Size(20, 20);
@@ -383,9 +466,9 @@
             // 
             // tbGrapple
             // 
+            this.tbGrapple.ContextMenuStrip = this.ctxtUpdate;
             this.tbGrapple.Location = new System.Drawing.Point(150, 158);
             this.tbGrapple.Name = "tbGrapple";
-            this.tbGrapple.ReadOnly = true;
             this.tbGrapple.Size = new System.Drawing.Size(47, 20);
             this.tbGrapple.TabIndex = 129;
             // 
@@ -451,6 +534,7 @@
             // 
             // tbTotalAC
             // 
+            this.tbTotalAC.ContextMenuStrip = this.ctxtUpdate;
             this.tbTotalAC.Location = new System.Drawing.Point(60, 133);
             this.tbTotalAC.Name = "tbTotalAC";
             this.tbTotalAC.Size = new System.Drawing.Size(26, 20);
@@ -475,6 +559,7 @@
             // 
             // tbWill
             // 
+            this.tbWill.ContextMenuStrip = this.ctxtUpdate;
             this.tbWill.Location = new System.Drawing.Point(223, 262);
             this.tbWill.Name = "tbWill";
             this.tbWill.Size = new System.Drawing.Size(33, 20);
@@ -491,6 +576,7 @@
             // 
             // tbRef
             // 
+            this.tbRef.ContextMenuStrip = this.ctxtUpdate;
             this.tbRef.Location = new System.Drawing.Point(154, 262);
             this.tbRef.Name = "tbRef";
             this.tbRef.Size = new System.Drawing.Size(33, 20);
@@ -610,6 +696,7 @@
             // 
             // tbFort
             // 
+            this.tbFort.ContextMenuStrip = this.ctxtUpdate;
             this.tbFort.Location = new System.Drawing.Point(85, 262);
             this.tbFort.Name = "tbFort";
             this.tbFort.Size = new System.Drawing.Size(33, 20);
@@ -626,14 +713,15 @@
             // 
             // tbBAB
             // 
+            this.tbBAB.ContextMenuStrip = this.ctxtUpdate;
             this.tbBAB.Location = new System.Drawing.Point(100, 158);
             this.tbBAB.Name = "tbBAB";
-            this.tbBAB.ReadOnly = true;
             this.tbBAB.Size = new System.Drawing.Size(47, 20);
             this.tbBAB.TabIndex = 90;
             // 
             // tbHP
             // 
+            this.tbHP.ContextMenuStrip = this.ctxtUpdate;
             this.tbHP.Location = new System.Drawing.Point(219, 59);
             this.tbHP.Name = "tbHP";
             this.tbHP.Size = new System.Drawing.Size(29, 20);
@@ -673,8 +761,8 @@
             // 
             this.dgvSkills.AllowUserToResizeColumns = false;
             this.dgvSkills.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
-            this.dgvSkills.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Info;
+            this.dgvSkills.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvSkills.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvSkills.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSkills.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -716,38 +804,38 @@
             // 
             // colTotal
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.NullValue = "0";
-            this.colTotal.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.NullValue = "0";
+            this.colTotal.DefaultCellStyle = dataGridViewCellStyle8;
             this.colTotal.FillWeight = 10F;
             this.colTotal.HeaderText = "Total";
             this.colTotal.Name = "colTotal";
             // 
             // colMod
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.NullValue = "0";
-            this.colMod.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.NullValue = "0";
+            this.colMod.DefaultCellStyle = dataGridViewCellStyle9;
             this.colMod.FillWeight = 10F;
             this.colMod.HeaderText = "Ability Mod";
             this.colMod.Name = "colMod";
             // 
             // colRanks
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.NullValue = "0";
-            this.colRanks.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.NullValue = "0";
+            this.colRanks.DefaultCellStyle = dataGridViewCellStyle10;
             this.colRanks.FillWeight = 10F;
             this.colRanks.HeaderText = "Ranks";
             this.colRanks.Name = "colRanks";
             // 
             // colMisc
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.colMisc.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.NullValue = "0";
+            this.colMisc.DefaultCellStyle = dataGridViewCellStyle11;
             this.colMisc.FillWeight = 10F;
             this.colMisc.HeaderText = "Misc";
             this.colMisc.Name = "colMisc";
@@ -812,9 +900,9 @@
             // 
             // colSlot
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colSlot.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colSlot.DefaultCellStyle = dataGridViewCellStyle12;
             this.colSlot.FillWeight = 20F;
             this.colSlot.HeaderText = "Slot";
             this.colSlot.Name = "colSlot";
@@ -880,92 +968,18 @@
             this.toolTip1.AutomaticDelay = 100;
             this.toolTip1.IsBalloon = true;
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(3, 474);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 78;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // lblFeats
-            // 
-            this.lblFeats.AutoSize = true;
-            this.lblFeats.Location = new System.Drawing.Point(8, 318);
-            this.lblFeats.Name = "lblFeats";
-            this.lblFeats.Size = new System.Drawing.Size(36, 13);
-            this.lblFeats.TabIndex = 149;
-            this.lblFeats.Text = "Feats:";
-            // 
-            // lblAttacks
-            // 
-            this.lblAttacks.AutoSize = true;
-            this.lblAttacks.Location = new System.Drawing.Point(8, 344);
-            this.lblAttacks.Name = "lblAttacks";
-            this.lblAttacks.Size = new System.Drawing.Size(46, 13);
-            this.lblAttacks.TabIndex = 150;
-            this.lblAttacks.Text = "Attacks:";
-            // 
-            // lblQualities
-            // 
-            this.lblQualities.AutoSize = true;
-            this.lblQualities.Location = new System.Drawing.Point(8, 370);
-            this.lblQualities.Name = "lblQualities";
-            this.lblQualities.Size = new System.Drawing.Size(50, 13);
-            this.lblQualities.TabIndex = 151;
-            this.lblQualities.Text = "Qualities:";
-            // 
-            // lblOther
-            // 
-            this.lblOther.AutoSize = true;
-            this.lblOther.Location = new System.Drawing.Point(8, 396);
-            this.lblOther.Name = "lblOther";
-            this.lblOther.Size = new System.Drawing.Size(36, 13);
-            this.lblOther.TabIndex = 152;
-            this.lblOther.Text = "Other:";
-            // 
-            // tbFeats
-            // 
-            this.tbFeats.Location = new System.Drawing.Point(59, 315);
-            this.tbFeats.Name = "tbFeats";
-            this.tbFeats.Size = new System.Drawing.Size(402, 20);
-            this.tbFeats.TabIndex = 153;
-            // 
-            // tbSpecAtks
-            // 
-            this.tbSpecAtks.Location = new System.Drawing.Point(60, 341);
-            this.tbSpecAtks.Name = "tbSpecAtks";
-            this.tbSpecAtks.Size = new System.Drawing.Size(398, 20);
-            this.tbSpecAtks.TabIndex = 154;
-            // 
-            // tbSpecQualities
-            // 
-            this.tbSpecQualities.Location = new System.Drawing.Point(60, 367);
-            this.tbSpecQualities.Name = "tbSpecQualities";
-            this.tbSpecQualities.Size = new System.Drawing.Size(398, 20);
-            this.tbSpecQualities.TabIndex = 155;
-            // 
-            // tbOther
-            // 
-            this.tbOther.Location = new System.Drawing.Point(60, 393);
-            this.tbOther.Name = "tbOther";
-            this.tbOther.Size = new System.Drawing.Size(398, 20);
-            this.tbOther.TabIndex = 156;
-            // 
-            // CharacterControl
+            // StatBlockControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabCharacterSheet);
-            this.Name = "CharacterControl";
+            this.Name = "StatBlockControl";
             this.Size = new System.Drawing.Size(600, 500);
             this.tabCharacterSheet.ResumeLayout(false);
             this.tabPageCharacterSheet.ResumeLayout(false);
             this.tabPageCharacterSheet.PerformLayout();
+            this.ctxtUpdate.ResumeLayout(false);
             this.tabSkills.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSkills)).EndInit();
             this.tabInventory.ResumeLayout(false);
@@ -1059,7 +1073,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colItemName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWeight;
         private System.Windows.Forms.TextBox tbACVals;
-        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.TextBox tbOther;
         private System.Windows.Forms.TextBox tbSpecQualities;
         private System.Windows.Forms.TextBox tbSpecAtks;
@@ -1068,5 +1081,7 @@
         private System.Windows.Forms.Label lblQualities;
         private System.Windows.Forms.Label lblAttacks;
         private System.Windows.Forms.Label lblFeats;
+        private System.Windows.Forms.ContextMenuStrip ctxtUpdate;
+        private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
     }
 }

@@ -43,7 +43,7 @@ namespace DM_Tool
         {
             string newCharacter = "New Character";
             TabPage page = new TabPage(newCharacter);
-            CharacterControl mc = new CharacterControl(page);
+            StatBlockControl mc = new StatBlockControl(page);
             page.Controls.Add(mc);
             mc.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
@@ -79,7 +79,7 @@ namespace DM_Tool
                         dgView.Rows.Add(type.name);
                     }
                 }
-                if (name == "Characters")
+                if (name == "Stat Blocks")
                 {
                     DisplayCharacters();
                 }
@@ -400,7 +400,7 @@ namespace DM_Tool
         private void derpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TabPage page = new TabPage("New Character");
-            CharacterControl aoc = new CharacterControl();
+            StatBlockControl aoc = new StatBlockControl();
             page.Controls.Add(aoc);
             aoc.Dock = DockStyle.Fill;
             AddOrSelectPage(page);
@@ -548,7 +548,7 @@ namespace DM_Tool
             {
                 string newCharacter = "New Character";
                 TabPage page = new TabPage(newCharacter);
-                CharacterControl mc = new CharacterControl(page);
+                StatBlockControl mc = new StatBlockControl(page);
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
                 AddOrSelectPage(page);

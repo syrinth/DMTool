@@ -269,7 +269,7 @@ namespace DM_Tool
                     tc.Dock = DockStyle.Fill;
                     break;
                 case "Character":
-                    CharacterControl m = new CharacterControl(page, listCombinedCharacters.Find(x => x.GetName().Equals(name)));
+                    StatBlockControl m = new StatBlockControl(page, listCombinedCharacters.Find(x => x.GetName().Equals(name)));
                     page.Controls.Add(m);
                     m.Dock = DockStyle.Fill;
                     break;

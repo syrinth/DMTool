@@ -26,7 +26,6 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csprojResolveAssemblyReferen
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Combat.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.AdventureSiteControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.ArtObjectControl.resources
-E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.CharacterControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.RoomControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.BaseItemControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.HardMaterialControl.resources
@@ -43,3 +42,4 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\Interop.MSScriptControl.dll
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csproj.ResolveComReference.cache
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.CampaignCreatorDialog.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.CalendarControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.StatBlockControl.resources

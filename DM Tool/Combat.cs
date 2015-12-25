@@ -72,7 +72,7 @@ namespace DM_Tool
                     Character character = mgr.listCombinedCharacters.Find(x => x.GetName().ToUpper().Equals(name.ToUpper()));
                     if (character != null)
                     {
-                        CharacterSheet sheet = character.GetCharacterSheet();
+                        StatBlock sheet = character.GetCharacterSheet();
                         currRow.Cells["AC"].Value = sheet.totalAC;
                         currRow.Cells["currHP"].Value = sheet.maxHP;
                         currRow.Cells["maxHP"].Value = sheet.maxHP;
@@ -311,7 +311,7 @@ namespace DM_Tool
                 }
 
                 TabPage page = new TabPage(charName);
-                CharacterControl mc = new CharacterControl(page, character);
+                StatBlockControl mc = new StatBlockControl(page, character);
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
 
@@ -320,7 +320,7 @@ namespace DM_Tool
             else
             {
                 TabPage page = new TabPage(charName);
-                CharacterControl mc = new CharacterControl(page, charName);
+                StatBlockControl mc = new StatBlockControl(page, charName);
                 page.Controls.Add(mc);
                 mc.Dock = DockStyle.Fill;
 

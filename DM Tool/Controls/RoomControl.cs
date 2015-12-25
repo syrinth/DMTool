@@ -230,7 +230,7 @@ namespace DM_Tool.Controls
                     }
 
                     TabPage page = new TabPage(charName);
-                    CharacterControl mc = new CharacterControl(page, character);
+                    StatBlockControl mc = new StatBlockControl(page, character);
                     page.Controls.Add(mc);
                     mc.Dock = DockStyle.Fill;
 
@@ -239,7 +239,7 @@ namespace DM_Tool.Controls
                 else
                 {
                     TabPage page = new TabPage(charName);
-                    CharacterControl mc = new CharacterControl(page, charName);
+                    StatBlockControl mc = new StatBlockControl(page, charName);
                     page.Controls.Add(mc);
                     mc.Dock = DockStyle.Fill;
 
