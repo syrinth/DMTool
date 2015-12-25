@@ -117,7 +117,6 @@ namespace DM_Tool.Controls
             _parentPage = parentPage;
 
             tbName.Text = name;
-            btnSave.Text = "Save";
         }
 
         public void Init()
@@ -438,10 +437,13 @@ namespace DM_Tool.Controls
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            string control = (((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl as TextBox).Name;
+            string control = ((sender as ToolStripMenuItem).Owner as ContextMenuStrip).SourceControl.Name;
 
             switch (control)
             {
+                case "tabPageCharacterSheet":
+                    UpdateSheet();
+                    break;
                 case "tbHD":
                     CalculateBaseHP();
                     break;
@@ -470,53 +472,8 @@ namespace DM_Tool.Controls
                     break;
             }
         }
-        
-        private void tabInventoryContainers_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                ctxtInventory.Show(Cursor.Position);
-            }
-        }
-        
-        private void tabSpells_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                ctxtNewSpellPage.Show(Cursor.Position);
-            }
-        }
-        
-        private void tbClasses_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                ctxtClasses.Items.Clear();
-                string[] split = tbClasses.Text.Split('/');
-                foreach (string s in split)
-                {
-                    if (!s.Equals(string.Empty))
-                    {
-                        ctxtClasses.Items.Add("Open " + s.Trim());
-                    }
-                }
-                ctxtClasses.Show();
-            }
-        }
 
-        private void ctxtClasses_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            string name = e.ClickedItem.Text;
-            name = name.Replace("Open ", "");
-            mgr.NewTab("Character Class", name);
-        }
-
-        private void tbClassesLevels_Leave(object sender, EventArgs e)
-        {
-            GetClassLevels();
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (tbName.Text != string.Empty)
             {
@@ -560,6 +517,51 @@ namespace DM_Tool.Controls
             {
                 MessageBox.Show("Name cannot be empty!", "Error");
             }
+        }
+
+        private void tabInventoryContainers_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctxtInventory.Show(Cursor.Position);
+            }
+        }
+        
+        private void tabSpells_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctxtNewSpellPage.Show(Cursor.Position);
+            }
+        }
+        
+        private void tbClasses_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctxtClasses.Items.Clear();
+                string[] split = tbClasses.Text.Split('/');
+                foreach (string s in split)
+                {
+                    if (!s.Equals(string.Empty))
+                    {
+                        ctxtClasses.Items.Add("Open " + s.Trim());
+                    }
+                }
+                ctxtClasses.Show();
+            }
+        }
+
+        private void ctxtClasses_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            string name = e.ClickedItem.Text;
+            name = name.Replace("Open ", "");
+            mgr.NewTab("Character Class", name);
+        }
+
+        private void tbClassesLevels_Leave(object sender, EventArgs e)
+        {
+            GetClassLevels();
         }
 
         private void cbSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -662,6 +664,39 @@ namespace DM_Tool.Controls
         #endregion
 
         #region Update Methods
+        public void UpdateSheet()
+        {
+
+            try
+            {
+                tc = mgr.listCreatureTypes.Find(x => x.name.Equals(cbType.SelectedItem));
+            }
+            catch { }
+            GetClassLevels();
+            try
+            {
+                RacialHD = Convert.ToInt32(tbRacialHD.Text);
+            }
+            catch { }
+
+            if (classLevels.Count > 0 || RacialHD > 0)
+            {
+
+                tbInit.Text = (Convert.ToInt32(tbInitDex.Text) + Convert.ToInt32(tbInitMisc.Text)).ToString();
+                //Calculate the BAB and Grapple
+                CalculateBAB();
+                CalculateGrapple();
+
+                //Calculate Saving Throws
+                CalculateSaves();
+
+                CalculateBaseHP();
+
+                CalculateAC();
+
+                CalculateSkills();
+            }
+        }
 
         public void CalculateSaves()
         {
@@ -957,5 +992,7 @@ namespace DM_Tool.Controls
             tbFFAC.Text = flatFootedAC.ToString();
         }
         #endregion
+
+        
     }
 }

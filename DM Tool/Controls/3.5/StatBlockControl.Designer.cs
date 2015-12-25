@@ -37,6 +37,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabCharacterSheet = new System.Windows.Forms.TabControl();
             this.tabPageCharacterSheet = new System.Windows.Forms.TabPage();
+            this.ctxtUpdate = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbOther = new System.Windows.Forms.TextBox();
             this.tbSpecQualities = new System.Windows.Forms.TextBox();
             this.tbSpecAtks = new System.Windows.Forms.TextBox();
@@ -48,8 +51,6 @@
             this.tbACVals = new System.Windows.Forms.TextBox();
             this.lblHP = new System.Windows.Forms.Label();
             this.tbHD = new System.Windows.Forms.TextBox();
-            this.ctxtUpdate = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbRacialHD = new System.Windows.Forms.TextBox();
             this.chkCampaign = new System.Windows.Forms.CheckBox();
             this.tbLevels = new System.Windows.Forms.TextBox();
@@ -121,7 +122,6 @@
             this.tabSpellPages = new System.Windows.Forms.TabControl();
             this.ctxtNewSpellPage = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewSpontaneousPageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabCharacterSheet.SuspendLayout();
             this.tabPageCharacterSheet.SuspendLayout();
@@ -146,12 +146,13 @@
             this.tabCharacterSheet.Location = new System.Drawing.Point(3, 3);
             this.tabCharacterSheet.Name = "tabCharacterSheet";
             this.tabCharacterSheet.SelectedIndex = 0;
-            this.tabCharacterSheet.Size = new System.Drawing.Size(594, 465);
+            this.tabCharacterSheet.Size = new System.Drawing.Size(594, 494);
             this.tabCharacterSheet.TabIndex = 75;
             // 
             // tabPageCharacterSheet
             // 
             this.tabPageCharacterSheet.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageCharacterSheet.ContextMenuStrip = this.ctxtUpdate;
             this.tabPageCharacterSheet.Controls.Add(this.tbOther);
             this.tabPageCharacterSheet.Controls.Add(this.tbSpecQualities);
             this.tabPageCharacterSheet.Controls.Add(this.tbSpecAtks);
@@ -214,9 +215,31 @@
             this.tabPageCharacterSheet.Location = new System.Drawing.Point(4, 22);
             this.tabPageCharacterSheet.Name = "tabPageCharacterSheet";
             this.tabPageCharacterSheet.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCharacterSheet.Size = new System.Drawing.Size(586, 439);
+            this.tabPageCharacterSheet.Size = new System.Drawing.Size(586, 468);
             this.tabPageCharacterSheet.TabIndex = 0;
             this.tabPageCharacterSheet.Text = "Character Sheet";
+            // 
+            // ctxtUpdate
+            // 
+            this.ctxtUpdate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.ctxtUpdate.Name = "ctxtUpdate";
+            this.ctxtUpdate.Size = new System.Drawing.Size(113, 48);
+            // 
+            // updateToolStripMenuItem
+            // 
+            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
+            this.updateToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.updateToolStripMenuItem.Text = "Update";
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // tbOther
             // 
@@ -306,20 +329,6 @@
             this.tbHD.Size = new System.Drawing.Size(205, 20);
             this.tbHD.TabIndex = 146;
             this.toolTip1.SetToolTip(this.tbHD, "Hit Dice HP calculations");
-            // 
-            // ctxtUpdate
-            // 
-            this.ctxtUpdate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.updateToolStripMenuItem});
-            this.ctxtUpdate.Name = "ctxtUpdate";
-            this.ctxtUpdate.Size = new System.Drawing.Size(113, 26);
-            // 
-            // updateToolStripMenuItem
-            // 
-            this.updateToolStripMenuItem.Name = "updateToolStripMenuItem";
-            this.updateToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.updateToolStripMenuItem.Text = "Update";
-            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
             // 
             // tbRacialHD
             // 
@@ -953,16 +962,6 @@
             this.addNewSpontaneousPageToolStripMenuItem.Text = "Add New Spell Page";
             this.addNewSpontaneousPageToolStripMenuItem.Click += new System.EventHandler(this.addNewSpellPageToolStripMenuItem_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(512, 474);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 77;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // toolTip1
             // 
             this.toolTip1.AutomaticDelay = 100;
@@ -972,7 +971,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tabCharacterSheet);
             this.Name = "StatBlockControl";
             this.Size = new System.Drawing.Size(600, 500);
@@ -997,7 +995,6 @@
 
         private System.Windows.Forms.TabControl tabCharacterSheet;
         private System.Windows.Forms.TabPage tabPageCharacterSheet;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TabPage tabSkills;
         private System.Windows.Forms.DataGridView dgvSkills;
         private System.Windows.Forms.TextBox tbLevels;
@@ -1083,5 +1080,6 @@
         private System.Windows.Forms.Label lblFeats;
         private System.Windows.Forms.ContextMenuStrip ctxtUpdate;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
