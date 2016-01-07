@@ -155,13 +155,7 @@ namespace DM_Tool.Classes
             _daysOfWeek.Clear();
             foreach (string s in val)
             {
-                string temp = s;
-                if (s.Contains("{"))
-                {
-                    temp = s.Trim(new char[] { '{', '}' });
-                    _currDayOfWeek = temp;
-                }
-                _daysOfWeek.Add(temp);
+                _daysOfWeek.Add(s);
             }
         }
 
@@ -175,14 +169,7 @@ namespace DM_Tool.Classes
             string val = string.Empty;
             foreach (string s in _daysOfWeek)
             {
-                if (_currDayOfWeek == s)
-                {
-                    val = val + "{" + s + "}, ";
-                }
-                else
-                {
-                    val = val + s + ", ";
-                }
+                val = val + s + ", ";
             }
 
             return val.Trim(new char[] {',', ' '});

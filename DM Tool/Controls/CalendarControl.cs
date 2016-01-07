@@ -43,15 +43,16 @@ namespace DM_Tool
             tbNumDays.Text = tbNumDays.Text.Trim(new char[] { ',', ' ' });
 
             tbDaysOfWeek.Text = _calendar.PrintDaysOfWeek();
-            tbCurrentDate.Text = _calendar.GetCurrentMonth() + " " + _calendar.GetCurrentDay() + ", " + _calendar.GetCurrentYear();
+            tbCurrentDate.Text = _calendar.GetCurrentDayOfWeek() + ", " + _calendar.GetCurrentMonth() + " " + _calendar.GetCurrentDay() + ", " + _calendar.GetCurrentYear();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             string[] date = ParseDate();
             _calendar.SetYearName(tbYearName.Text);
-            _calendar.SetCurrentMonth(date[0]);
-            _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[1]));
+            _calendar.SetCurrentDayOfWeek(date[0]);
+            _calendar.SetCurrentMonth(date[1]);
+            _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[2]));
             _calendar.SetCurrentYear(PublicCode.ConvertToIntSafely(date[3]));
 
             string[] months = tbMonthNames.Text.Split(new string[] { ", " }, StringSplitOptions.None);
@@ -82,15 +83,15 @@ namespace DM_Tool
 
         private string[] ParseDate()
         {
-            return tbCurrentDate.Text.Split(new Char[] {',', ' '});
+            return tbCurrentDate.Text.Split(new Char[] {',', ' '}, StringSplitOptions.RemoveEmptyEntries);
         }
 
         private void tbCurrentDate_Leave(object sender, EventArgs e)
         {
             string[] date = ParseDate();
-            int maxDays = _calendar.GetMonthDays(date[0]);
+            int maxDays = _calendar.GetMonthDays(date[1]);
 
-            int curr = PublicCode.ConvertToIntSafely(date[1]);
+            int curr = PublicCode.ConvertToIntSafely(date[2]);
 
             if (curr > 0 && curr <= maxDays)
             {
@@ -100,16 +101,16 @@ namespace DM_Tool
             {
                 if (curr <= 0)
                 {
-                    date[1] = "1";
-                    _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[1]));
+                    date[2] = "1";
+                    _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[2]));
                 }
                 else if (curr > maxDays)
                 {
-                    date[1] = maxDays.ToString();
-                    _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[1]));
+                    date[2] = maxDays.ToString();
+                    _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[2]));
                 }
 
-                tbCurrentDate.Text = date[0] + " " + date[1] + ", " + date[3];
+                tbCurrentDate.Text = date[0] + ", " + date[1] + " " + date[2] + ", " + date[3];
             }
         }
     }

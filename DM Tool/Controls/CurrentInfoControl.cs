@@ -68,7 +68,7 @@ namespace DM_Tool.Controls
 
         private string[] ParseDate()
         {
-            return tbCurrentDate.Text.Split(new Char[] { ',', ' ' });
+            return tbCurrentDate.Text.Split(new Char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         private void tbCurrentDate_Leave(object sender, EventArgs e)
@@ -101,8 +101,8 @@ namespace DM_Tool.Controls
         private void btnNext_Click(object sender, EventArgs e)
         {
             string[] date = ParseDate();
-            int maxDays = _calendar.GetMonthDays(date[2]);
-            int currDay = PublicCode.ConvertToIntSafely(date[3]) + 1;
+            int maxDays = _calendar.GetMonthDays(date[1]);
+            int currDay = PublicCode.ConvertToIntSafely(date[2]) + 1;
 
             if (currDay > 0 && currDay <= maxDays)
             {
@@ -112,15 +112,15 @@ namespace DM_Tool.Controls
             {
                 if (currDay <= 0)
                 {
-                    date[3] = "1";
-                    _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[3]));
+                    date[2] = "1";
+                    _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[2]));
                 }
                 else if (currDay > maxDays)
                 {
                     //increment the month
                     _calendar.GoToNextMonth();
-                    date[2] = _calendar.GetCurrentMonth();
-                    date[5] = _calendar.GetCurrentYear().ToString();
+                    date[1] = _calendar.GetCurrentMonth();
+                    date[4] = _calendar.GetCurrentYear().ToString();
                     _calendar.SetCurrentDay(1);
                 }
             }
@@ -128,7 +128,7 @@ namespace DM_Tool.Controls
             _calendar.GoToNextDayOfWeek();
 
             dtpTime.Text = "08:00 AM";
-            tbCurrentDate.Text = _calendar.GetCurrentDayOfWeek() + ", " + date[2] + " " + _calendar.GetCurrentDay() + ", " + date[5] + " " + _calendar.GetYearName();
+            tbCurrentDate.Text = _calendar.GetCurrentDayOfWeek() + ", " + date[1] + " " + _calendar.GetCurrentDay() + ", " + date[3] + " " + _calendar.GetYearName();
         }
         #endregion
 
@@ -226,8 +226,9 @@ namespace DM_Tool.Controls
         {
             //Save Date and Time
             string[] date = ParseDate();
-            _calendar.SetCurrentMonth(date[0]);
-            _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[1]));
+            _calendar.SetCurrentDayOfWeek(date[0]);
+            _calendar.SetCurrentMonth(date[1]);
+            _calendar.SetCurrentDay(PublicCode.ConvertToIntSafely(date[2]));
             _calendar.SetCurrentYear(PublicCode.ConvertToIntSafely(date[3]));
 
             _calendar.SetTime(dtpTime.Text);
