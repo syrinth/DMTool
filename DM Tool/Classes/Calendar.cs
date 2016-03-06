@@ -8,6 +8,7 @@ namespace DM_Tool.Classes
     public class Calendar
     {
         public string _time;
+        public string _location;
         public string _yearName;
         public int _currYear;
         public List<Month> _totalMonths;
@@ -138,6 +139,16 @@ namespace DM_Tool.Classes
         public string GetTime()
         {
             return _time;
+        }
+
+        public void SetLocation(string val)
+        {
+            _location = val;
+        }
+
+        public string GetLocation()
+        {
+            return _location;
         }
 
         public void SetCurrentDayOfWeek(string val)

@@ -32,6 +32,7 @@ namespace DM_Tool.Controls
 
             tbCurrentDate.Text = _calendar.GetCurrentDayOfWeek() + ", " + _calendar.GetCurrentMonth() + " " + _calendar.GetCurrentDay() + ", " + _calendar.GetCurrentYear() + " " + _calendar.GetYearName();
             dtpTime.Text = _calendar.GetTime();
+            tbLocation.Text = _calendar.GetLocation();
 
             for (int i = 0; i < xpLedger.Count; i++)
             {
@@ -232,6 +233,7 @@ namespace DM_Tool.Controls
             _calendar.SetCurrentYear(PublicCode.ConvertToIntSafely(date[3]));
 
             _calendar.SetTime(dtpTime.Text);
+            _calendar.SetLocation(tbLocation.Text);
 
             PublicManager.SerializeCalendarToXML();
 
