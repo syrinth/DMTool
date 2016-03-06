@@ -26,7 +26,7 @@ namespace DM_Tool.Managers
 
         public override List<String> GetBaseMenuItems()
         {
-            return new List<string> { "Types", "Stat Blocks", "Character Classes", "Base Items", "Adventure Sites" };
+            return new List<string> { "Types", "Stat Blocks", "Character Classes", "Base Items", "Adventure Sites", "Encounter Tables" };
         }
 
         public override void OpenSpecifiedWindow(string itemName)

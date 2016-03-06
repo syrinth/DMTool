@@ -43,3 +43,4 @@ E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM Tool.csproj.ResolveComReference.c
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.CampaignCreatorDialog.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.CalendarControl.resources
 E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.StatBlockControl.resources
+E:\Programming\DMTool\DM Tool\obj\x86\Debug\DM_Tool.Controls.EncounterTableControl.resources

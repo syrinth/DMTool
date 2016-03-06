@@ -26,7 +26,7 @@ namespace DM_Tool.Managers
 
         public override List<String> GetBaseMenuItems()
         {
-            return new List<string> { "Items", "Pokedex", "Pokemon", "Trainers", "Adventure Sites" };
+            return new List<string> { "Items", "Pokedex", "Pokemon", "Trainers", "Adventure Sites", "Encounter Tables" };
         }
     }
 }

@@ -13,7 +13,7 @@ namespace DM_Tool
 {
     public partial class MainPanel : Form
     {
-        private enum ListDisplay { ALL, TYPES, CHARACTERS, CHARCLASSES, BASEITEMS, ADVSITES};
+        private enum ListDisplay { ALL, TYPES, CHARACTERS, CHARCLASSES, BASEITEMS, ADVSITES, ENCTABLES};
         private List<string> baseMenu;
 
         public PublicManager mgr = PublicManager.GetInstance();
@@ -62,7 +62,7 @@ namespace DM_Tool
         {
             string name = dgView.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-            if (name == "--Main Manu")
+            if (name == "--Main Menu")
             {
                 SetMenuToBase();
             }
@@ -94,6 +94,10 @@ namespace DM_Tool
                 if (name == "Adventure Sites")
                 {
                     DisplayAdventureSites();
+                }
+                if (name == "Encounter Tables")
+                {
+                    DisplayEncounterTables();
                 }
             }
             else if (display == ListDisplay.TYPES)
@@ -155,6 +159,18 @@ namespace DM_Tool
                     }
                 }
                 mgr.NewTab("AdventureSite", name);
+            }
+            else if (display == ListDisplay.ENCTABLES)
+            {
+                foreach (TabPage page in tabOpenObjects.TabPages)
+                {
+                    if (page.Text == name)
+                    {
+                        tabOpenObjects.SelectedTab = page;
+                        return;
+                    }
+                }
+                mgr.NewTab("EncounterTable", name);
             }
         }
 
@@ -237,6 +253,17 @@ namespace DM_Tool
             foreach (AdventureSite m in mgr.listAdvSites)
             {
                 dgView.Rows.Add(m.GetName());
+            }
+        }
+
+        public void DisplayEncounterTables()
+        {
+            dgView.Rows.Clear();
+            display = ListDisplay.ENCTABLES;
+            dgView.Rows.Add("--Main Manu");
+            foreach (EncounterTable e in mgr.listEncounterTables)
+            {
+                dgView.Rows.Add(e.GetName());
             }
         }
 
@@ -571,6 +598,14 @@ namespace DM_Tool
             {
                 TabPage page = new TabPage("New Adventure Site");
                 AdventureSiteControl aoc = new AdventureSiteControl(page, this);
+                page.Controls.Add(aoc);
+                aoc.Dock = DockStyle.Fill;
+                AddOrSelectPage(page);
+            }
+            else if (display == ListDisplay.ENCTABLES)
+            {
+                TabPage page = new TabPage("New Encounter Table");
+                EncounterTableControl aoc = new EncounterTableControl(page, this);
                 page.Controls.Add(aoc);
                 aoc.Dock = DockStyle.Fill;
                 AddOrSelectPage(page);

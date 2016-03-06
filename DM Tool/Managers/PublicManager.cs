@@ -43,6 +43,7 @@ namespace DM_Tool
         public List<string> listBaseItemNames;
         public List<HardMaterial> listHardMaterials;        
         public List<Quality> listQualities;
+        public List<EncounterTable> listEncounterTables;
 
         //3.5 guys
         public List<CreatureSize> listCreatureSizes;
@@ -62,6 +63,7 @@ namespace DM_Tool
         private static string xmlCharacterClasses = "./Files/CharacterClasses.xml";
         private static string xmlQualities = "./Files/Qualitys.xml";
         private static string xmlCalendar = "./Files/*/Calendar.xml";
+        private static string xmlEncounterTables = "./Files/*/EncounterTables.xml";
 
         private static XmlWriterSettings ws = new XmlWriterSettings();
 
@@ -83,6 +85,7 @@ namespace DM_Tool
             listHardMaterials = new List<HardMaterial>();
             listBaseItemNames = new List<string>();
             listAdvSites = new List<AdventureSite>();
+            listEncounterTables = new List<EncounterTable>();
 
             // 3.5 guys
             listCreatureTypes = new List<CreatureType>();
@@ -142,6 +145,7 @@ namespace DM_Tool
         public void LoadCampaign()
         {
             listAdvSites = DeserializeAdventuresFromXML();
+            listEncounterTables = DeserializeEncounterTablesFromXML();
             listCampaignCharacters = DeserializeCampaignCharactersFromXML();
 
             listCombinedCharacters.Clear();
@@ -258,6 +262,11 @@ namespace DM_Tool
             _main.DisplayAdventureSites();
         }
 
+        public void DisplayEncounterTables()
+        {
+            _main.DisplayEncounterTables();
+        }
+
         public void NewTab(string controlType, string name)
         {
             TabPage page = new TabPage(name);
@@ -291,6 +300,11 @@ namespace DM_Tool
                     page.Controls.Add(adv);
                     adv.Dock = DockStyle.Fill;
                     break;
+                case "EncounterTable":
+                    EncounterTableControl enc = new EncounterTableControl(page, listEncounterTables.Find(x => x.GetName().Equals(name)), _main);
+                    page.Controls.Add(enc);
+                    enc.Dock = DockStyle.Fill;
+                    break;
                 default:
                     break;
 
@@ -309,6 +323,7 @@ namespace DM_Tool
             SerializeCharactersToXML(listCharacters);
             SerializeCampaignCharactersToXML(listCampaignCharacters);
             SerializeAdventuresToXML(listAdvSites);
+            SerializeEncounterTablesToXML(listEncounterTables);
             SerializeCreatureSizesToXML(listCreatureSizes);
             SerializeCreatureTypesToXML(listCreatureTypes);
             SerializeQualitiesToXML(listQualities);
@@ -321,6 +336,15 @@ namespace DM_Tool
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<AdventureSite>));
             using (XmlWriter wr = XmlWriter.Create(xmlAdventures.Replace("*", _campaignName), ws))
+            {
+                serializer.Serialize(wr, sites);
+            }
+        }
+
+        static public void SerializeEncounterTablesToXML(List<EncounterTable> sites)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<EncounterTable>));
+            using (XmlWriter wr = XmlWriter.Create(xmlEncounterTables.Replace("*", _campaignName), ws))
             {
                 serializer.Serialize(wr, sites);
             }
@@ -427,6 +451,7 @@ namespace DM_Tool
             listCampaignCharacters = DeserializeCampaignCharactersFromXML();
             listQualities = DeserializeQualitiesFromXML();
             listAdvSites = DeserializeAdventuresFromXML();
+            listEncounterTables = DeserializeEncounterTablesFromXML();
             listHardMaterials = DeserializeHardMaterialsFromXML();
             listBaseItems = DeserializeBaseItemsFromXML();
             listCreatureSizes = DeserializeCreatureSizesFromXML();
@@ -446,12 +471,12 @@ namespace DM_Tool
 
         static public List<AdventureSite> DeserializeAdventuresFromXML()
         {
-            List<AdventureSite> advs = new List<AdventureSite>();
+            List<AdventureSite> x = new List<AdventureSite>();
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<AdventureSite>));
                 TextReader textReader = new StreamReader(xmlAdventures.Replace("*", _campaignName));
-                advs = (List<AdventureSite>)deserializer.Deserialize(textReader);
+                x = (List<AdventureSite>)deserializer.Deserialize(textReader);
                 textReader.Close();
 
             }
@@ -459,7 +484,25 @@ namespace DM_Tool
             {
             }
 
-            return advs;
+            return x;
+        }
+
+        static public List<EncounterTable> DeserializeEncounterTablesFromXML()
+        {
+            List<EncounterTable> x = new List<EncounterTable>();
+            try
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(List<EncounterTable>));
+                TextReader textReader = new StreamReader(xmlEncounterTables.Replace("*", _campaignName));
+                x = (List<EncounterTable>)deserializer.Deserialize(textReader);
+                textReader.Close();
+
+            }
+            catch
+            {
+            }
+
+            return x;
         }
 
         static public List<Character> DeserializeCharactersFromXML()

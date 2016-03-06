@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Classes\AdventureSite.cs" />
     <Compile Include="Classes\Calendar.cs" />
+    <Compile Include="Classes\TableItems\EncounterTable.cs" />
     <Compile Include="Classes\ThirdEd\Character.cs" />
     <Compile Include="Classes\ThirdEd\CharacterClass.cs" />
     <Compile Include="Classes\ThirdEd\CreatureSize.cs" />
@@ -76,10 +77,10 @@
     <Compile Include="Controls\3.5\CharacterClassControl.Designer.cs">
       <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\3.5\StatBlockControl.cs">
+    <Compile Include="Controls\StatBlockControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\3.5\StatBlockControl.Designer.cs">
+    <Compile Include="Controls\StatBlockControl.Designer.cs">
       <DependentUpon>StatBlockControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CalendarControl.cs">
@@ -106,6 +107,12 @@
     </Compile>
     <Compile Include="CampaignCreatorDialog.Designer.cs">
       <DependentUpon>CampaignCreatorDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EncounterTableControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\EncounterTableControl.Designer.cs">
+      <DependentUpon>EncounterTableControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Managers\PTU1_05Manager.cs" />
     <Compile Include="Managers\DnDThirdEdManager.cs" />
@@ -191,7 +198,7 @@
     <EmbeddedResource Include="Controls\3.5\CharacterClassControl.resx">
       <DependentUpon>CharacterClassControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\3.5\StatBlockControl.resx">
+    <EmbeddedResource Include="Controls\StatBlockControl.resx">
       <DependentUpon>StatBlockControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CalendarControl.resx">
@@ -199,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CurrentInfoControl.resx">
       <DependentUpon>CurrentInfoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\EncounterTableControl.resx">
+      <DependentUpon>EncounterTableControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RoomControl.resx">
       <DependentUpon>RoomControl.cs</DependentUpon>

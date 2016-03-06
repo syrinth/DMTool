@@ -15,7 +15,7 @@ namespace DM_Tool.Controls
     public partial class StatBlockControl : UserControl
     {
         public PublicManager mgr = PublicManager.GetInstance();
-        private TabPage _parentPage;
+        private TabPage _parent;
         private CreatureType tc;
         private CreatureSize size;
         private Character _character;
@@ -33,7 +33,7 @@ namespace DM_Tool.Controls
             InitializeComponent();
             Init();
 
-            _parentPage = parentPage;
+            _parent = parentPage;
 
             _character = c;
             StatBlock statBlock = c.GetCharacterSheet();
@@ -105,7 +105,7 @@ namespace DM_Tool.Controls
             Init();
             InitEmptyDGV();
 
-            _parentPage = parentPage;
+            _parent = parentPage;
         }
 
         public StatBlockControl(TabPage parentPage, string name)
@@ -114,7 +114,7 @@ namespace DM_Tool.Controls
             Init();
             InitEmptyDGV();
 
-            _parentPage = parentPage;
+            _parent = parentPage;
 
             tbName.Text = name;
         }
@@ -481,7 +481,7 @@ namespace DM_Tool.Controls
                 {
                     tbRaceName.Text = "";
                 }
-                _parentPage.Text = tbName.Text;
+                _parent.Text = tbName.Text;
                 if (mgr.listCharacters.Count > 0)
                 {
                     try
