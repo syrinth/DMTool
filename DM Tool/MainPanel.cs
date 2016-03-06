@@ -73,7 +73,7 @@ namespace DM_Tool
                 {
                     dgView.Rows.Clear();
                     display = ListDisplay.TYPES;
-                    dgView.Rows.Add("--Main Manu");
+                    dgView.Rows.Add("--Main Menu");
                     foreach (CreatureType type in mgr.listCreatureTypes)
                     {
                         dgView.Rows.Add(type.name);
@@ -215,7 +215,7 @@ namespace DM_Tool
             mgr.listCombinedCharacters.AddRange(mgr.listCampaignCharacters);
             mgr.listCombinedCharacters.Sort((p1, p2) => string.Compare(p1.GetName(), p2.GetName(), true));
             display = ListDisplay.CHARACTERS;
-            dgView.Rows.Add("--Main Manu");
+            dgView.Rows.Add("--Main Menu");
             foreach (Character c in mgr.listCombinedCharacters)
             {
                 dgView.Rows.Add(c.GetName());
@@ -227,7 +227,7 @@ namespace DM_Tool
             dgView.Rows.Clear();
 
             display = ListDisplay.CHARCLASSES;
-            dgView.Rows.Add("--Main Manu");
+            dgView.Rows.Add("--Main Menu");
             foreach (CharacterClass cc in mgr.listCharacterClasses)
             {
                 dgView.Rows.Add(cc.name);
@@ -238,7 +238,7 @@ namespace DM_Tool
         {
             dgView.Rows.Clear();
             display = ListDisplay.BASEITEMS;
-            dgView.Rows.Add("--Main Manu");
+            dgView.Rows.Add("--Main Menu");
             foreach (BaseItem m in mgr.listBaseItems)
             {
                 dgView.Rows.Add(m.name);
@@ -249,7 +249,7 @@ namespace DM_Tool
         {
             dgView.Rows.Clear();
             display = ListDisplay.ADVSITES;
-            dgView.Rows.Add("--Main Manu");
+            dgView.Rows.Add("--Main Menu");
             foreach (AdventureSite m in mgr.listAdvSites)
             {
                 dgView.Rows.Add(m.GetName());
@@ -260,7 +260,7 @@ namespace DM_Tool
         {
             dgView.Rows.Clear();
             display = ListDisplay.ENCTABLES;
-            dgView.Rows.Add("--Main Manu");
+            dgView.Rows.Add("--Main Menu");
             foreach (EncounterTable e in mgr.listEncounterTables)
             {
                 dgView.Rows.Add(e.GetName());

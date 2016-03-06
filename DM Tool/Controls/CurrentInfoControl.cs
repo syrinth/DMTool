@@ -49,6 +49,8 @@ namespace DM_Tool.Controls
                     if (dgvXP.Rows.Count == j)
                     {
                         dgvXP.Rows.Add();
+
+                        dgvXP.FirstDisplayedScrollingRowIndex = dgvXP.Rows[dgvXP.Rows.Count - 1].Index;
                     }
                     dgvXP.Rows[j - 1].Cells[i].Value = val;
                 }
